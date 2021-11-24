@@ -1,0 +1,14 @@
+{
+    "Notes": "Each JsonObject is saved as a value in isolatedStorage by the key of the EntryId, the AppId of the extension",
+    "active": true,
+    "lastUpdated": "2021-11-23T16:06:47Z",
+    "endDate": "2021-11-23T16:06:47Z",
+    "extensionContactEmail": "something",
+    "extensionMisuseURI": "",
+    "activationGumroadInfo": {
+        "plan": "contain the purchase data we get from Gumroad at activation"
+    },
+    "currentGumroadInfo": {
+        "plan": "When license check is performed, for ability to compare current vs activation, used for debugging"
+    }
+}

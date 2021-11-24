@@ -1,0 +1,16 @@
+{
+
+    "al.codeAnalyzers": [
+      "${CodeCop}",
+      "${UICop}"
+    ],
+    "al.enableCodeAnalysis": true,
+    "al.enableCodeActions": true,
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+        "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+        "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+        "CRS.OnSaveAlFileAction": "Reorganize",
+        "CRS.RenameWithGit": false,
+        "CRS.ObjectNamePrefix": "SPBPL ",
+
+}
