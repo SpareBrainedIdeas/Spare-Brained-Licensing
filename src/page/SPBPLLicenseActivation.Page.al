@@ -29,7 +29,7 @@ page 71034 "SPBPL License Activation"
 
                         trigger OnDrillDown()
                         begin
-                            SPBLicenseUtilities.LaunchProductUrl(Rec);
+                            SPBPLLicenseUtilities.LaunchProductUrl(Rec);
                         end;
                     }
                 }
@@ -100,7 +100,7 @@ page 71034 "SPBPL License Activation"
 
                     trigger OnDrillDown()
                     begin
-                        LicenseKey := SPBLicenseUtilities.GetTestProductKey();
+                        LicenseKey := SPBPLLicenseUtilities.GetTestProductKey();
                     end;
                 }
             }
@@ -176,8 +176,8 @@ page 71034 "SPBPL License Activation"
     }
 
     var
-        SPBLicenseManagement: Codeunit "SPBPL License Management";
-        SPBLicenseUtilities: Codeunit "SPBPL License Utilities";
+        SPBPLLicenseManagement: Codeunit "SPBPL License Management";
+        SPBPLLicenseUtilities: Codeunit "SPBPL License Utilities";
         LicenseLinkText: Text;
         LicenseKey: Text;
         LicenseFormatHintText: Text;
@@ -238,7 +238,7 @@ page 71034 "SPBPL License Activation"
         // Validation trigger when moving from Step2 to 3
         if (Step = Step::Step2) and not Backwards then begin
             Rec."License Key" := CopyStr(LicenseKey, 1, MaxStrLen(Rec."License Key"));
-            ActivationResult := SPBLicenseManagement.ActivateFromWizard(Rec);
+            ActivationResult := SPBPLLicenseManagement.ActivateFromWizard(Rec);
             Step := Step + 1;
         end;
 

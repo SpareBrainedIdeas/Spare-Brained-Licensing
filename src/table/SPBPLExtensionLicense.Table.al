@@ -186,8 +186,8 @@ table 71033 "SPBPL Extension License"
 
     internal procedure IsTestSubscription(): Boolean
     var
-        SPBLicenseUtilities: Codeunit "SPBPL License Utilities";
+        SPBPLLicenseUtilities: Codeunit "SPBPL License Utilities";
     begin
-        exit(Rec."Entry Id" = SPBLicenseUtilities.GetTestProductAppId());
+        exit(Rec."Entry Id" = SPBPLLicenseUtilities.GetTestProductAppId());
     end;
 }

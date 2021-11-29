@@ -23,13 +23,13 @@ codeunit 71033 "SPBPL License Utilities"
         exit(SelfTestProductKeyTok);
     end;
 
-    internal procedure LaunchProductUrl(SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LaunchProductUrl(SPBPLExtensionLicense: Record "SPBPL Extension License")
     var
         IsHandled: Boolean;
     begin
-        OnBeforeLaunchProductUrl(SPBExtensionLicense, IsHandled);
+        OnBeforeLaunchProductUrl(SPBPLExtensionLicense, IsHandled);
         if not IsHandled then
-            Hyperlink(SPBExtensionLicense."Product URL");
+            Hyperlink(SPBPLExtensionLicense."Product URL");
     end;
 
     internal procedure AddNameValuePair(var FormData: TextBuilder; name: Text; value: Text)
@@ -43,28 +43,28 @@ codeunit 71033 "SPBPL License Utilities"
         FormData.AppendLine('--SpareBrainedLicensing--');
     end;
 
-    internal procedure UpdateOrCreateIsoStorage(var SPBExtensionLicense: Record "SPBPL Extension License"; ApiResponse: Text)
+    internal procedure UpdateOrCreateIsoStorage(var SPBPLExtensionLicense: Record "SPBPL Extension License"; ApiResponse: Text)
     var
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
+        SPBPLIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
         YesterdayDateTime: DateTime;
     begin
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastUpdated', Format(CurrentDateTime, 0, 9));
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'endDate', Format(SPBExtensionLicense."Subscription End Date", 0, 9));
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'active', Format(SPBExtensionLicense.Activated));
+        SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'lastUpdated', Format(CurrentDateTime, 0, 9));
+        SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'endDate', Format(SPBPLExtensionLicense."Subscription End Date", 0, 9));
+        SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'active', Format(SPBPLExtensionLicense.Activated));
 
         // We mark the lastCheckDate as yesterday on activation to trigger one check DURING activation, just to be safe
         // Someone could be installing from an app file that's outdated, etc.
         YesterdayDateTime := CreateDateTime(CalcDate('<-1D>', Today()), Time());
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastCheckDate', Format(YesterdayDateTime, 0, 9));
+        SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'lastCheckDate', Format(YesterdayDateTime, 0, 9));
 
-        if not SPBIsoStoreManager.ContainsAppValue(SPBExtensionLicense, 'extensionContactEmail') then begin
-            SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'extensionContactEmail', SPBExtensionLicense."Billing Support Email");
-            SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'extensionMisuseURI', '');
+        if not SPBPLIsoStoreManager.ContainsAppValue(SPBPLExtensionLicense, 'extensionContactEmail') then begin
+            SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'extensionContactEmail', SPBPLExtensionLicense."Billing Support Email");
+            SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'extensionMisuseURI', '');
         end;
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeLaunchProductUrl(var SPBExtensionLicense: Record "SPBPL Extension License"; var IsHandled: Boolean)
+    local procedure OnBeforeLaunchProductUrl(var SPBPLExtensionLicense: Record "SPBPL Extension License"; var IsHandled: Boolean)
     begin
     end;
 }

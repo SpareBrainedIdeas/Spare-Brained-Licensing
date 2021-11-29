@@ -2,7 +2,9 @@
 
     "al.codeAnalyzers": [
       "${CodeCop}",
-      "${UICop}"
+      "${UICop}", 
+      "${PerTenantExtensionCop}",
+      "${AppSourceCop}"
     ],
     "al.enableCodeAnalysis": true,
     "al.enableCodeActions": true,
@@ -12,5 +14,6 @@
         "CRS.OnSaveAlFileAction": "Reorganize",
         "CRS.RenameWithGit": false,
         "CRS.ObjectNamePrefix": "SPBPL ",
+        "al.ruleSetPath": "./ruleset.json",
 
 }

@@ -88,6 +88,7 @@ page 71033 "SPBPL Extension Licenses"
                 Enabled = not Rec.Activated and UserHasWritePermission;
                 Image = SuggestElectronicDocument;
                 Promoted = true;
+                PromotedOnly = true;
                 PromotedCategory = Process;
                 ToolTip = 'Launches the Activation Wizard for this Subscription.';
 
@@ -107,6 +108,7 @@ page 71033 "SPBPL Extension Licenses"
                 Image = Cancel;
                 Promoted = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
                 ToolTip = 'Forces this Subscription inactive, which will allow entry of a new License Key.';
 
                 trigger OnAction()
@@ -167,13 +169,13 @@ page 71033 "SPBPL Extension Licenses"
 
     local procedure CheckAllForUpdates()
     var
-        SPBLicense: Record "SPBPL Extension License";
-        SPBLicenseMgmt: Codeunit "SPBPL License Management";
+        SPBPLExtensionLicense: Record "SPBPL Extension License";
+        SPBPLLicenseManagement: Codeunit "SPBPL License Management";
     begin
-        if SPBLicense.FindSet(true) then
+        if SPBPLExtensionLicense.FindSet(true) then
             repeat
-                if SPBLicense."Update News URL" <> '' then
-                    SPBLicenseMgmt.DoVersionCheck(SPBLicense);
-            until SPBLicense.Next() = 0;
+                if SPBPLExtensionLicense."Update News URL" <> '' then
+                    SPBPLLicenseManagement.DoVersionCheck(SPBPLExtensionLicense);
+            until SPBPLExtensionLicense.Next() = 0;
     end;
 }

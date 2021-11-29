@@ -30,5 +30,6 @@
   "runtime": "8.0",
   "features": [
     "TranslationFile", "NoImplicitWith"
-  ]
+  ],
+  "applicationInsightsConnectionString": ""
 }
