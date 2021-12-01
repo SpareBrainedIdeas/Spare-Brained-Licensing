@@ -1,0 +1,21 @@
+{
+    "name": "Project ruleset",
+    "description": "A list of company specific rules",
+    "rules": [
+        {
+            "id": "PTE0001",
+            "action": "None",
+            "justification": "<object> has an ID of [#######]. It must be between 50000 and 99999. Need to clarify licensing issues with VAR ID range"
+        },
+        {
+            "id": "PTE0002",
+            "action": "None",
+            "justification": "<field in tableextension> has an ID of [#######]. It must be between 50000 and 99999. Need to clarify licensing issues with VAR ID range"
+        },
+        {
+            "id": "AS0084",
+            "action": "None",
+            "justification": "Not Applicable - The ID range '[50000..99999]' is not valid. It must be within the range allocated to the partner for AppSource, within the range '[1000000..75999999]' allocated to AppSource applications, and outside the range '[50000..99999]' allocated to per-tenant customizations."
+        }
+    ]
+}

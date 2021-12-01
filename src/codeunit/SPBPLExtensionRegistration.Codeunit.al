@@ -17,15 +17,15 @@ codeunit 71034 "SPBPL Extension Registration"
         forceUpdate: Boolean)
     var
         SPBPLExtensionLicense: Record "SPBPL Extension License";
-        SPBLicenseManagement: Codeunit "SPBPL License Management";
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
+        SPBPLLicenseManagement: Codeunit "SPBPL License Management";
+        SPBPLIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
         EnvironmentInformation: Codeunit "Environment Information";
         PlusDaysTok: Label '<+%1D>', Comment = '%1 is the number of days ';
         GraceEndDate: Date;
         GraceDays: Integer;
     begin
         if minimumLicensingAppVersion > Version.Create('1.0.0.0') then
-            SPBLicenseManagement.CheckSupportedVersion(minimumLicensingAppVersion);
+            SPBPLLicenseManagement.CheckSupportedVersion(minimumLicensingAppVersion);
 
         if EnvironmentInformation.IsOnPrem() or EnvironmentInformation.IsProduction() then
             GraceDays := daysAllowedBeforeActivationProd
@@ -60,25 +60,25 @@ codeunit 71034 "SPBPL Extension Registration"
             SPBPLExtensionLicense."Trial Grace End Date" := GraceEndDate;
             SPBPLExtensionLicense.Insert();
         end;
-        SPBIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'installDate', Format(CurrentDateTime, 0, 9));
-        SPBIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'preactivationDays', Format(GraceDays));
+        SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'installDate', Format(CurrentDateTime, 0, 9));
+        SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'preactivationDays', Format(GraceDays));
     end;
 
     procedure CheckIfActive(AppId: Guid; InactiveShowError: Boolean): Boolean
     var
-        SPBExtensionLicense: Record "SPBPL Extension License";
-        SPBLicenseManagement: Codeunit "SPBPL License Management";
+        SPBPLExtensionLicense: Record "SPBPL Extension License";
+        SPBPLLicenseManagement: Codeunit "SPBPL License Management";
         NoSubFoundErr: Label 'No Subscription was found in the Subscriptions list for AppId: %1', Comment = '%1 is which Application ID';
         SubscriptionInactiveErr: Label 'The Subscription for %1 is not Active.  Contact your system administrator to re-activate it.', Comment = '%1 is the name of the Subscription';
         IsActive: Boolean;
     begin
-        if not SPBExtensionLicense.get(AppId) then
+        if not SPBPLExtensionLicense.get(AppId) then
             if GuiAllowed() then
                 Error(NoSubFoundErr, AppId);
-        IsActive := SPBLicenseManagement.CheckIfActive(SPBExtensionLicense);
+        IsActive := SPBPLLicenseManagement.CheckIfActive(SPBPLExtensionLicense);
         if not IsActive and InactiveShowError then
             if GuiAllowed() then
-                Error(SubscriptionInactiveErr, SPBExtensionLicense."Extension Name");
+                Error(SubscriptionInactiveErr, SPBPLExtensionLicense."Extension Name");
         exit(IsActive);
     end;
 }

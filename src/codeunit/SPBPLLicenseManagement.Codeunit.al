@@ -4,7 +4,7 @@ codeunit 71036 "SPBPL License Management"
 
     var
         /* GumroadCommunicator: Codeunit "SPBPL Gumroad Communicator"; */
-        LicenseUtilities: Codeunit "SPBPL License Utilities";
+        SPBPLLicenseUtilities: Codeunit "SPBPL License Utilities";
 
     internal procedure CheckSupportedVersion(minVersion: Version)
     var
@@ -18,46 +18,46 @@ codeunit 71036 "SPBPL License Management"
     end;
 
 
-    internal procedure ActivateFromWizard(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean
+    internal procedure ActivateFromWizard(var SPBPLExtensionLicense: Record "SPBPL Extension License"): Boolean
     var
         ResponseBody: Text;
         NoRemainingUsesErr: Label 'There are no remaining uses of that license key to assign to this installation.';
         LicensePlatform: Interface "SPBPL ILicenseCommunicator";
     begin
-        LicensePlatform := SPBExtensionLicense."License Platform";
+        LicensePlatform := SPBPLExtensionLicense."License Platform";
         // We call first WITHOUT incrementing the use count to check current use count
-        if LicensePlatform.CallAPIForVerification(SPBExtensionLicense, ResponseBody, false) then
-            if LicensePlatform.CheckAPILicenseCount(SPBExtensionLicense, ResponseBody) then
-                exit(ActivateExtension(SPBExtensionLicense, ResponseBody))
+        if LicensePlatform.CallAPIForVerification(SPBPLExtensionLicense, ResponseBody, false) then
+            if LicensePlatform.CheckAPILicenseCount(SPBPLExtensionLicense, ResponseBody) then
+                exit(ActivateExtension(SPBPLExtensionLicense, ResponseBody))
             else
                 if GuiAllowed() then
                     Error(NoRemainingUsesErr);
     end;
 
-    internal procedure LaunchActivation(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LaunchActivation(var SPBPLExtensionLicense: Record "SPBPL Extension License")
     var
-        SPBLicenseActivationWizard: Page "SPBPL License Activation";
+        SPBPLLicenseActivationWizard: Page "SPBPL License Activation";
     begin
-        Clear(SPBLicenseActivationWizard);
-        SPBExtensionLicense.SetRecFilter();
-        SPBLicenseActivationWizard.SetTableView(SPBExtensionLicense);
-        SPBLicenseActivationWizard.RunModal();
+        Clear(SPBPLLicenseActivationWizard);
+        SPBPLExtensionLicense.SetRecFilter();
+        SPBPLLicenseActivationWizard.SetTableView(SPBPLExtensionLicense);
+        SPBPLLicenseActivationWizard.RunModal();
     end;
 
-    internal procedure VerifyActiveLicense(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure VerifyActiveLicense(var SPBPLExtensionLicense: Record "SPBPL Extension License")
     begin
-        if not SPBExtensionLicense.Activated then
+        if not SPBPLExtensionLicense.Activated then
             exit;
 
-        if not CheckIfActive(SPBExtensionLicense) then begin
-            SPBExtensionLicense.Validate(Activated, false);
-            SPBExtensionLicense.Modify();
+        if not CheckIfActive(SPBPLExtensionLicense) then begin
+            SPBPLExtensionLicense.Validate(Activated, false);
+            SPBPLExtensionLicense.Modify();
         end;
     end;
 
-    internal procedure CheckIfActive(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean
+    internal procedure CheckIfActive(var SPBPLExtensionLicense: Record "SPBPL Extension License"): Boolean
     var
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
+        SPBPLIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
         EnvironmentInformation: Codeunit "Environment Information";
         GraceExpiringMsg: Label 'Today is the last trial day for %1. Please purchase a License Key and Activate the subscription to continue use.', Comment = '%1 is the name of the Extension';
         DaysGraceTok: Label '<+%1D>', Comment = '%1 is the number of days';
@@ -70,12 +70,12 @@ codeunit 71036 "SPBPL License Management"
         IsoNumber: Integer;
         LicensePlatform: Interface "SPBPL ILicenseCommunicator";
     begin
-        LicensePlatform := SPBExtensionLicense."License Platform";
+        LicensePlatform := SPBPLExtensionLicense."License Platform";
 
         // if the subscription isn't active, check if we're in the 'grace' preinstall window, which always includes the first day of use
-        if not SPBExtensionLicense.Activated then begin
-            Evaluate(InstallDateTime, SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'installDate'));
-            Evaluate(IsoNumber, SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'preactivationDays'));
+        if not SPBPLExtensionLicense.Activated then begin
+            Evaluate(InstallDateTime, SPBPLIsoStoreManager.GetAppValue(SPBPLExtensionLicense, 'installDate'));
+            Evaluate(IsoNumber, SPBPLIsoStoreManager.GetAppValue(SPBPLExtensionLicense, 'preactivationDays'));
             if IsoNumber > 0 then
                 GraceEndDate := CalcDate(StrSubstNo(DaysGraceTok, IsoNumber), DT2Date(InstallDateTime))
             else
@@ -85,120 +85,120 @@ codeunit 71036 "SPBPL License Management"
                 else
                     GraceEndDate := Today;
             if (GraceEndDate = Today) and GuiAllowed then
-                Message(GraceExpiringMsg, SPBExtensionLicense."Extension Name");
+                Message(GraceExpiringMsg, SPBPLExtensionLicense."Extension Name");
             if GraceEndDate > Today then
                 exit(true);
         end;
 
-        Evaluate(LastCheckDateTime, SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'lastCheckDate'));
+        Evaluate(LastCheckDateTime, SPBPLIsoStoreManager.GetAppValue(SPBPLExtensionLicense, 'lastCheckDate'));
         if ((Today() - DT2Date(LastCheckDateTime)) > 0) then begin
-            if LicensePlatform.CallAPIForVerification(SPBExtensionLicense, ResponseBody, false) then begin
+            if LicensePlatform.CallAPIForVerification(SPBPLExtensionLicense, ResponseBody, false) then begin
                 // This may update the End Dates - note: may or may not call .Modify
-                LicensePlatform.PopulateSubscriptionFromResponse(SPBExtensionLicense, ResponseBody);
-                SPBExtensionLicense.Modify();
+                LicensePlatform.PopulateSubscriptionFromResponse(SPBPLExtensionLicense, ResponseBody);
+                SPBPLExtensionLicense.Modify();
             end;
-            DoVersionCheck(SPBExtensionLicense);
-            SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastCheckDate', Format(CurrentDateTime, 0, 9));
+            DoVersionCheck(SPBPLExtensionLicense);
+            SPBPLIsoStoreManager.SetAppValue(SPBPLExtensionLicense, 'lastCheckDate', Format(CurrentDateTime, 0, 9));
         end;
 
         // if the subscription ran out
-        if (SPBExtensionLicense."Subscription End Date" < CurrentDateTime) and
-          (SPBExtensionLicense."Subscription End Date" <> 0DT)
+        if (SPBPLExtensionLicense."Subscription End Date" < CurrentDateTime) and
+          (SPBPLExtensionLicense."Subscription End Date" <> 0DT)
         then
             exit(false);
 
 
         // if the record version IS active, then let's crosscheck against isolated storage
-        Evaluate(IsoActive, SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'active'));
+        Evaluate(IsoActive, SPBPLIsoStoreManager.GetAppValue(SPBPLExtensionLicense, 'active'));
         if not IsoActive then
-            LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
+            LicensePlatform.ReportPossibleMisuse(SPBPLExtensionLicense);
 
         // Check Record end date against IsoStorage end date
-        Evaluate(IsoDatetime, SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'endDate'));
+        Evaluate(IsoDatetime, SPBPLIsoStoreManager.GetAppValue(SPBPLExtensionLicense, 'endDate'));
         if IsoDatetime <> 0DT then
             // Only checking at the date level in case of time zone nonsense
-            if DT2Date(IsoDatetime) <> DT2Date(SPBExtensionLicense."Subscription End Date") then
-                LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
+            if DT2Date(IsoDatetime) <> DT2Date(SPBPLExtensionLicense."Subscription End Date") then
+                LicensePlatform.ReportPossibleMisuse(SPBPLExtensionLicense);
 
         // Finally, all things checked out
         exit(true);
     end;
 
-    local procedure ActivateExtension(var SPBExtensionLicense: Record "SPBPL Extension License"; ResponseBody: Text): Boolean
+    local procedure ActivateExtension(var SPBPLExtensionLicense: Record "SPBPL Extension License"; ResponseBody: Text): Boolean
     var
         LicensePlatform: Interface "SPBPL ILicenseCommunicator";
         AppInfo: ModuleInfo;
         ActivationFailureErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         LicenseKeyExpiredErr: Label 'The License Key provided has already expired due to a Subscription End.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
     begin
-        NavApp.GetModuleInfo(SPBExtensionLicense."Entry Id", AppInfo);
+        NavApp.GetModuleInfo(SPBPLExtensionLicense."Entry Id", AppInfo);
 
         // Note we're swapping the ResponseBody to the 2nd API call with the new info from the API!
-        LicensePlatform := SPBExtensionLicense."License Platform";
-        if LicensePlatform.CallAPIForVerification(SPBExtensionLicense, ResponseBody, true) then begin
+        LicensePlatform := SPBPLExtensionLicense."License Platform";
+        if LicensePlatform.CallAPIForVerification(SPBPLExtensionLicense, ResponseBody, true) then begin
 
-            LicensePlatform.PopulateSubscriptionFromResponse(SPBExtensionLicense, ResponseBody);
+            LicensePlatform.PopulateSubscriptionFromResponse(SPBPLExtensionLicense, ResponseBody);
 
-            if (SPBExtensionLicense."Subscription End Date" <> 0DT) and
-              (SPBExtensionLicense."Subscription End Date" < CurrentDateTime)
+            if (SPBPLExtensionLicense."Subscription End Date" <> 0DT) and
+              (SPBPLExtensionLicense."Subscription End Date" < CurrentDateTime)
             then begin
-                SPBExtensionLicense.Activated := false;
-                SPBExtensionLicense.Modify();
+                SPBPLExtensionLicense.Activated := false;
+                SPBPLExtensionLicense.Modify();
                 Commit();
-                OnAfterActivationFailure(SPBExtensionLicense, AppInfo);
+                OnAfterActivationFailure(SPBPLExtensionLicense, AppInfo);
                 if GuiAllowed() then
                     Error(LicenseKeyExpiredErr, AppInfo.Publisher);
             end else begin
-                SPBExtensionLicense.Modify();
+                SPBPLExtensionLicense.Modify();
                 Commit();
-                OnAfterActivationSuccess(SPBExtensionLicense, AppInfo);
+                OnAfterActivationSuccess(SPBPLExtensionLicense, AppInfo);
             end;
 
             // Now pop the details into IsolatedStorage
-            LicenseUtilities.UpdateOrCreateIsoStorage(SPBExtensionLicense, ResponseBody);
-            exit(SPBExtensionLicense.Activated);
+            SPBPLLicenseUtilities.UpdateOrCreateIsoStorage(SPBPLExtensionLicense, ResponseBody);
+            exit(SPBPLExtensionLicense.Activated);
         end else
             if GuiAllowed() then
                 Error(ActivationFailureErr, AppInfo.Publisher);
     end;
 
-    internal procedure DoVersionCheck(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure DoVersionCheck(var SPBPLExtensionLicense: Record "SPBPL Extension License")
     var
         UserTask: Record "User Task";
         SubjectTok: Label 'Update Extension: %1', Comment = '%1 is Extension Name';
         DocsTok: Label 'https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/tenant-admin-center-manage-apps#get-an-overview-and-check-for-updates';
         ApiHttpClient: HttpClient;
-        ApiHttpReqMessage: HttpRequestMessage;
-        ApiHttpRespMessage: HttpResponseMessage;
+        ApiHttpRequestMessage: HttpRequestMessage;
+        ApiHttpResponseMessage: HttpResponseMessage;
         VersionResponseBody: Text;
         IsHandled: Boolean;
         LatestVersion: Version;
         AppInfo: ModuleInfo;
     begin
         NavApp.GetCurrentModuleInfo(AppInfo);
-        if SPBExtensionLicense."Version Check URL" = '' then
+        if SPBPLExtensionLicense."Version Check URL" = '' then
             exit;
 
-        ApiHttpReqMessage.SetRequestUri(SPBExtensionLicense."Version Check URL");
-        ApiHttpReqMessage.Method('GET');
+        ApiHttpRequestMessage.SetRequestUri(SPBPLExtensionLicense."Version Check URL");
+        ApiHttpRequestMessage.Method('GET');
 
-        if ApiHttpClient.Send(ApiHttpReqMessage, ApiHttpRespMessage) then begin
-            if ApiHttpRespMessage.IsSuccessStatusCode then begin
-                ApiHttpRespMessage.Content.ReadAs(VersionResponseBody);
+        if ApiHttpClient.Send(ApiHttpRequestMessage, ApiHttpResponseMessage) then begin
+            if ApiHttpResponseMessage.IsSuccessStatusCode then begin
+                ApiHttpResponseMessage.Content.ReadAs(VersionResponseBody);
                 LatestVersion := Version.Create(VersionResponseBody);
                 if (AppInfo.AppVersion < LatestVersion) then begin
-                    SPBExtensionLicense."Update Available" := true;
-                    SPBExtensionLicense.Modify();
+                    SPBPLExtensionLicense."Update Available" := true;
+                    SPBPLExtensionLicense.Modify();
 
-                    OnBeforeVersionCheckUpgradeAvailable(SPBExtensionLicense, LatestVersion, IsHandled);
+                    OnBeforeVersionCheckUpgradeAvailable(SPBPLExtensionLicense, LatestVersion, IsHandled);
                     if IsHandled then
                         exit;
 
                     UserTask.Init();
                     UserTask.Title := StrSubstNo(SubjectTok, AppInfo.Name);
                     UserTask.SetDescription(DocsTok);
-                    if not IsNullGuid(SPBExtensionLicense."Activated By") then
-                        UserTask."Assigned To" := SPBExtensionLicense."Activated By";
+                    if not IsNullGuid(SPBPLExtensionLicense."Activated By") then
+                        UserTask."Assigned To" := SPBPLExtensionLicense."Activated By";
                     UserTask."Due DateTime" := CurrentDateTime;
                     UserTask."Start DateTime" := CurrentDateTime;
                     UserTask."Object Type" := UserTask."Object Type"::Page;
@@ -206,38 +206,38 @@ codeunit 71036 "SPBPL License Management"
                     UserTask.Insert(true);
                 end;
             end else
-                OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpRespMessage);
+                OnAfterVersionCheckFailure(SPBPLExtensionLicense, ApiHttpResponseMessage);
         end else
-            OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpRespMessage);
+            OnAfterVersionCheckFailure(SPBPLExtensionLicense, ApiHttpResponseMessage);
     end;
 
-    internal procedure DeactivateExtension(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean
+    internal procedure DeactivateExtension(var SPBPLExtensionLicense: Record "SPBPL Extension License"): Boolean
     var
         DeactivationWarningQst: Label 'This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?';
     begin
         if Confirm(DeactivationWarningQst, false) then begin
-            SPBExtensionLicense.Validate(Activated, false);
-            SPBExtensionLicense.Modify();
+            SPBPLExtensionLicense.Validate(Activated, false);
+            SPBPLExtensionLicense.Modify();
         end;
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterActivationFailure(var SPBExtensionLicense: Record "SPBPL Extension License"; var AppInfo: ModuleInfo)
+    local procedure OnAfterActivationFailure(var SPBPLExtensionLicense: Record "SPBPL Extension License"; var AppInfo: ModuleInfo)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeVersionCheckUpgradeAvailable(var SPBExtensionLicense: Record "SPBPL Extension License"; var LatestVersion: Version; var IsHandled: Boolean)
+    local procedure OnBeforeVersionCheckUpgradeAvailable(var SPBPLExtensionLicense: Record "SPBPL Extension License"; var LatestVersion: Version; var IsHandled: Boolean)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterActivationSuccess(var SPBExtensionLicense: Record "SPBPL Extension License"; var AppInfo: ModuleInfo)
+    local procedure OnAfterActivationSuccess(var SPBPLExtensionLicense: Record "SPBPL Extension License"; var AppInfo: ModuleInfo)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterVersionCheckFailure(var SPBExtensionLicense: Record "SPBPL Extension License"; var ApiHttpRespMessage: HttpResponseMessage)
+    local procedure OnAfterVersionCheckFailure(var SPBPLExtensionLicense: Record "SPBPL Extension License"; var ApiHttpResponseMessage: HttpResponseMessage)
     begin
     end;
 
