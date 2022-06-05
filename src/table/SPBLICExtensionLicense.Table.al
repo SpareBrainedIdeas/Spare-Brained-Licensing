@@ -102,6 +102,18 @@ table 71033 "SPBPL Extension License"
             DataClassification = AccountData;
             Editable = false;
         }
+        field(15; "Sandbox Grace Days"; Integer)
+        {
+            Caption = 'Sandbox Grace Days';
+            DataClassification = SystemMetadata;
+            Editable = false;
+        }
+        field(19; "Extension App Id"; Guid)
+        {
+            Caption = 'Extension App Id';
+            DataClassification = SystemMetadata;
+            Editable = false;
+        }
         field(20; "Subscription Email"; Text[250])
         {
             Caption = 'Subscription Email';
@@ -149,6 +161,12 @@ table 71033 "SPBPL Extension License"
             Editable = false;
             ExtendedDatatype = URL;
         }
+        field(28; "Submodule Name"; Text[100])
+        {
+            Caption = 'Submodule Name';
+            DataClassification = SystemMetadata;
+            Editable = false;
+        }
         field(30; "License Platform"; Enum "SPBPL License Platform")
         {
             Caption = 'License Platform';
@@ -163,6 +181,12 @@ table 71033 "SPBPL Extension License"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    begin
+        if IsNullGuid("Extension App Id") then
+            "Extension App Id" := "Entry Id";
+    end;
 
     internal procedure CalculateEndDate()
     var

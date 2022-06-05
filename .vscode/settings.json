@@ -11,7 +11,6 @@
     "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
         "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
         "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
-        "CRS.OnSaveAlFileAction": "Reorganize",
         "CRS.RenameWithGit": false,
         "CRS.ObjectNamePrefix": "SPBPL ",
         "al.ruleSetPath": "./ruleset.json",

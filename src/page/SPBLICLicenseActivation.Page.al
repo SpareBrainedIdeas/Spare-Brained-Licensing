@@ -242,6 +242,9 @@ page 71034 "SPBPL License Activation"
             Step := Step + 1;
         end;
 
+        if (Step = Step::Finish) and Backwards then
+            Step := Step - 1;
+
         if Backwards then
             Step := Step - 1
         ELSE

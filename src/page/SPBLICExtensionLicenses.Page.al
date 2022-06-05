@@ -16,7 +16,13 @@ page 71033 "SPBPL Extension Licenses"
             {
                 field("Entry Id"; Rec."Entry Id")
                 {
-                    ToolTip = 'Specifies the value of the Entry Id field.';
+                    ToolTip = 'This Guid is the Subscription Entry Id.';
+                    ApplicationArea = All;
+                    Visible = false;
+                }
+                field("Extension App Id"; Rec."Extension App Id")
+                {
+                    ToolTip = 'This Guid is the Extension''s App Id.';
                     ApplicationArea = All;
                     Visible = false;
                 }
@@ -25,6 +31,11 @@ page 71033 "SPBPL Extension Licenses"
                     ToolTip = 'The name of the Extension that is registered to have a Subscription requirement.';
                     ApplicationArea = All;
                     StyleExpr = SubscriptionStatusStyle;
+                }
+                field("Submodule Name"; Rec."Submodule Name")
+                {
+                    ToolTip = 'If this Extension uses Module based Subscriptions, this displays which Submodule/Edition this is.';
+                    ApplicationArea = All;
                 }
                 field(Activated; Rec.Activated)
                 {
@@ -125,6 +136,7 @@ page 71033 "SPBPL Extension Licenses"
 
     var
         UserHasWritePermission: Boolean;
+        ShowAsTestSubscription: Boolean;
         SubscriptionStatusStyle: Text;
         UpdateLink: Text;
         UpdateAvailableTok: Label 'Available';
@@ -140,6 +152,7 @@ page 71033 "SPBPL Extension Licenses"
 
     trigger OnAfterGetRecord()
     begin
+        ShowAsTestSubscription := Rec.IsTestSubscription();
         SetSubscriptionStyle();
 
         if Rec."Update Available" and (Rec."Update News URL" <> '') then
@@ -169,13 +182,13 @@ page 71033 "SPBPL Extension Licenses"
 
     local procedure CheckAllForUpdates()
     var
-        SPBPLExtensionLicense: Record "SPBPL Extension License";
+        SPBExtensionLicense: Record "SPBPL Extension License";
         SPBPLLicenseManagement: Codeunit "SPBPL License Management";
     begin
-        if SPBPLExtensionLicense.FindSet(true) then
+        if SPBExtensionLicense.FindSet(true) then
             repeat
-                if SPBPLExtensionLicense."Update News URL" <> '' then
-                    SPBPLLicenseManagement.DoVersionCheck(SPBPLExtensionLicense);
-            until SPBPLExtensionLicense.Next() = 0;
+                if SPBExtensionLicense."Update News URL" <> '' then
+                    SPBPLLicenseManagement.DoVersionCheck(SPBExtensionLicense);
+            until SPBExtensionLicense.Next() = 0;
     end;
 }
