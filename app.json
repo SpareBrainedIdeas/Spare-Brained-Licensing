@@ -4,7 +4,7 @@
   "publisher": "Spare Brained Ideas AB",
   "brief": "This library helps other Extensions verify a current subscription license.",
   "description": "This library helps other Extensions verify a current subscription license.",
-  "version": "1.1.0.0",
+  "version": "1.2.0.0",
   "privacyStatement": "https://sparebrained.com/appsource/privacystatement",
   "EULA": "https://sparebrained.com/appsource/eula",
   "help": "https://sparebrained.com/support",
@@ -18,7 +18,7 @@
   "idRanges": [
     {
       "from": 71033,
-      "to": 71043
+      "to": 71049
     }
   ],
   "resourceExposurePolicy": {
@@ -27,7 +27,7 @@
     "includeSourceInSymbolFile": true
   },
   "target": "Cloud",
-  "runtime": "8.0",
+  "runtime": "10.0",
   "features": [
     "TranslationFile", "NoImplicitWith"
   ],

@@ -38,6 +38,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Entry Id - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2870711897 - Field 793520103 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Extension App Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Extension App Id - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2870711897 - Field 2515772770 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Extension Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -58,6 +63,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field License Platform - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2870711897 - Field 3113370813 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Licensing ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Licensing ID - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3265714202 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Product Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -67,6 +77,16 @@
           <source>Product URL</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Product URL - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2870711897 - Field 251475916 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sandbox Grace Days</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Sandbox Grace Days - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2870711897 - Field 66934155 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Submodule Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Submodule Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3577687543 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Subscription Cancelled At</source>
@@ -118,35 +138,75 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Version Check URL - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1922437799 - Method 2560927687 - NamedType 345427010" size-unit="char" translate="yes" xml:space="preserve">
-          <source>No Subscription was found in the Subscriptions list for AppId: %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 is which Application ID</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Extension Registration - Method CheckIfActive - NamedType NoSubFoundErr</note>
+        <trans-unit id="Codeunit 3181116820 - Method 488700208 - NamedType 2571021891" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An error occured validating the license.  Contact %1 for assistance</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Activate Meth - Method CheckPlatformCanActivate - NamedType ActivationFailureErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1922437799 - Method 2560927687 - NamedType 4007641815" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The Subscription for %1 is not Active.  Contact your system administrator to re-activate it.</source>
-          <note from="Developer" annotates="general" priority="2">%1 is the name of the Subscription</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Extension Registration - Method CheckIfActive - NamedType SubscriptionInactiveErr</note>
+        <trans-unit id="Codeunit 3181116820 - Method 488700208 - NamedType 2597918364" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There are no remaining uses of that license key to assign to this installation.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Activate Meth - Method CheckPlatformCanActivate - NamedType NoRemainingUsesErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 3181116820 - Method 2107568876 - NamedType 4258206074" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The License Key provided has already expired due to a Subscription End.  Contact %1 for assistance</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Activate Meth - Method DoActivationInLocalSystem - NamedType LicenseKeyExpiredErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2729312257 - Method 788638224 - NamedType 345427010" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No License was found in the Licenses list for SubscriptionId: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the ID of the App.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active - Method CheckBasic - NamedType NoSubFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2729312257 - Method 766558854 - NamedType 4016921347" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No License was found in the Licenses list for SubscriptionId: %1 with Submodule name: %2</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the ID of the App. %2 is the Submodule.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active - Method CheckBasicSubmodule - NamedType NoSubscriptionFoundErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2729312257 - Method 430906001 - NamedType 4007641815" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The License for %1 is not Active.  Contact your system administrator to re-activate it.</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the name of the Extension.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active - Method DoCheckBasic - NamedType SubscriptionInactiveErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 629474109 - Method 1532212514 - NamedType 1318374551" size-unit="char" translate="yes" xml:space="preserve">
+          <source>&lt;+%1D&gt;</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the number of days</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active Meth - Method DoCheckIfActive - NamedType DaysGraceTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 629474109 - Method 1532212514 - NamedType 3635804519" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Today is the last trial day for %1. Please purchase a License Key and Activate the subscription to continue use.</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the name of the Extension</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active Meth - Method DoCheckIfActive - NamedType GraceExpiringMsg</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4244379827 - Method 3272340085 - NamedType 1073361429" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There was an issue in contacting the licensing server to deactivate this license.  Contact %1 for assistance.</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the App Publisher name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Deactivate Meth - Method DoDeactivate - NamedType DeactivationProblemErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1922437799 - Method 2547612846 - NamedType 4286379137" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To install this Extension, you need to update %1 to at least version %2.</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the name of licensing extension, %2 is the version number</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Extension Registration - Method CheckSupportedVersion - NamedType VersionUpdateRequiredErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1922437799 - Method 36282276 - NamedType 3218011231" size-unit="char" translate="yes" xml:space="preserve">
           <source>&lt;+%1D&gt;</source>
           <note from="Developer" annotates="general" priority="2">%1 is the number of days </note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Extension Registration - Method RegisterExtension - NamedType PlusDaysTok</note>
         </trans-unit>
-        <trans-unit id="Codeunit 4024883425 - NamedType 4116823388" size-unit="char" translate="yes" xml:space="preserve">
-          <source>https://api.gumroad.com/v2/licenses/verify?product_permalink=%1&amp;license_key=%2&amp;increment_uses_count=%3</source>
-          <note from="Developer" annotates="general" priority="2">%1 %2 %3</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - NamedType GumroadVerifyAPITok</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 4024883425 - Method 572322412 - NamedType 1832738441" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Unable to verify or activate license.\ %1: %2 \ %3</source>
-          <note from="Developer" annotates="general" priority="2">%1 %2 %3</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method CallAPIForVerification - NamedType WebCallErr</note>
+        <trans-unit id="Codeunit 4024883425 - NamedType 385219469" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The key will look like XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - NamedType GumroadKeyFormatTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 4024883425 - Method 572322412 - NamedType 2344834051" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unable to communicate with the license server due to an environment block. Please resolve and try again.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method CallAPIForVerification - NamedType EnvironmentBlockErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 4024883425 - Method 572322412 - NamedType 1832738441" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unable to verify or activate license.\ %1: %2 \ %3</source>
+          <note from="Developer" annotates="general" priority="2">%1 %2 %3</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method CallAPIForVerification - NamedType WebCallErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 4024883425 - Method 2508294018 - NamedType 1515148142" size-unit="char" translate="yes" xml:space="preserve">
           <source>An error occured validating the license.  Contact %1 for assistance</source>
@@ -158,75 +218,45 @@
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method PopulateSubscriptionFromResponse - NamedType ActivationFailureErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 4024883425 - Method 906692905 - NamedType 385219469" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The key will look like XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX.</source>
+        <trans-unit id="Codeunit 2825412634 - Method 1937264269 - NamedType 2344834051" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unable to communicate with the license server due to an environment block. Please resolve and try again.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method SampleKeyFormatText - NamedType GumroadKeyFormatTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method CallLemonSqueezy - NamedType EnvironmentBlockErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 2595493984 - NamedType 3305359901" size-unit="char" translate="yes" xml:space="preserve">
-          <source>%1-%2</source>
-          <note from="Developer" annotates="general" priority="2">%1 %2</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL IsoStore Manager - NamedType NameMapTok</note>
+        <trans-unit id="Codeunit 2825412634 - Method 1937264269 - NamedType 1832738441" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unable to verify or activate license.\ %1: %2 \ %3</source>
+          <note from="Developer" annotates="general" priority="2">%1 %2 %3</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method CallLemonSqueezy - NamedType WebCallErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 1089336500 - NamedType 2571021891" size-unit="char" translate="yes" xml:space="preserve">
-          <source>An error occured validating the license.  Contact %1 for assistance</source>
+        <trans-unit id="Codeunit 2825412634 - Method 2792865364 - NamedType 3707967943" size-unit="char" translate="yes" xml:space="preserve">
+          <source>An error occured communicating with the licensing platform.  Contact %1 for assistance</source>
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method ActivateExtension - NamedType ActivationFailureErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method PopulateSubscriptionFromResponse - NamedType CommunicationFailureErr</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 1089336500 - NamedType 4258206074" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The License Key provided has already expired due to a Subscription End.  Contact %1 for assistance</source>
-          <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method ActivateExtension - NamedType LicenseKeyExpiredErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 1130209872 - NamedType 2597918364" size-unit="char" translate="yes" xml:space="preserve">
-          <source>There are no remaining uses of that license key to assign to this installation.</source>
+        <trans-unit id="Codeunit 2825412634 - Method 906692905 - NamedType 3887869495" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The key will look like XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method ActivateFromWizard - NamedType NoRemainingUsesErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method SampleKeyFormatText - NamedType LemonSqueezyKeyFormatTok</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 2560927687 - NamedType 3635804519" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Today is the last trial day for %1. Please purchase a License Key and Activate the subscription to continue use.</source>
-          <note from="Developer" annotates="general" priority="2">%1 is the name of the Extension</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method CheckIfActive - NamedType GraceExpiringMsg</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 2560927687 - NamedType 1318374551" size-unit="char" translate="yes" xml:space="preserve">
-          <source>&lt;+%1D&gt;</source>
-          <note from="Developer" annotates="general" priority="2">%1 is the number of days</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method CheckIfActive - NamedType DaysGraceTok</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 2547612846 - NamedType 4286379137" size-unit="char" translate="yes" xml:space="preserve">
-          <source>To install this Extension, you need to update %1 to at least version %2.</source>
-          <note from="Developer" annotates="general" priority="2">%1 is the name of extension, %2 is the version number</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method CheckSupportedVersion - NamedType VersionUpdateRequiredErr</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 1168398803 - NamedType 2648923875" size-unit="char" translate="yes" xml:space="preserve">
-          <source>This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?</source>
+        <trans-unit id="Codeunit 2498763846 - NamedType 1018804737" size-unit="char" translate="yes" xml:space="preserve">
+          <source>b08c8cbe-ff20-4c38-9448-21e68b509e84</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method DeactivateExtension - NamedType DeactivationWarningQst</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Licensing Install - NamedType GumroadTestSubscriptionIdTok</note>
         </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 2406779609 - NamedType 1913171376" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 2498763846 - NamedType 3762490115" size-unit="char" translate="yes" xml:space="preserve">
+          <source>62922d07-87e2-4959-aece-2cacf9222e9b</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Licensing Install - NamedType LemonSqueezyTestSubscriptionIdTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2498763846 - Method 875139600 - NamedType 3252658350" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 Test Subscription</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the Licensing Extension name.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Licensing Install - Method AddTestProduct - NamedType TestLicenseNameTok</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2019263043 - Method 2406779609 - NamedType 1913171376" size-unit="char" translate="yes" xml:space="preserve">
           <source>Update Extension: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 is Extension Name</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method DoVersionCheck - NamedType SubjectTok</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3022200967 - Method 2406779609 - NamedType 3863198149" size-unit="char" translate="yes" xml:space="preserve">
-          <source>https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/tenant-admin-center-manage-apps#get-an-overview-and-check-for-updates</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Management - Method DoVersionCheck - NamedType DocsTok</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3829117740 - NamedType 838086400" size-unit="char" translate="yes" xml:space="preserve">
-          <source>bwdCu</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Utilities - NamedType SelfTestProductIdTok</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3829117740 - NamedType 667657482" size-unit="char" translate="yes" xml:space="preserve">
-          <source>21E2339D-F24D4A92-9813B4F2-8ABA083C</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Utilities - NamedType SelfTestProductKeyTok</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 3829117740 - Method 1134850377 - NamedType 3336782859" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Content-Disposition: form-data; name="%1"</source>
-          <note from="Developer" annotates="general" priority="2">%1 is the name of the Form Data</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL License Utilities - Method AddNameValuePair - NamedType FormDataNameTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Version Check - Method DoVersionCheck - NamedType SubjectTok</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Extension Licenses</source>
@@ -237,6 +267,16 @@
           <source>Available</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - NamedType UpdateAvailableTok</note>
+        </trans-unit>
+        <trans-unit id="Page 2519867600 - Method 1168398803 - NamedType 3960046211" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Method DeactivateExtension - NamedType DeactivationNotPossibleWarningQst</note>
+        </trans-unit>
+        <trans-unit id="Page 2519867600 - Method 1168398803 - NamedType 1534060074" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This will deactivate this license in this Business Central instance.\ \Are you sure you want to deactivate this license?</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Method DeactivateExtension - NamedType DeactivationPossibleQst</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 2520497479 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Shows if this Extension has been Activated with a Product Key.</source>
@@ -249,19 +289,34 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Billing Support Email - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 3553709163 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Entry Id field.</source>
+          <source>This Guid is the Subscription Entry Id.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Entry Id - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2519867600 - Control 793520103 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This Guid is the Extension's App Id.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Extension App Id - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 2515772770 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>The name of the Extension that is registered to have a Subscription requirement.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Extension Name - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 2519867600 - Control 3482719256 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the License Platform field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control License Platform - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 2519867600 - Control 1615067412 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>The page where one can find more information about purchasing a Subscription for this Extension.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Product URL - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2519867600 - Control 66934155 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>If this Extension uses Module based Subscriptions, this displays which Submodule/Edition this is.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Submodule Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 2993034865 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>This shows the email address that the License Key is registered to, in case there is a need to find it later.</source>
@@ -397,6 +452,11 @@
           <source>Gumroad</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum SPBPL License Platform - EnumValue Gumroad - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3747597251 - EnumValue 1315004771 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>LemonSqueezy</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum SPBPL License Platform - EnumValue LemonSqueezy - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 917097709 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spare Brained Licensing Admin</source>

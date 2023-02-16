@@ -1,13 +1,14 @@
 page 71034 "SPBPL License Activation"
 {
 
+    ApplicationArea = All;
     Caption = 'Licensing Activation Wizard';
     PageType = NavigatePage;
     SourceTable = "SPBPL Extension License";
 
     layout
     {
-        area(content)
+        area(Content)
         {
             group(Step1)
             {
@@ -17,19 +18,18 @@ page 71034 "SPBPL License Activation"
                     Caption = 'This is the Activation Wizard for the Licensing system.';
                     group(WelcomeExplainer)
                     {
-                        ShowCaption = false;
                         InstructionalText = 'You will enter the License Key for the following License.  If you do not have a License key, please click on the "Get License Key" link.';
+                        ShowCaption = false;
                     }
                     field(LicenseLinkField; LicenseLinkText)
                     {
                         DrillDown = true;
                         Editable = false;
                         ShowCaption = false;
-                        ApplicationArea = All;
 
                         trigger OnDrillDown()
                         begin
-                            SPBPLLicenseUtilities.LaunchProductUrl(Rec);
+                            Rec.LaunchProductUrl();
                         end;
                     }
                 }
@@ -38,8 +38,8 @@ page 71034 "SPBPL License Activation"
                     Caption = 'Start Activation';
                     group(StartText)
                     {
-                        ShowCaption = false;
                         InstructionalText = 'Click Next to begin the activation process. You will need your Subscription License key.';
+                        ShowCaption = false;
                     }
                 }
             }
@@ -49,20 +49,18 @@ page 71034 "SPBPL License Activation"
 
                 group(LicenseKeyInstruction)
                 {
-                    ShowCaption = false;
                     InstructionalText = 'Please enter your Subscription License Key:';
+                    ShowCaption = false;
                 }
                 field(LicenseKeyField; LicenseKey)
                 {
-                    ApplicationArea = All;
-                    ShowMandatory = true;
                     ShowCaption = false;
+                    ShowMandatory = true;
                 }
                 field(LicenseKeyFormat; LicenseFormatHintText)
                 {
-                    ApplicationArea = All;
-                    ShowCaption = false;
                     Editable = false;
+                    ShowCaption = false;
                 }
             }
             group(Step2Test)
@@ -71,36 +69,33 @@ page 71034 "SPBPL License Activation"
 
                 group(TestPathLicenseKeyInstruction)
                 {
-                    ShowCaption = false;
                     InstructionalText = 'Please enter your Subscription License Key:';
+                    ShowCaption = false;
                 }
                 field(TestPathLicenseKeyField; LicenseKey)
                 {
-                    ApplicationArea = All;
-                    ShowMandatory = true;
                     ShowCaption = false;
+                    ShowMandatory = true;
                 }
                 field(TestPathLicenseKeyFormat; LicenseFormatHintText)
                 {
-                    ApplicationArea = All;
-                    ShowCaption = false;
                     Editable = false;
+                    ShowCaption = false;
                 }
                 group(TestLicenseOption)
                 {
-                    ShowCaption = false;
                     InstructionalText = 'This is the Test Subscription, so you can use a test License Key here by clicking:';
+                    ShowCaption = false;
                 }
                 field(TestLicenseHint; TestLicenseLinkText)
                 {
                     DrillDown = true;
                     Editable = false;
                     ShowCaption = false;
-                    ApplicationArea = All;
 
                     trigger OnDrillDown()
                     begin
-                        LicenseKey := SPBPLLicenseUtilities.GetTestProductKey();
+                        LicenseKey := SPBPLenseUtilities.GetTestProductKey(Rec);
                     end;
                 }
             }
@@ -112,15 +107,15 @@ page 71034 "SPBPL License Activation"
                     Caption = 'Activation Results';
                     group(ActivationWorked)
                     {
-                        Visible = ActivationResult;
                         InstructionalText = 'Activation Successful!';
                         ShowCaption = false;
+                        Visible = ActivationResult;
                     }
                     group(ActivationDidNotWork)
                     {
-                        Visible = not ActivationResult;
                         InstructionalText = 'Activation Unsuccessful!';
                         ShowCaption = false;
+                        Visible = not ActivationResult;
                     }
                 }
             }
@@ -129,11 +124,10 @@ page 71034 "SPBPL License Activation"
 
     actions
     {
-        area(processing)
+        area(Processing)
         {
             action(ActionBack)
             {
-                ApplicationArea = All;
                 Caption = 'Back';
                 Enabled = BackActionEnabled;
                 Image = PreviousRecord;
@@ -146,7 +140,6 @@ page 71034 "SPBPL License Activation"
             }
             action(ActionNext)
             {
-                ApplicationArea = All;
                 Caption = 'Next';
                 Enabled = NextActionEnabled;
                 Image = NextRecord;
@@ -161,7 +154,6 @@ page 71034 "SPBPL License Activation"
             }
             action(ActionFinish)
             {
-                ApplicationArea = All;
                 Caption = 'Finish';
                 Enabled = FinishActionEnabled;
                 Image = Approve;
@@ -176,25 +168,25 @@ page 71034 "SPBPL License Activation"
     }
 
     var
-        SPBPLLicenseManagement: Codeunit "SPBPL License Management";
-        SPBPLLicenseUtilities: Codeunit "SPBPL License Utilities";
-        LicenseLinkText: Text;
-        LicenseKey: Text;
-        LicenseFormatHintText: Text;
-        TestLicenseLinkText: Text;
-        Step1Visible: Boolean;
-        Step2Visible: Boolean;
-        Step2TestVisible: Boolean;
-        Step3Visible: Boolean;
-        Step: Option Start,Step2,Step2Test,Finish;
+        SPBPLActivateMeth: Codeunit "SPBPL Activate Meth";
+        SPBPLenseUtilities: Codeunit "SPBPL License Utilities";
+        ActivationResult: Boolean;
         BackActionEnabled: Boolean;
         FinishActionEnabled: Boolean;
         NextActionEnabled: Boolean;
-        LicenseLinkUriTok: Label 'Get License Key';
-        LicenseKeyNeededErr: Label 'You need to enter a License Key to continue.';
-        TestLicenseKeyOfferTok: Label 'Use Test Key';
-        ActivationResult: Boolean;
         ShowAsTestSubscription: Boolean;
+        Step1Visible: Boolean;
+        Step2TestVisible: Boolean;
+        Step2Visible: Boolean;
+        Step3Visible: Boolean;
+        LicenseKeyNeededErr: Label 'You need to enter a License Key to continue.';
+        LicenseLinkUriTok: Label 'Get License Key';
+        TestLicenseKeyOfferTok: Label 'Use Test Key';
+        Step: Option Start,Step2,Step2Test,Finish;
+        LicenseFormatHintText: Text;
+        LicenseKey: Text;
+        LicenseLinkText: Text;
+        TestLicenseLinkText: Text;
 
 
     trigger OnOpenPage()
@@ -238,7 +230,8 @@ page 71034 "SPBPL License Activation"
         // Validation trigger when moving from Step2 to 3
         if (Step = Step::Step2) and not Backwards then begin
             Rec."License Key" := CopyStr(LicenseKey, 1, MaxStrLen(Rec."License Key"));
-            ActivationResult := SPBPLLicenseManagement.ActivateFromWizard(Rec);
+            Rec.Modify();
+            ActivationResult := SPBPLActivateMeth.Activate(Rec);
             Step := Step + 1;
         end;
 
@@ -247,7 +240,7 @@ page 71034 "SPBPL License Activation"
 
         if Backwards then
             Step := Step - 1
-        ELSE
+        else
             Step := Step + 1;
 
         EnableControls();

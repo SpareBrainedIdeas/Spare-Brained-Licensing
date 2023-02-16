@@ -13,6 +13,6 @@
         "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
         "CRS.RenameWithGit": false,
         "CRS.ObjectNamePrefix": "SPBPL ",
-        "al.ruleSetPath": "./ruleset.json",
+        "al.ruleSetPath": "src\\.rulesets\\SPBLicensing.ruleset.json",
 
 }

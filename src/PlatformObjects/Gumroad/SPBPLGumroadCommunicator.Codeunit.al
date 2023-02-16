@@ -2,19 +2,29 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
 {
 
     var
+        GumroadBillingEmailTok: Label 'support@sparebrained.com', Locked = true;
+        GumroadKeyFormatTok: Label 'The key will look like XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX.';
+        GumroadSupportUrlTok: Label 'support@sparebrained.com', Locked = true;
+        GumroadTestProductIdTok: Label 'bwdCu', Locked = true;
+        GumroadTestProductKeyTok: Label '21E2339D-F24D4A92-9813B4F2-8ABA083C', Locked = true;
+        GumroadTestProductUrlTok: Label 'https://sparebrained.gumroad.com/l/SBILicensingTest', Locked = true;
         GumroadVerifyAPITok: Label 'https://api.gumroad.com/v2/licenses/verify?product_permalink=%1&license_key=%2&increment_uses_count=%3', Comment = '%1 %2 %3', Locked = true;
+
+    procedure CallAPIForActivation(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    begin
+        exit(CallAPIForVerification(SPBExtensionLicense, ResponseBody, true));
+    end;
 
     procedure CallAPIForVerification(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean) ResultOK: Boolean
     var
         NAVAppSetting: Record "NAV App Setting";
-        EnvInformation: Codeunit "Environment Information";
         ApiHttpClient: HttpClient;
         ApiHttpRequestMessage: HttpRequestMessage;
         ApiHttpResponseMessage: HttpResponseMessage;
-        VerifyAPI: Text;
-        WebCallErr: Label 'Unable to verify or activate license.\ %1: %2 \ %3', Comment = '%1 %2 %3';
         EnvironmentBlockErr: Label 'Unable to communicate with the license server due to an environment block. Please resolve and try again.';
+        WebCallErr: Label 'Unable to verify or activate license.\ %1: %2 \ %3', Comment = '%1 %2 %3';
         AppInfo: ModuleInfo;
+        VerifyAPI: Text;
     begin
         // We REQUIRE HTTP access, so we'll force it on, regardless of Sandbox
         NavApp.GetCurrentModuleInfo(AppInfo);
@@ -49,12 +59,17 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
                     Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
     end;
 
+    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    begin
+        exit(CallAPIForVerification(SPBExtensionLicense, ResponseBody, false));
+    end;
 
     procedure ReportPossibleMisuse(SPBExtensionLicense: Record "SPBPL Extension License")
+    var
+        SPBPLEvents: Codeunit "SPBPL Events";
     begin
         // Potential future use of 'reporting' misuse attempts.   For example, someone programmatically changing the Subscription Record
-
-        OnAfterThrowPossibleMisuse(SPBExtensionLicense);
+        SPBPLEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
     end;
 
 #pragma warning disable AA0150 // TODO - Passed as "var" for the interface
@@ -62,11 +77,11 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
 #pragma warning restore AA0150
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
-        TempPlaceholder: Text;
-        AppInfo: ModuleInfo;
         GumroadJson: JsonObject;
         GumroadToken: JsonToken;
         ActivationFailureErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
+        AppInfo: ModuleInfo;
+        TempPlaceholder: Text;
     begin
         NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
         GumroadJson.ReadFrom(ResponseBody);
@@ -80,8 +95,6 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
 
         // Update the current Subscription record
         SPBExtensionLicense.Validate(Activated, true);
-        TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'license_key');
-        SPBExtensionLicense."License Key" := CopyStr(TempPlaceholder, 1, MaxStrLen(SPBExtensionLicense."License Key"));
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'created_at');
         Evaluate(SPBExtensionLicense."Created At", TempPlaceholder);
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'subscription_ended_at');
@@ -96,19 +109,31 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         SPBExtensionLicense.CalculateEndDate();
     end;
 
+    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean;
+    begin
+        // Gumroad only allows this using an API key, which is unique to each Publisher.  At this time,
+        // I can't support the safe storage of that information 
+        exit(false);
+    end;
+
+    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean;
+    begin
+        exit(true);
+    end;
+
     procedure CheckAPILicenseCount(var SPBExtensionLicense: Record "SPBPL Extension License"; ResponseBody: Text): Boolean
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
-        GumroadSPBLicenseUtilities: Codeunit "SPBPL License Utilities";
-        LicenseUses: Integer;
+        SPBPLenseUtilities: Codeunit "SPBPL License Utilities";
         LicenseCount: Integer;
-        AppInfo: ModuleInfo;
+        LicenseUses: Integer;
         GumroadJson: JsonObject;
         GumroadToken: JsonToken;
         GumroadErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
+        AppInfo: ModuleInfo;
     begin
         // The 'Test' product, we never do a Count check on this application
-        if SPBExtensionLicense."Entry Id" = GumroadSPBLicenseUtilities.GetTestProductAppId() then
+        if SPBExtensionLicense."Entry Id" = SPBPLenseUtilities.GetTestProductAppId() then
             exit(true);
 
         GumroadJson.ReadFrom(ResponseBody);
@@ -128,12 +153,36 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
     end;
 
     procedure SampleKeyFormatText(): Text
-    var
-        GumroadKeyFormatTok: Label 'The key will look like XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX.';
     begin
         exit(GumroadKeyFormatTok);
     end;
 
+    procedure GetTestProductUrl(): Text
+    begin
+        exit(GumroadTestProductUrlTok);
+    end;
+
+    procedure GetTestProductId(): Text
+    begin
+        exit(GumroadTestProductIdTok);
+    end;
+
+    procedure GetTestProductKey(): Text
+    begin
+        exit(GumroadTestProductKeyTok);
+    end;
+
+    procedure GetTestSupportUrl(): Text
+    begin
+        exit(GumroadSupportUrlTok);
+    end;
+
+    procedure GetTestBillingEmail(): Text
+    begin
+        exit(GumroadBillingEmailTok);
+    end;
+
+    [Obsolete('This event is moved to the central License Management codeunit for platform-agnostic eventing.')]
     [IntegrationEvent(false, false)]
     local procedure OnAfterThrowPossibleMisuse(SPBExtensionLicense: Record "SPBPL Extension License")
     begin

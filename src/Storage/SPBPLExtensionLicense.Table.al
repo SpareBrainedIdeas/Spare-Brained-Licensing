@@ -151,8 +151,8 @@ table 71033 "SPBPL Extension License"
         field(26; "Update Available"; Boolean)
         {
             Caption = 'Update Available';
-            Editable = false;
             DataClassification = SystemMetadata;
+            Editable = false;
         }
         field(27; "Update News URL"; Text[250])
         {
@@ -171,6 +171,13 @@ table 71033 "SPBPL Extension License"
         {
             Caption = 'License Platform';
             DataClassification = SystemMetadata;
+            Editable = false;
+        }
+        field(40; "Licensing ID"; Text[250])
+        {
+            // This is for generic storage of 3rd party system ID fields in case needed
+            Caption = 'Licensing ID';
+            DataClassification = CustomerContent;
             Editable = false;
         }
     }
@@ -210,8 +217,18 @@ table 71033 "SPBPL Extension License"
 
     internal procedure IsTestSubscription(): Boolean
     var
-        SPBPLLicenseUtilities: Codeunit "SPBPL License Utilities";
+        SPBPLenseUtilities: Codeunit "SPBPL License Utilities";
     begin
-        exit(Rec."Entry Id" = SPBPLLicenseUtilities.GetTestProductAppId());
+        exit(Rec."Extension App Id" = SPBPLenseUtilities.GetTestProductAppId());
+    end;
+
+    internal procedure LaunchProductUrl()
+    var
+        SBPLicEvents: Codeunit "SPBPL Events";
+        IsHandled: Boolean;
+    begin
+        SBPLicEvents.OnBeforeLaunchProductUrl(Rec, IsHandled);
+        if not IsHandled then
+            Hyperlink("Product URL");
     end;
 }

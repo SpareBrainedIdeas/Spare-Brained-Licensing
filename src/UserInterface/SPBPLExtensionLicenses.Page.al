@@ -3,52 +3,46 @@ page 71033 "SPBPL Extension Licenses"
 
     ApplicationArea = All;
     Caption = 'Extension Licenses';
+    Editable = false;
     PageType = List;
     SourceTable = "SPBPL Extension License";
     UsageCategory = Administration;
-    Editable = false;
 
     layout
     {
-        area(content)
+        area(Content)
         {
             repeater(General)
             {
                 field("Entry Id"; Rec."Entry Id")
                 {
                     ToolTip = 'This Guid is the Subscription Entry Id.';
-                    ApplicationArea = All;
                     Visible = false;
                 }
                 field("Extension App Id"; Rec."Extension App Id")
                 {
                     ToolTip = 'This Guid is the Extension''s App Id.';
-                    ApplicationArea = All;
                     Visible = false;
                 }
                 field("Extension Name"; Rec."Extension Name")
                 {
-                    ToolTip = 'The name of the Extension that is registered to have a Subscription requirement.';
-                    ApplicationArea = All;
                     StyleExpr = SubscriptionStatusStyle;
+                    ToolTip = 'The name of the Extension that is registered to have a Subscription requirement.';
                 }
                 field("Submodule Name"; Rec."Submodule Name")
                 {
                     ToolTip = 'If this Extension uses Module based Subscriptions, this displays which Submodule/Edition this is.';
-                    ApplicationArea = All;
                 }
                 field(Activated; Rec.Activated)
                 {
                     ToolTip = 'Shows if this Extension has been Activated with a Product Key.';
-                    ApplicationArea = All;
                 }
                 field(UpdateLink; UpdateLink)
                 {
                     Caption = 'Update News';
-                    ToolTip = 'If an Update is available, this will link to where to find out more.';
-                    ApplicationArea = All;
                     DrillDown = true;
                     Style = Favorable;
+                    ToolTip = 'If an Update is available, this will link to where to find out more.';
 
                     trigger OnDrillDown()
                     begin
@@ -58,31 +52,31 @@ page 71033 "SPBPL Extension Licenses"
                 field("Trial Grace End Date"; Rec."Trial Grace End Date")
                 {
                     ToolTip = 'If the Extension is not yet Activated, this is the last date the Extension can run in Trial Mode.';
-                    ApplicationArea = All;
                 }
                 field("Subscription Email"; Rec."Subscription Email")
                 {
-                    ToolTip = 'This shows the email address that the License Key is registered to, in case there is a need to find it later.';
                     ExtendedDatatype = EMail;
-                    ApplicationArea = All;
+                    ToolTip = 'This shows the email address that the License Key is registered to, in case there is a need to find it later.';
                 }
                 field("Product URL"; Rec."Product URL")
                 {
-                    ToolTip = 'The page where one can find more information about purchasing a Subscription for this Extension.';
-                    ApplicationArea = All;
                     ExtendedDatatype = URL;
+                    ToolTip = 'The page where one can find more information about purchasing a Subscription for this Extension.';
                 }
                 field("Support URL"; Rec."Support URL")
                 {
-                    ToolTip = 'The page where one can find more information about how to get Support for the Extension.';
-                    ApplicationArea = All;
                     ExtendedDatatype = URL;
+                    ToolTip = 'The page where one can find more information about how to get Support for the Extension.';
                 }
                 field("Billing Support Email"; Rec."Billing Support Email")
                 {
-                    ToolTip = 'The email address to contact with Billing related questions about this Subscription.';
-                    ApplicationArea = All;
                     ExtendedDatatype = EMail;
+                    ToolTip = 'The email address to contact with Billing related questions about this Subscription.';
+                }
+                field("License Platform"; Rec."License Platform")
+                {
+                    ToolTip = 'Specifies the value of the License Platform field.';
+                    Visible = false;
                 }
             }
         }
@@ -94,26 +88,22 @@ page 71033 "SPBPL Extension Licenses"
         {
             action(ActivateProduct)
             {
-                ApplicationArea = All;
                 Caption = 'Activate';
                 Enabled = not Rec.Activated and UserHasWritePermission;
                 Image = SuggestElectronicDocument;
                 Promoted = true;
-                PromotedOnly = true;
                 PromotedCategory = Process;
+                PromotedOnly = true;
                 ToolTip = 'Launches the Activation Wizard for this Subscription.';
 
                 trigger OnAction()
-                var
-                    SPBLicenseManagement: Codeunit "SPBPL License Management";
                 begin
-                    SPBLicenseManagement.LaunchActivation(Rec);
+                    LaunchActivation(Rec);
                     Rec.SetRange("Entry Id");
                 end;
             }
             action(DeactivateProduct)
             {
-                ApplicationArea = All;
                 Caption = 'Deactivate';
                 Enabled = Rec.Activated and UserHasWritePermission;
                 Image = Cancel;
@@ -123,10 +113,8 @@ page 71033 "SPBPL Extension Licenses"
                 ToolTip = 'Forces this Subscription inactive, which will allow entry of a new License Key.';
 
                 trigger OnAction()
-                var
-                    SPBLicenseManagement: Codeunit "SPBPL License Management";
                 begin
-                    SPBLicenseManagement.DeactivateExtension(Rec);
+                    DeactivateExtension(Rec);
                     Rec.SetRange("Entry Id");
                 end;
             }
@@ -136,10 +124,9 @@ page 71033 "SPBPL Extension Licenses"
 
     var
         UserHasWritePermission: Boolean;
-        ShowAsTestSubscription: Boolean;
+        UpdateAvailableTok: Label 'Available';
         SubscriptionStatusStyle: Text;
         UpdateLink: Text;
-        UpdateAvailableTok: Label 'Available';
 
     trigger OnOpenPage()
     begin
@@ -152,7 +139,6 @@ page 71033 "SPBPL Extension Licenses"
 
     trigger OnAfterGetRecord()
     begin
-        ShowAsTestSubscription := Rec.IsTestSubscription();
         SetSubscriptionStyle();
 
         if Rec."Update Available" and (Rec."Update News URL" <> '') then
@@ -182,13 +168,43 @@ page 71033 "SPBPL Extension Licenses"
 
     local procedure CheckAllForUpdates()
     var
-        SPBExtensionLicense: Record "SPBPL Extension License";
-        SPBPLLicenseManagement: Codeunit "SPBPL License Management";
+        SPBPLense: Record "SPBPL Extension License";
+        SPBPLVersionCheck: Codeunit "SPBPL Version Check";
     begin
-        if SPBExtensionLicense.FindSet(true) then
+        if SPBPLense.FindSet(true) then
             repeat
-                if SPBExtensionLicense."Update News URL" <> '' then
-                    SPBPLLicenseManagement.DoVersionCheck(SPBExtensionLicense);
-            until SPBExtensionLicense.Next() = 0;
+                if SPBPLense."Update News URL" <> '' then
+                    SPBPLVersionCheck.DoVersionCheck(SPBPLense);
+            until SPBPLense.Next() = 0;
+    end;
+
+    internal procedure LaunchActivation(var SPBExtensionLicense: Record "SPBPL Extension License")
+    var
+        SPBPLenseActivationWizard: Page "SPBPL License Activation";
+    begin
+        Clear(SPBPLenseActivationWizard);
+        SPBExtensionLicense.SetRecFilter();
+        SPBPLenseActivationWizard.SetTableView(SPBExtensionLicense);
+        SPBPLenseActivationWizard.RunModal();
+    end;
+
+    internal procedure DeactivateExtension(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean
+    var
+        SPBPLDeactivateMeth: Codeunit "SPBPL Deactivate Meth";
+        DoDeactivation: Boolean;
+        LicensePlatform: Interface "SPBPL ILicenseCommunicator";
+        DeactivationNotPossibleWarningQst: Label 'This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?';
+        DeactivationPossibleQst: Label 'This will deactivate this license in this Business Central instance.\ \Are you sure you want to deactivate this license?';
+    begin
+        LicensePlatform := SPBExtensionLicense."License Platform";
+
+        // Depending on the platform capabilities, we give the user a different message
+        if LicensePlatform.ClientSideDeactivationPossible(SPBExtensionLicense) then
+            DoDeactivation := Confirm(DeactivationPossibleQst, false)
+        else
+            DoDeactivation := Confirm(DeactivationNotPossibleWarningQst, false);
+
+        if DoDeactivation then
+            exit(SPBPLDeactivateMeth.Deactivate(SPBExtensionLicense, false));
     end;
 }
