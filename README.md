@@ -37,21 +37,21 @@ This is a License Key validation and management framework, which does mean it do
 
 However, the core table has been implemented as an Enum/Interface system. This extension comes with built-in support for using Gumroad as a license platform, but you can extend it to support almost anything.
 
-### Gumroad Interface
-Out of the box, this extension has support for the Gumroad licensing system, making it very simple for smaller partners or even single developers to quickly and easily:
+### Licensing Systems Interfaces
+Out of the box, this extension has support for the Gumroad and Lemon Squeezy platforms, making it very simple for smaller partners or even single developers to quickly and easily:
 
 - Offer complex rates per month, quarter, half year, and annually in a variety of currencies
-- Payout is handled automatically by Gumroad to you, either by direct transfer or PayPal (varies by country)
+- Payout is handled automatically by Gumroad or Lemon Squeezy to you, either by direct transfer or PayPal (varies by country)
 - Easily support Affiliate handling to offer partners a % payout, which will also be managed by Gumroad on your behalf
-- All VAT handling, including MOSS reporting, is done by Gumroad on your behalf, so you only have to worry about the Net
+- All VAT handling, including MOSS reporting, is done by Gumroad or Lemon Squeezy on your behalf, so you only have to worry about the Net
 - Built-In Customer Email List building, along with easy integrations with third parties to communicate with your market
-- Entirely reasonable fees that reduce along your lifetime earnings
+- Fees vary, and you should consult the respective pricing pages on either platform for the latest information
 
 ### Extensible
-Because the framework is extensible, publishers can also extend the Licensing system to add other License Key verification platforms as wanted.
+Because the framework is extensible, publishers can also extend the Licensing system to add other License Key verification platforms as wanted.   Simply extend the "Platform" enum, and implement a Communication Interface, and it'll tick right along as before.
 
 ## How can I trust it?
-Valid question! This application does communicate to outside systems in a very narrow scope. Once we’re sure this is working for customers and partners (aiming for a 30-60 day safety period to resolve any issues), this will be entirely available via well, **this** GitHub repo.
+Valid question! This application does communicate to outside systems in a very narrow scope.  You are welcome and encouraged to review the source code in detail and make us aware of any faults.  We have had multiple code reviews by other MVPs to see if there is any way to circumvent the solution's protections, and that has not been possible.
 
 ## What’s the Catch?
-None. We needed a Licensing verification system for our great new API Designer tool, Data Braider, so the intention from inception was to make this extension available for more people to use.
+None. We needed a Licensing verification system for our great low-code Business Central API Designer tool, Data Braider, so the intention from inception was to make this extension available for more people to use.
