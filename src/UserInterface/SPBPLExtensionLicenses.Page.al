@@ -192,7 +192,7 @@ page 71033 "SPBPL Extension Licenses"
     var
         SPBPLDeactivateMeth: Codeunit "SPBPL Deactivate Meth";
         DoDeactivation: Boolean;
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator";
+        LicensePlatform: Interface "SPBPL ILicenseCommunicator2";
         DeactivationNotPossibleWarningQst: Label 'This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?';
         DeactivationPossibleQst: Label 'This will deactivate this license in this Business Central instance.\ \Are you sure you want to deactivate this license?';
     begin

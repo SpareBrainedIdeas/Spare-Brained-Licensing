@@ -22,6 +22,7 @@ codeunit 71045 "SPBPL Activate Meth"
     local procedure CheckPlatformCanActivate(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ActivationSuccess: Boolean
     var
         LicensePlatform: Interface "SPBPL ILicenseCommunicator";
+        LicensePlatformV2: Interface "SPBPL ILicenseCommunicator2";
         ActivationFailureErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         NoRemainingUsesErr: Label 'There are no remaining uses of that license key to assign to this installation.';
         AppInfo: ModuleInfo;
@@ -30,8 +31,8 @@ codeunit 71045 "SPBPL Activate Meth"
         // We'll want the App info for events / errors:
         NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
 
-        if LicensePlatform.CallAPIForActivation(SPBExtensionLicense, ResponseBody) then begin
-            if LicensePlatform.ClientSideLicenseCount(SPBExtensionLicense) then begin
+        if LicensePlatformV2.CallAPIForActivation(SPBExtensionLicense, ResponseBody) then begin
+            if LicensePlatformV2.ClientSideLicenseCount(SPBExtensionLicense) then begin
                 if LicensePlatform.CheckAPILicenseCount(SPBExtensionLicense, ResponseBody) then
                     ActivationSuccess := true
                 else

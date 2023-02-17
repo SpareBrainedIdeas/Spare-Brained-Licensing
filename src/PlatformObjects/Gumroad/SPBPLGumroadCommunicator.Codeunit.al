@@ -1,4 +1,4 @@
-codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicator"
+codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicator", "SPBPL ILicenseCommunicator2"
 {
 
     var

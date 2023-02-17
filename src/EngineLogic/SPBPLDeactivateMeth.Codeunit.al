@@ -10,7 +10,7 @@ codeunit 71046 "SPBPL Deactivate Meth"
         SPBPLEvents: Codeunit "SPBPL Events";
         SPBPLIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
         SPBPLTelemetry: Codeunit "SPBPL Telemetry";
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator";
+        LicensePlatformV2: Interface "SPBPL ILicenseCommunicator2";
         DeactivationProblemErr: Label 'There was an issue in contacting the licensing server to deactivate this license.  Contact %1 for assistance.', Comment = '%1 is the App Publisher name';
         AppInfo: ModuleInfo;
         ResponseBody: Text;
@@ -23,8 +23,8 @@ codeunit 71046 "SPBPL Deactivate Meth"
         Commit();  // if calling the API fails, the local should still be marked as deactivated
 
         if not ByPlatform then begin
-            LicensePlatform := SPBExtensionLicense."License Platform";
-            if not LicensePlatform.CallAPIForDeactivation(SPBExtensionLicense, ResponseBody) then begin
+            LicensePlatformV2 := SPBExtensionLicense."License Platform";
+            if not LicensePlatformV2.CallAPIForDeactivation(SPBExtensionLicense, ResponseBody) then begin
                 if GuiAllowed() then
                     Error(DeactivationProblemErr, AppInfo.Publisher);
             end else

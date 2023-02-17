@@ -34,7 +34,7 @@ codeunit 71037 "SPBPL Licensing Install"
     var
         SPBExtensionLicense: Record "SPBPL Extension License";
         TestLicenseNameTok: Label '%1 Test Subscription', Comment = '%1 is the Licensing Extension name.';
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator";
+        LicensePlatform: Interface "SPBPL ILicenseCommunicator2";
         AppInfo: ModuleInfo;
         TestProductGuid: Guid;
     begin
