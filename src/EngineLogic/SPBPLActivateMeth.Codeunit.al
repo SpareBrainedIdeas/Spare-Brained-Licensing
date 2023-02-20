@@ -28,6 +28,7 @@ codeunit 71045 "SPBPL Activate Meth"
         AppInfo: ModuleInfo;
     begin
         LicensePlatform := SPBExtensionLicense."License Platform";
+        LicensePlatformV2 := SPBExtensionLicense."License Platform";        
         // We'll want the App info for events / errors:
         NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
 
