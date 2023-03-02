@@ -42,7 +42,7 @@ codeunit 71038 "SPBPL IsoStore Manager"
         IsolatedStorage.Set(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), StoreValue, DataScope::Module);
     end;
 
-    internal procedure GetAppValue(SPBExtensionLicense: Record "SPBPL Extension License"; StoreName: Text; ReturnValue: Text) Found: Boolean
+    internal procedure GetAppValue(SPBExtensionLicense: Record "SPBPL Extension License"; StoreName: Text; var ReturnValue: Text) Found: Boolean
     begin
         Found := IsolatedStorage.Get(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), DataScope::Module, ReturnValue);
         if EnvironmentInformation.IsOnPrem() and CryptographyManagement.IsEncryptionEnabled() and CryptographyManagement.IsEncryptionPossible() then
