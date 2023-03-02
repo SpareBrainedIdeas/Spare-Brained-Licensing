@@ -37,7 +37,7 @@ codeunit 71038 "SPBPL IsoStore Manager"
                 StoreValue := CryptographyManagement.EncryptText(CopyStr(StoreValue, 1, 215))
             else
                 if GuiAllowed() then
-                    Error('To use Spare Brained Licensing On-Prem, Database Encryption must be enabled.');
+                    Error('To use Spare Brained Licensing On-Prem, Database Encryption must be enabled.'); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
 
         IsolatedStorage.Set(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), StoreValue, DataScope::Module);
     end;

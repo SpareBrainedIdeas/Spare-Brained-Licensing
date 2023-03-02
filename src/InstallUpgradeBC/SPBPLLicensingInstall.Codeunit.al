@@ -9,9 +9,12 @@ codeunit 71037 "SPBPL Licensing Install"
     trigger OnInstallAppPerDatabase()
     var
         SPBPLTelemetry: Codeunit "SPBPL Telemetry";
+        UpgradeTag: Codeunit "Upgrade Tag";
     begin
         PerformInstallOfTestSubscriptions();
         SPBPLTelemetry.LicensingAppInstalled();
+
+        UpgradeTag.SetAllUpgradeTags();
     end;
 
     procedure PerformInstallOfTestSubscriptions()
@@ -25,7 +28,7 @@ codeunit 71037 "SPBPL Licensing Install"
         Evaluate(TestProductGuid, GumroadTestSubscriptionIdTok);
     end;
 
-    procedure GetLemongSqueezyTestAppId() TestProductGuid: Guid
+    procedure GetLemonSqueezyTestAppId() TestProductGuid: Guid
     begin
         Evaluate(TestProductGuid, LemonSqueezyTestSubscriptionIdTok);
     end;

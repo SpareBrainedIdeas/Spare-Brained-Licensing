@@ -35,7 +35,7 @@ codeunit 71043 "SPBPL Check Active Meth"
         IsoActive: Boolean;
         GraceEndDate: Date;
         InstallDateTime: DateTime;
-        IsoDatetime: DateTime;
+        IsoDateTime: DateTime;
         LastCheckDateTime: DateTime;
         IsoNumber: Integer;
         LicensePlatform: Interface "SPBPL ILicenseCommunicator";
@@ -53,28 +53,33 @@ codeunit 71043 "SPBPL Check Active Meth"
         if not SPBExtensionLicense.Activated then begin
             if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'installDate', IsoStorageValue) then
                 Evaluate(InstallDateTime, IsoStorageValue);
+
             if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'preactivationDays', IsoStorageValue) then
                 Evaluate(IsoNumber, IsoStorageValue);
+
             if IsoNumber > 0 then
                 GraceEndDate := CalcDate(StrSubstNo(DaysGraceTok, IsoNumber), DT2Date(InstallDateTime))
             else
-                if (EnvironmentInformation.IsSandbox() and (IsoNumber < 0)) then
+                if EnvironmentInformation.IsSandbox() and (IsoNumber < 0) then
                     // -1 days grace for a Sandbox means it's unlimited use in sandboxes, even if not activated.
                     exit(true)
                 else
                     GraceEndDate := Today;
+
             if (GraceEndDate = Today) and GuiAllowed then
                 Message(GraceExpiringMsg, SPBExtensionLicense."Extension Name");
 
             // if the subscription isn't active, and we're not in the grace period, then we're not Active
             if GraceEndDate < Today then
                 SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, StrSubstNo(GracePeriodExpiredTok, GraceEndDate));
+
             exit(GraceEndDate >= Today);
         end;
 
         if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'lastCheckDate', IsoStorageValue) then
             Evaluate(LastCheckDateTime, IsoStorageValue);
-        if ((Today() - DT2Date(LastCheckDateTime)) > 0) then begin
+
+        if (Today() - DT2Date(LastCheckDateTime)) > 0 then begin
             if LicensePlatform.CallAPIForVerification(SPBExtensionLicense, ResponseBody, false) then begin
                 // This may update the End Dates - note: may or may not call .Modify
                 LicensePlatform.PopulateSubscriptionFromResponse(SPBExtensionLicense, ResponseBody);
@@ -95,6 +100,7 @@ codeunit 71043 "SPBPL Check Active Meth"
         // if the record version IS active, then let's crosscheck against isolated storage
         if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'active', IsoStorageValue) then
             Evaluate(IsoActive, IsoStorageValue);
+
         if not IsoActive then begin
             LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
             SPBPLTelemetry.EventTagMisuseReport(SPBExtensionLicense);
@@ -104,10 +110,11 @@ codeunit 71043 "SPBPL Check Active Meth"
 
         // Check Record end date against IsoStorage end date
         if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'endDate', IsoStorageValue) then
-            Evaluate(IsoDatetime, IsoStorageValue);
-        if IsoDatetime <> 0DT then
+            Evaluate(IsoDateTime, IsoStorageValue);
+
+        if IsoDateTime <> 0DT then
             // Only checking at the date level in case of time zone nonsense
-            if DT2Date(IsoDatetime) <> DT2Date(SPBExtensionLicense."Subscription End Date") then begin
+            if DT2Date(IsoDateTime) <> DT2Date(SPBExtensionLicense."Subscription End Date") then begin
                 LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
                 SPBPLTelemetry.EventTagMisuseReport(SPBExtensionLicense);
                 SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, IsoStorageTamperingTok);

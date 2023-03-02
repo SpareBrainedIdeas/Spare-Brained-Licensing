@@ -91,19 +91,20 @@ codeunit 71034 "SPBPL Extension Registration"
         GraceDays: Integer;
         PlusDaysTok: Label '<+%1D>', Comment = '%1 is the number of days ';
     begin
-        if minimumLicensingAppVersion > Version.Create('1.0.0.0') then
+        if minimumLicensingAppVersion > Version.Create('1.0.0.0') then //TODO: I think the minimum version an app can have is 0.0.0.0, at least thats used in install codeunits to handle fresh vs re install
             CheckSupportedVersion(minimumLicensingAppVersion);
 
         if EnvironmentInformation.IsOnPrem() or EnvironmentInformation.IsProduction() then
             GraceDays := daysAllowedBeforeActivationProd
         else
             GraceDays := daysAllowedBeforeActivationSandbox;
+
         if GraceDays > 0 then
             GraceEndDate := CalcDate(StrSubstNo(PlusDaysTok, daysAllowedBeforeActivationProd), Today)
         else
             GraceEndDate := Today;
 
-        if (SPBExtensionLicense.Get(SubModuleId)) then begin
+        if SPBExtensionLicense.Get(SubModuleId) then begin
             if forceUpdate then begin
                 SPBExtensionLicense."Submodule Name" := SubModuleName;
                 SPBExtensionLicense."Extension Name" := CopyStr(AppInfo.Name, 1, MaxStrLen(SPBExtensionLicense."Extension Name"));
@@ -132,8 +133,10 @@ codeunit 71034 "SPBPL Extension Registration"
             SPBExtensionLicense."Sandbox Grace Days" := daysAllowedBeforeActivationSandbox;
             SPBExtensionLicense.Insert(true);
         end;
+
         SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'installDate', Format(CurrentDateTime, 0, 9));
         SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'preactivationDays', Format(GraceDays));
+
         SPBPLTelemetry.NewExtensionRegistered(SPBExtensionLicense);
     end;
 
@@ -144,7 +147,7 @@ codeunit 71034 "SPBPL Extension Registration"
     begin
         NavApp.GetCurrentModuleInfo(AppInfo);
         if AppInfo.AppVersion < minVersion then
-            if GuiAllowed then
+            if GuiAllowed then //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
                 Error(VersionUpdateRequiredErr, AppInfo.Name, minVersion);
     end;
 

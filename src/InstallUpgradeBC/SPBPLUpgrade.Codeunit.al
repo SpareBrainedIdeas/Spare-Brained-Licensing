@@ -2,7 +2,7 @@ codeunit 71039 "SPBPL Upgrade"
 {
     Subtype = Upgrade;
 
-    trigger OnUpgradePerCompany()
+    trigger OnUpgradePerDatabase()
     var
         SPBPLTelemetry: Codeunit "SPBPL Telemetry";
         UpgradeTag: Codeunit "Upgrade Tag";
@@ -47,11 +47,11 @@ codeunit 71039 "SPBPL Upgrade"
     end;
 
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Upgrade Tag", 'OnGetPerCompanyUpgradeTags', '', false, false)]
-    local procedure OnGetPerCompanyUpgradeTags(var PerCompanyUpgradeTags: List of [Code[250]]);
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Upgrade Tag", 'OnGetPerDatabaseUpgradeTags', '', false, false)]
+    local procedure OnGetPerCompanyUpgradeTags(var PerDatabaseUpgradeTags: List of [Code[250]]);
     begin
-        PerCompanyUpgradeTags.Add(v20ReasonLbl);
-        PerCompanyUpgradeTags.Add(v21ReasonLbl);
+        PerDatabaseUpgradeTags.Add(v20ReasonLbl);
+        PerDatabaseUpgradeTags.Add(v21ReasonLbl);
     end;
 
 

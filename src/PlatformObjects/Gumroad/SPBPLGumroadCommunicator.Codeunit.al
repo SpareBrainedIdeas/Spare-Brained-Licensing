@@ -46,17 +46,17 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         if not ApiHttpClient.Send(ApiHttpRequestMessage, ApiHttpResponseMessage) then begin
             if ApiHttpResponseMessage.IsBlockedByEnvironment then begin
                 if GuiAllowed() then
-                    Error(EnvironmentBlockErr)
+                    Error(EnvironmentBlockErr)  //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
             end else
                 if GuiAllowed() then
-                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
+                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
         end else
             if ApiHttpResponseMessage.IsSuccessStatusCode() then begin
                 ApiHttpResponseMessage.Content.ReadAs(ResponseBody);
                 exit(true);
             end else
                 if GuiAllowed() then
-                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
+                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
     end;
 
     procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ResultOK: Boolean
@@ -79,7 +79,7 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         TempJsonBuffer: Record "JSON Buffer" temporary;
         GumroadJson: JsonObject;
         GumroadToken: JsonToken;
-        ActivationFailureErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
+        ActivationFailureErr: Label 'An error occurred validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         AppInfo: ModuleInfo;
         TempPlaceholder: Text;
     begin
@@ -88,7 +88,7 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         GumroadJson.Get('success', GumroadToken);
         if not GumroadToken.AsValue().AsBoolean() then
             if GuiAllowed() then
-                Error(ActivationFailureErr, AppInfo.Publisher);
+                Error(ActivationFailureErr, AppInfo.Publisher); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
         GumroadJson.Get('purchase', GumroadToken);
 
         TempJsonBuffer.ReadFromText(ResponseBody);
@@ -129,7 +129,7 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         LicenseUses: Integer;
         GumroadJson: JsonObject;
         GumroadToken: JsonToken;
-        GumroadErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
+        GumroadErr: Label 'An error occurred validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         AppInfo: ModuleInfo;
     begin
         // The 'Test' product, we never do a Count check on this application
@@ -141,7 +141,7 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         if not GumroadToken.AsValue().AsBoolean() then begin
             NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
             if GuiAllowed() then
-                Error(GumroadErr, AppInfo.Publisher);
+                Error(GumroadErr, AppInfo.Publisher); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
         end;
         GumroadJson.Get('purchase', GumroadToken);
 

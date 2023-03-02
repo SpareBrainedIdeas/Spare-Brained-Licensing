@@ -1,7 +1,8 @@
 permissionset 71033 "SPBPL Licensing"
 {
     Assignable = true;
-    Caption = 'Spare Brained Licensing Admin';
+    Caption = 'Spare Brained Licensing Admin', MaxLength = 30;
+
     Permissions = table "SPBPL Extension License" = X,
         tabledata "SPBPL Extension License" = RMI,
         codeunit "SPBPL Activate Meth" = X,
