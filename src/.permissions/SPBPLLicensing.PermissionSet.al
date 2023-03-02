@@ -16,6 +16,7 @@ permissionset 71033 "SPBPL Licensing"
         codeunit "SPBPL LemonSqueezy Comm." = X,
         codeunit "SPBPL License Utilities" = X,
         codeunit "SPBPL Licensing Install" = X,
+        codeunit "SPBPL Telemetry" = X,
         codeunit "SPBPL Upgrade" = X,
         codeunit "SPBPL Version Check" = X,
         page "SPBPL Extension Licenses" = X,

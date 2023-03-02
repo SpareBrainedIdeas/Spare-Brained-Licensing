@@ -13,14 +13,17 @@ codeunit 71042 "SPBPL Check Active"
     procedure CheckBasic(SubscriptionId: Guid; InactiveShowError: Boolean) IsActive: Boolean
     var
         SPBExtensionLicense: Record "SPBPL Extension License";
+        SPBEvents: Codeunit "SPBPL Events";
         NoSubFoundErr: Label 'No License was found in the Licenses list for SubscriptionId: %1', Comment = '%1 is the ID of the App.';
     begin
-        SPBExtensionLicense.SetRange("Extension App Id");
+        SPBExtensionLicense.SetRange("Extension App Id", SubscriptionId);
         //If using this function signature, the Submodule functionality should NOT be considered.
         SPBExtensionLicense.SetRange("Submodule Name", '');
         if not SPBExtensionLicense.FindFirst() then
             if GuiAllowed() then
-                Error(NoSubFoundErr, SubscriptionId);
+                Error(NoSubFoundErr, SubscriptionId)
+            else
+                SPBEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, '', StrSubstNo(FailureToFindSubscriptionTok, SPBExtensionLicense.GetFilters()));
 
         IsActive := DoCheckBasic(SPBExtensionLicense, InactiveShowError);
     end;
@@ -35,13 +38,16 @@ codeunit 71042 "SPBPL Check Active"
     procedure CheckBasicSubmodule(SubscriptionId: Guid; SubmoduleName: Text[100]; InactiveShowError: Boolean) IsActive: Boolean
     var
         SPBExtensionLicense: Record "SPBPL Extension License";
+        SPBEvents: Codeunit "SPBPL Events";
         NoSubscriptionFoundErr: Label 'No License was found in the Licenses list for SubscriptionId: %1 with Submodule name: %2', Comment = '%1 is the ID of the App. %2 is the Submodule.';
     begin
-        SPBExtensionLicense.SetRange("Extension App Id");
+        SPBExtensionLicense.SetRange("Extension App Id", SubscriptionId);
         SPBExtensionLicense.SetRange("Submodule Name", SubmoduleName);
         if not SPBExtensionLicense.FindFirst() then
             if GuiAllowed() then
-                Error(NoSubscriptionFoundErr, SubscriptionId, SubmoduleName);
+                Error(NoSubscriptionFoundErr, SubscriptionId, SubmoduleName)
+            else
+                SPBEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, SubmoduleName, StrSubstNo(FailureToFindSubscriptionTok, SPBExtensionLicense.GetFilters()));
 
         IsActive := DoCheckBasic(SPBExtensionLicense, InactiveShowError);
     end;
@@ -58,4 +64,7 @@ codeunit 71042 "SPBPL Check Active"
                 Error(SubscriptionInactiveErr, SPBExtensionLicense."Extension Name");
         exit(IsActive);
     end;
+
+    var
+        FailureToFindSubscriptionTok: Label 'Unable to find Subscription Entry (Filters %1)', Locked = true;
 }

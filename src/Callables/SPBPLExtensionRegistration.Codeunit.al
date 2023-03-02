@@ -148,7 +148,7 @@ codeunit 71034 "SPBPL Extension Registration"
                 Error(VersionUpdateRequiredErr, AppInfo.Name, minVersion);
     end;
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use SPB Check Active method codeunit instead.')]
     procedure CheckIfActive(SubscriptionId: Guid; InactiveShowError: Boolean): Boolean
     begin
     end;

@@ -149,7 +149,7 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         TempJsonBuffer.GetIntegerPropertyValue(LicenseUses, 'uses');
         TempJsonBuffer.GetIntegerPropertyValue(LicenseCount, 'quantity');
 
-        exit(LicenseUses < LicenseCount);
+        exit(LicenseUses <= LicenseCount);
     end;
 
     procedure SampleKeyFormatText(): Text

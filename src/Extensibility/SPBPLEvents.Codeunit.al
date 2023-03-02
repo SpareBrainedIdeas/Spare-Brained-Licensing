@@ -12,6 +12,16 @@ codeunit 71041 "SPBPL Events"
     internal procedure OnAfterCheckActiveBasic(var SPBExtensionLicense: Record "SPBPL Extension License"; IsActive: Boolean);
     begin
     end;
+
+    [IntegrationEvent(false, false)]
+    internal procedure OnAfterCheckActiveBasicFailure(SubscriptionId: Guid; SubmoduleName: Text[100]; FailureReason: Text);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    internal procedure OnAfterCheckActiveFailure(var SPBExtensionLicense: Record "SPBPL Extension License"; IsActive: Boolean; FailureReason: Text);
+    begin
+    end;
     #endregion ActiveCheckEvents
 
     #region VersionEvents
