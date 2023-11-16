@@ -115,6 +115,7 @@ codeunit 71034 "SPBPL Extension Registration"
                 SPBExtensionLicense."Version Check URL" := newVersionURL;
                 SPBExtensionLicense."Update News URL" := newUpdateNewsURL;
                 SPBExtensionLicense."Sandbox Grace Days" := daysAllowedBeforeActivationSandbox;
+                SPBExtensionLicense."License Platform" := licensePlatform;
                 SPBExtensionLicense.Modify();
             end;
         end else begin
