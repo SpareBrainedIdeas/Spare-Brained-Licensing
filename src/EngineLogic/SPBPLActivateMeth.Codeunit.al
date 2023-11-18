@@ -23,7 +23,7 @@ codeunit 71045 "SPBPL Activate Meth"
     var
         LicensePlatform: Interface "SPBPL ILicenseCommunicator";
         LicensePlatformV2: Interface "SPBPL ILicenseCommunicator2";
-        ActivationFailureErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
+        ActivationFailureErr: Label 'An error occurred validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         NoRemainingUsesErr: Label 'There are no remaining uses of that license key to assign to this installation.';
         AppInfo: ModuleInfo;
     begin
@@ -38,7 +38,7 @@ codeunit 71045 "SPBPL Activate Meth"
                     ActivationSuccess := true
                 else
                     if GuiAllowed() then
-                        Error(NoRemainingUsesErr)
+                        Error(NoRemainingUsesErr) //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
                     else
                         ActivationSuccess := false;  // Yes, default, but being explicit for clarity/future-proofing
             end else
@@ -71,7 +71,7 @@ codeunit 71045 "SPBPL Activate Meth"
             Commit();
             SPBPLEvents.OnAfterActivationFailure(SPBExtensionLicense, AppInfo);
             if GuiAllowed() then
-                Error(LicenseKeyExpiredErr, AppInfo.Publisher);
+                Error(LicenseKeyExpiredErr, AppInfo.Publisher); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
         end else begin
             SPBExtensionLicense.Modify();
             Commit();

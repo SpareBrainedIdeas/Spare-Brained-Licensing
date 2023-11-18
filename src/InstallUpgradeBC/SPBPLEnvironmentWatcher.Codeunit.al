@@ -17,7 +17,7 @@ codeunit 71047 "SPBPL Environment Watcher"
                         SPBExtensionLicense."Trial Grace End Date" := CalcDate(StrSubstNo(GraceDaysMathTok, SPBExtensionLicense."Sandbox Grace Days"), Today);
                     SPBPLDeactivateMeth.Deactivate(SPBExtensionLicense, false);
                 end else
-                    // Deactive the licenses in general
+                    // Deactivate the licenses in general
                     SPBPLDeactivateMeth.Deactivate(SPBExtensionLicense, false);
             until SPBExtensionLicense.Next() = 0;
     end;

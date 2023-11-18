@@ -91,9 +91,6 @@ page 71033 "SPBPL Extension Licenses"
                 Caption = 'Activate';
                 Enabled = not Rec.Activated and UserHasWritePermission;
                 Image = SuggestElectronicDocument;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedOnly = true;
                 ToolTip = 'Launches the Activation Wizard for this Subscription.';
 
                 trigger OnAction()
@@ -107,9 +104,6 @@ page 71033 "SPBPL Extension Licenses"
                 Caption = 'Deactivate';
                 Enabled = Rec.Activated and UserHasWritePermission;
                 Image = Cancel;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedOnly = true;
                 ToolTip = 'Forces this Subscription inactive, which will allow entry of a new License Key.';
 
                 trigger OnAction()
@@ -119,6 +113,18 @@ page 71033 "SPBPL Extension Licenses"
                 end;
             }
 
+        }
+        area(Promoted)
+        {
+            group(Category_Process)
+            {
+                actionref(ActivateProduct_Promoted; ActivateProduct)
+                {
+                }
+                actionref(DeactivateProduct_Promoted; DeactivateProduct)
+                {
+                }
+            }
         }
     }
 

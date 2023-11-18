@@ -23,7 +23,6 @@ table 71033 "SPBPL Extension License"
         field(3; "Product Code"; Text[100])
         {
             Caption = 'Product Code';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(4; Activated; Boolean)
@@ -44,13 +43,11 @@ table 71033 "SPBPL Extension License"
         field(5; "Installed At"; DateTime)
         {
             Caption = 'Installed At';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(6; "Activated At"; DateTime)
         {
             Caption = 'Activated At';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(7; "License Key"; Text[50])
@@ -69,37 +66,31 @@ table 71033 "SPBPL Extension License"
         field(9; "Subscription End Date"; DateTime)
         {
             Caption = 'Subscription End Date';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(10; "Created At"; DateTime)
         {
             Caption = 'Created At';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(11; "Subscription Ended At"; DateTime)
         {
             Caption = 'Subscription Ended At';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(12; "Subscription Cancelled At"; DateTime)
         {
             Caption = 'Subscription Cancelled At';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(13; "Subscription Failed At"; DateTime)
         {
             Caption = 'Subscription Failed At';
-            DataClassification = AccountData;
 
         }
         field(14; "Trial Grace End Date"; Date)
         {
             Caption = 'Trial Grace End Date';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(15; "Sandbox Grace Days"; Integer)

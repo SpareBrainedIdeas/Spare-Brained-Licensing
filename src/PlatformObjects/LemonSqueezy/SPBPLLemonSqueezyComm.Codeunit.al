@@ -57,7 +57,7 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         exit(CallLemonSqueezy(ResponseBody, DeactivateAPI));
     end;
 
-    local procedure CallLemonSqueezy(var ResponseBody: Text; LemonSquezyRequestUri: Text): Boolean
+    local procedure CallLemonSqueezy(var ResponseBody: Text; LemonSqueezyRequestUri: Text): Boolean
     var
         NAVAppSetting: Record "NAV App Setting";
         ApiHttpClient: HttpClient;
@@ -80,23 +80,23 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
             NAVAppSetting.Insert();
         end;
 
-        ApiHttpRequestMessage.SetRequestUri(LemonSquezyRequestUri);
+        ApiHttpRequestMessage.SetRequestUri(LemonSqueezyRequestUri);
         ApiHttpRequestMessage.Method('POST');
 
         if not ApiHttpClient.Send(ApiHttpRequestMessage, ApiHttpResponseMessage) then begin
             if ApiHttpResponseMessage.IsBlockedByEnvironment then begin
                 if GuiAllowed() then
-                    Error(EnvironmentBlockErr)
+                    Error(EnvironmentBlockErr) //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
             end else
                 if GuiAllowed() then
-                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
+                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
         end else
             if ApiHttpResponseMessage.IsSuccessStatusCode() then begin
                 ApiHttpResponseMessage.Content.ReadAs(ResponseBody);
                 exit(true);
             end else
                 if GuiAllowed() then
-                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
+                    Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content); //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
     end;
 
     local procedure ValidateLicenseIdInfo(var SPBExtensionLicense: Record "SPBPL Extension License")
@@ -106,7 +106,7 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         LSqueezyIdJsonToken: JsonToken;
         TempPlaceholder: Text;
     begin
-        TempPlaceholder := SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'licensingId');
+        SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'licensingId', TempPlaceholder);
         if LSqueezyIdJson.ReadFrom(TempPlaceholder) then
             if LSqueezyIdJson.Get('id', LSqueezyIdJsonToken) then
                 if LSqueezyIdJsonToken.AsValue().AsText() <> SPBExtensionLicense."Licensing ID" then
@@ -117,7 +117,7 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
     var
         SPBPLEvents: Codeunit "SPBPL Events";
     begin
-        // Potential future use of 'reporting' misuse attempts.   For example, someone programmatically changing the Subscription Record
+        // Potential future use of 'reporting' misuse attempts.  For example, someone programmatically changing the Subscription Record
         SPBPLEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
     end;
 
@@ -132,9 +132,9 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         InstanceInfo: JsonObject;
         LSqueezyJson: JsonObject;
         LSqueezyToken: JsonToken;
-        CommunicationFailureErr: Label 'An error occured communicating with the licensing platform.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
+        CommunicationFailureErr: Label 'An error occurred communicating with the licensing platform.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         AppInfo: ModuleInfo;
-        SqueezyReponseType: Option " ",Activation,Validation,Deactivation;
+        SqueezyResponseType: Option " ",Activation,Validation,Deactivation;
         TempPlaceholder: Text;
     begin
         // This is a generic function to process all Responses, regardless of Activation, Validation, or Deactivation
@@ -144,22 +144,22 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         case true of
             LSqueezyJson.Get('activated', LSqueezyToken):
                 begin
-                    SqueezyReponseType := SqueezyReponseType::Activation;
+                    SqueezyResponseType := SqueezyResponseType::Activation;
                     CurrentActiveStatus := LSqueezyToken.AsValue().AsBoolean();
                 end;
             LSqueezyJson.Get('valid', LSqueezyToken):
                 begin
-                    SqueezyReponseType := SqueezyReponseType::Validation;
+                    SqueezyResponseType := SqueezyResponseType::Validation;
                     CurrentActiveStatus := LSqueezyToken.AsValue().AsBoolean();
                 end;
             LSqueezyJson.Get('deactivated', LSqueezyToken):
                 begin
-                    SqueezyReponseType := SqueezyReponseType::Deactivation;
+                    SqueezyResponseType := SqueezyResponseType::Deactivation;
                     // We flip. If deactivated is true, then it's not active.
                     CurrentActiveStatus := not LSqueezyToken.AsValue().AsBoolean();
                 end;
         end;
-        if SqueezyReponseType = SqueezyReponseType::" " then
+        if SqueezyResponseType = SqueezyResponseType::" " then
             if GuiAllowed() then
                 Error(CommunicationFailureErr, AppInfo.Publisher);
 
@@ -178,7 +178,7 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         SPBExtensionLicense.CalculateEndDate();
 
         // Lemon Squeezy relies on having storage of the "instance ID" to verify an instance is still active
-        if SqueezyReponseType = SqueezyReponseType::Activation then begin
+        if SqueezyResponseType = SqueezyResponseType::Activation then begin
             TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'id', '*instance*');
             SPBExtensionLicense."Licensing ID" := CopyStr(TempPlaceholder, 1, MaxStrLen(SPBExtensionLicense."Licensing ID"));
             InstanceInfo.Add('id', TempPlaceholder);

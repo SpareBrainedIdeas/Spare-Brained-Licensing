@@ -20,7 +20,7 @@ codeunit 71042 "SPBPL Check Active"
         //If using this function signature, the Submodule functionality should NOT be considered.
         SPBExtensionLicense.SetRange("Submodule Name", '');
         if not SPBExtensionLicense.FindFirst() then
-            if GuiAllowed() then
+            if GuiAllowed() then //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
                 Error(NoSubFoundErr, SubscriptionId)
             else
                 SPBEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, '', StrSubstNo(FailureToFindSubscriptionTok, SPBExtensionLicense.GetFilters()));
@@ -44,7 +44,7 @@ codeunit 71042 "SPBPL Check Active"
         SPBExtensionLicense.SetRange("Extension App Id", SubscriptionId);
         SPBExtensionLicense.SetRange("Submodule Name", SubmoduleName);
         if not SPBExtensionLicense.FindFirst() then
-            if GuiAllowed() then
+            if GuiAllowed() then //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
                 Error(NoSubscriptionFoundErr, SubscriptionId, SubmoduleName)
             else
                 SPBEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, SubmoduleName, StrSubstNo(FailureToFindSubscriptionTok, SPBExtensionLicense.GetFilters()));
@@ -60,7 +60,7 @@ codeunit 71042 "SPBPL Check Active"
     begin
         IsActive := SPBPLCheckActiveMeth.CheckIfActive(SPBExtensionLicense);
         if not IsActive and InactiveShowError then
-            if GuiAllowed() then
+            if GuiAllowed() then //TODO: Errors usually can be raised in non UI sessions such as API or Background sessions
                 Error(SubscriptionInactiveErr, SPBExtensionLicense."Extension Name");
         exit(IsActive);
     end;

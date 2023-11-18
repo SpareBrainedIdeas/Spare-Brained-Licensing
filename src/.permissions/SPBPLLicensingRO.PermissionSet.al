@@ -1,7 +1,8 @@
 permissionset 71034 "SPBPL Licensing RO"
 {
     Assignable = true;
-    Caption = 'SPBPL Licensing RO';
+    Caption = 'SPBPL Licensing RO', MaxLength = 30;
+
     Permissions = table "SPBPL Extension License" = X,
         tabledata "SPBPL Extension License" = RMI,
         codeunit "SPBPL Activate Meth" = X,
