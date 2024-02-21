@@ -1,12 +1,12 @@
 interface "CAVSB ILicenseCommunicator2"
 {
-    procedure CallAPIForActivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean;
+    procedure CallAPIForActivation(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean;
 
-    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean;
+    procedure CallAPIForDeactivation(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean;
 
-    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
+    procedure ClientSideDeactivationPossible(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean;
 
-    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
+    procedure ClientSideLicenseCount(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean;
 
     procedure GetTestProductUrl(): Text;
 

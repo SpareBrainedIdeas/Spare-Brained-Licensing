@@ -32,7 +32,7 @@ codeunit 71037 "CAVSB Licensing Install"
 
     internal procedure AddTestProduct(WhichLicensePlatform: Enum "CAVSB License Platform"; TestProductId: Text)
     var
-        SPBExtensionLicense: Record "CAVSB Extension License";
+        CAVExtensionLicense: Record "CAVSB Extension License";
         TestLicenseNameTok: Label '%1 Test Subscription', Comment = '%1 is the Licensing Extension name.';
         LicensePlatform: Interface "CAVSB ILicenseCommunicator2";
         AppInfo: ModuleInfo;
@@ -41,22 +41,22 @@ codeunit 71037 "CAVSB Licensing Install"
         NavApp.GetCurrentModuleInfo(AppInfo);
         Evaluate(TestProductGuid, TestProductId);
 
-        if not SPBExtensionLicense.Get(TestProductGuid) then begin
-            SPBExtensionLicense.Init();
-            Evaluate(SPBExtensionLicense."Entry Id", TestProductGuid);
-            SPBExtensionLicense.Insert(true);
+        if not CAVExtensionLicense.Get(TestProductGuid) then begin
+            CAVExtensionLicense.Init();
+            Evaluate(CAVExtensionLicense."Entry Id", TestProductGuid);
+            CAVExtensionLicense.Insert(true);
         end;
 
-        SPBExtensionLicense."Extension App Id" := AppInfo.Id;
-        SPBExtensionLicense."Extension Name" := StrSubstNo(TestLicenseNameTok, AppInfo.Name);
-        SPBExtensionLicense."License Platform" := WhichLicensePlatform;
-        LicensePlatform := SPBExtensionLicense."License Platform";
-        SPBExtensionLicense."Submodule Name" := CopyStr(UpperCase(Format(WhichLicensePlatform)), 1, MaxStrLen(SPBExtensionLicense."Submodule Name"));
+        CAVExtensionLicense."Extension App Id" := AppInfo.Id;
+        CAVExtensionLicense."Extension Name" := StrSubstNo(TestLicenseNameTok, AppInfo.Name);
+        CAVExtensionLicense."License Platform" := WhichLicensePlatform;
+        LicensePlatform := CAVExtensionLicense."License Platform";
+        CAVExtensionLicense."Submodule Name" := CopyStr(UpperCase(Format(WhichLicensePlatform)), 1, MaxStrLen(CAVExtensionLicense."Submodule Name"));
 
-        SPBExtensionLicense."Product Code" := CopyStr(LicensePlatform.GetTestProductId(), 1, MaxStrLen(SPBExtensionLicense."Product Code"));
-        SPBExtensionLicense."Product URL" := CopyStr(LicensePlatform.GetTestProductUrl(), 1, MaxStrLen(SPBExtensionLicense."Product URL"));
-        SPBExtensionLicense."Support URL" := CopyStr(LicensePlatform.GetTestSupportUrl(), 1, MaxStrLen(SPBExtensionLicense."Support URL"));
-        SPBExtensionLicense."Billing Support Email" := CopyStr(LicensePlatform.GetTestBillingEmail(), 1, MaxStrLen(SPBExtensionLicense."Billing Support Email"));
-        SPBExtensionLicense.Modify();
+        CAVExtensionLicense."Product Code" := CopyStr(LicensePlatform.GetTestProductId(), 1, MaxStrLen(CAVExtensionLicense."Product Code"));
+        CAVExtensionLicense."Product URL" := CopyStr(LicensePlatform.GetTestProductUrl(), 1, MaxStrLen(CAVExtensionLicense."Product URL"));
+        CAVExtensionLicense."Support URL" := CopyStr(LicensePlatform.GetTestSupportUrl(), 1, MaxStrLen(CAVExtensionLicense."Support URL"));
+        CAVExtensionLicense."Billing Support Email" := CopyStr(LicensePlatform.GetTestBillingEmail(), 1, MaxStrLen(CAVExtensionLicense."Billing Support Email"));
+        CAVExtensionLicense.Modify();
     end;
 }

@@ -2,34 +2,34 @@ codeunit 71043 "CAVSB Check Active Meth"
 {
     Access = Internal;
 
-    procedure CheckIfActive(var SPBExtensionLicense: Record "CAVSB Extension License") IsActive: Boolean
+    procedure CheckIfActive(var CAVExtensionLicense: Record "CAVSB Extension License") IsActive: Boolean
     var
         CAVSBDeactivateMeth: Codeunit "CAVSB Deactivate Meth";
         CAVSBEvents: Codeunit "CAVSB Events";
         CAVSBTelemetry: Codeunit "CAVSB Telemetry";
     begin
-        IsActive := DoCheckIfActive(SPBExtensionLicense);
+        IsActive := DoCheckIfActive(CAVExtensionLicense);
 
         // We throw the Event here before we begin to deactivate the subscription.
-        CAVSBEvents.OnAfterCheckActiveBasic(SPBExtensionLicense, IsActive);
+        CAVSBEvents.OnAfterCheckActiveBasic(CAVExtensionLicense, IsActive);
 
         if IsActive then
-            CAVSBTelemetry.LicenseCheckSuccess(SPBExtensionLicense)
+            CAVSBTelemetry.LicenseCheckSuccess(CAVExtensionLicense)
         else
-            CAVSBTelemetry.LicenseCheckFailure(SPBExtensionLicense);
+            CAVSBTelemetry.LicenseCheckFailure(CAVExtensionLicense);
 
-        if SPBExtensionLicense.Activated and not IsActive then
+        if CAVExtensionLicense.Activated and not IsActive then
             // If the Check came back FALSE but the Subscription is Active,
             // it may be because the subscription has expired or deactivated on the platform.
             // We will force the local installation to inactive.
-            CAVSBDeactivateMeth.Deactivate(SPBExtensionLicense, true);
+            CAVSBDeactivateMeth.Deactivate(CAVExtensionLicense, true);
     end;
 
-    procedure DoCheckIfActive(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean
+    procedure DoCheckIfActive(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean
     var
         EnvironmentInformation: Codeunit "Environment Information";
-        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
-        SPBEvents: Codeunit "CAVSB Events";
+        CAVIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        CAVEvents: Codeunit "CAVSB Events";
         CAVSBTelemetry: Codeunit "CAVSB Telemetry";
         CAVSBVersionCheck: Codeunit "CAVSB Version Check";
         IsoActive: Boolean;
@@ -47,13 +47,13 @@ codeunit 71043 "CAVSB Check Active Meth"
         SubscriptionExpiredTok: Label 'Subscription Period (Ended %1) Expired', Locked = true;
         IsoStorageTamperingTok: Label 'The IsoStorage and License record are different, which MAY indicate tampering or defects in the Platform.', Locked = true;
     begin
-        LicensePlatform := SPBExtensionLicense."License Platform";
+        LicensePlatform := CAVExtensionLicense."License Platform";
 
         // if the subscription isn't active, check if we're in the 'grace' preinstall window, which always includes the first day of use
-        if not SPBExtensionLicense.Activated then begin
-            if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'installDate', IsoStorageValue) then
+        if not CAVExtensionLicense.Activated then begin
+            if CAVIsoStoreManager.GetAppValue(CAVExtensionLicense, 'installDate', IsoStorageValue) then
                 Evaluate(InstallDateTime, IsoStorageValue);
-            if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'preactivationDays', IsoStorageValue) then
+            if CAVIsoStoreManager.GetAppValue(CAVExtensionLicense, 'preactivationDays', IsoStorageValue) then
                 Evaluate(IsoNumber, IsoStorageValue);
             if IsoNumber > 0 then
                 GraceEndDate := CalcDate(StrSubstNo(DaysGraceTok, IsoNumber), DT2Date(InstallDateTime))
@@ -64,53 +64,53 @@ codeunit 71043 "CAVSB Check Active Meth"
                 else
                     GraceEndDate := Today;
             if (GraceEndDate = Today) and GuiAllowed then
-                Message(GraceExpiringMsg, SPBExtensionLicense."Extension Name");
+                Message(GraceExpiringMsg, CAVExtensionLicense."Extension Name");
 
             // if the subscription isn't active, and we're not in the grace period, then we're not Active
             if GraceEndDate < Today then
-                SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, StrSubstNo(GracePeriodExpiredTok, GraceEndDate));
+                CAVEvents.OnAfterCheckActiveFailure(CAVExtensionLicense, false, StrSubstNo(GracePeriodExpiredTok, GraceEndDate));
             exit(GraceEndDate >= Today);
         end;
 
-        if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'lastCheckDate', IsoStorageValue) then
+        if CAVIsoStoreManager.GetAppValue(CAVExtensionLicense, 'lastCheckDate', IsoStorageValue) then
             Evaluate(LastCheckDateTime, IsoStorageValue);
         if ((Today() - DT2Date(LastCheckDateTime)) > 0) then begin
-            if LicensePlatform.CallAPIForVerification(SPBExtensionLicense, ResponseBody, false) then begin
+            if LicensePlatform.CallAPIForVerification(CAVExtensionLicense, ResponseBody, false) then begin
                 // This may update the End Dates - note: may or may not call .Modify
-                LicensePlatform.PopulateSubscriptionFromResponse(SPBExtensionLicense, ResponseBody);
-                SPBExtensionLicense.Modify();
+                LicensePlatform.PopulateSubscriptionFromResponse(CAVExtensionLicense, ResponseBody);
+                CAVExtensionLicense.Modify();
             end;
-            CAVSBVersionCheck.DoVersionCheck(SPBExtensionLicense);
-            SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastCheckDate', Format(CurrentDateTime, 0, 9));
+            CAVSBVersionCheck.DoVersionCheck(CAVExtensionLicense);
+            CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'lastCheckDate', Format(CurrentDateTime, 0, 9));
         end;
 
         // if the subscription ran out
-        if (SPBExtensionLicense."Subscription End Date" < CurrentDateTime) and
-          (SPBExtensionLicense."Subscription End Date" <> 0DT)
+        if (CAVExtensionLicense."Subscription End Date" < CurrentDateTime) and
+          (CAVExtensionLicense."Subscription End Date" <> 0DT)
         then begin
-            SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, StrSubstNo(SubscriptionExpiredTok, SPBExtensionLicense."Subscription End Date"));
+            CAVEvents.OnAfterCheckActiveFailure(CAVExtensionLicense, false, StrSubstNo(SubscriptionExpiredTok, CAVExtensionLicense."Subscription End Date"));
             exit(false);
         end;
 
         // if the record version IS active, then let's crosscheck against isolated storage
-        if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'active', IsoStorageValue) then
+        if CAVIsoStoreManager.GetAppValue(CAVExtensionLicense, 'active', IsoStorageValue) then
             Evaluate(IsoActive, IsoStorageValue);
         if not IsoActive then begin
-            LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
-            CAVSBTelemetry.EventTagMisuseReport(SPBExtensionLicense);
-            SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, IsoStorageTamperingTok);
+            LicensePlatform.ReportPossibleMisuse(CAVExtensionLicense);
+            CAVSBTelemetry.EventTagMisuseReport(CAVExtensionLicense);
+            CAVEvents.OnAfterCheckActiveFailure(CAVExtensionLicense, false, IsoStorageTamperingTok);
             exit(false);
         end;
 
         // Check Record end date against IsoStorage end date
-        if SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'endDate', IsoStorageValue) then
+        if CAVIsoStoreManager.GetAppValue(CAVExtensionLicense, 'endDate', IsoStorageValue) then
             Evaluate(IsoDatetime, IsoStorageValue);
         if IsoDatetime <> 0DT then
             // Only checking at the date level in case of time zone nonsense
-            if DT2Date(IsoDatetime) <> DT2Date(SPBExtensionLicense."Subscription End Date") then begin
-                LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
-                CAVSBTelemetry.EventTagMisuseReport(SPBExtensionLicense);
-                SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, IsoStorageTamperingTok);
+            if DT2Date(IsoDatetime) <> DT2Date(CAVExtensionLicense."Subscription End Date") then begin
+                LicensePlatform.ReportPossibleMisuse(CAVExtensionLicense);
+                CAVSBTelemetry.EventTagMisuseReport(CAVExtensionLicense);
+                CAVEvents.OnAfterCheckActiveFailure(CAVExtensionLicense, false, IsoStorageTamperingTok);
                 exit(false);
             end;
 

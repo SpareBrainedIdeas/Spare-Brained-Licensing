@@ -178,17 +178,17 @@ page 71033 "CAVSB Extension Licenses"
             until CAVSBense.Next() = 0;
     end;
 
-    internal procedure LaunchActivation(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure LaunchActivation(var CAVExtensionLicense: Record "CAVSB Extension License")
     var
         CAVSBenseActivationWizard: Page "CAVSB License Activation";
     begin
         Clear(CAVSBenseActivationWizard);
-        SPBExtensionLicense.SetRecFilter();
-        CAVSBenseActivationWizard.SetTableView(SPBExtensionLicense);
+        CAVExtensionLicense.SetRecFilter();
+        CAVSBenseActivationWizard.SetTableView(CAVExtensionLicense);
         CAVSBenseActivationWizard.RunModal();
     end;
 
-    internal procedure DeactivateExtension(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean
+    internal procedure DeactivateExtension(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean
     var
         CAVSBDeactivateMeth: Codeunit "CAVSB Deactivate Meth";
         DoDeactivation: Boolean;
@@ -196,15 +196,15 @@ page 71033 "CAVSB Extension Licenses"
         DeactivationNotPossibleWarningQst: Label 'This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?';
         DeactivationPossibleQst: Label 'This will deactivate this license in this Business Central instance.\ \Are you sure you want to deactivate this license?';
     begin
-        LicensePlatform := SPBExtensionLicense."License Platform";
+        LicensePlatform := CAVExtensionLicense."License Platform";
 
         // Depending on the platform capabilities, we give the user a different message
-        if LicensePlatform.ClientSideDeactivationPossible(SPBExtensionLicense) then
+        if LicensePlatform.ClientSideDeactivationPossible(CAVExtensionLicense) then
             DoDeactivation := Confirm(DeactivationPossibleQst, false)
         else
             DoDeactivation := Confirm(DeactivationNotPossibleWarningQst, false);
 
         if DoDeactivation then
-            exit(CAVSBDeactivateMeth.Deactivate(SPBExtensionLicense, false));
+            exit(CAVSBDeactivateMeth.Deactivate(CAVExtensionLicense, false));
     end;
 }

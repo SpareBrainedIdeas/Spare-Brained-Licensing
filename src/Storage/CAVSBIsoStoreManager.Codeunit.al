@@ -6,31 +6,31 @@ codeunit 71038 "CAVSB IsoStore Manager"
         EnvironmentInformation: Codeunit "Environment Information";
         NameMapTok: Label '%1-%2', Comment = '%1 %2', Locked = true;
 
-    internal procedure UpdateOrCreateIsoStorage(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure UpdateOrCreateIsoStorage(var CAVExtensionLicense: Record "CAVSB Extension License")
     var
-        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        CAVIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         YesterdayDateTime: DateTime;
     begin
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastUpdated', Format(CurrentDateTime, 0, 9));
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'endDate', Format(SPBExtensionLicense."Subscription End Date", 0, 9));
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'active', Format(SPBExtensionLicense.Activated, 0, 9));
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'preactivationDays', Format(SPBExtensionLicense."Sandbox Grace Days", 0, 9));
+        CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'lastUpdated', Format(CurrentDateTime, 0, 9));
+        CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'endDate', Format(CAVExtensionLicense."Subscription End Date", 0, 9));
+        CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'active', Format(CAVExtensionLicense.Activated, 0, 9));
+        CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'preactivationDays', Format(CAVExtensionLicense."Sandbox Grace Days", 0, 9));
 
         // We mark the lastCheckDate as yesterday on activation to trigger one check DURING activation, just to be safe
         // Someone could be installing from an app file that's outdated, etc.
         YesterdayDateTime := CreateDateTime(CalcDate('<-1D>', Today()), Time());
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastCheckDate', Format(YesterdayDateTime, 0, 9));
+        CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'lastCheckDate', Format(YesterdayDateTime, 0, 9));
 
-        if not SPBIsoStoreManager.ContainsAppValue(SPBExtensionLicense, 'extensionContactEmail') then begin
-            SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'extensionContactEmail', SPBExtensionLicense."Billing Support Email");
-            SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'extensionMisuseURI', '');
+        if not CAVIsoStoreManager.ContainsAppValue(CAVExtensionLicense, 'extensionContactEmail') then begin
+            CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'extensionContactEmail', CAVExtensionLicense."Billing Support Email");
+            CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'extensionMisuseURI', '');
         end;
     end;
 
-    internal procedure SetAppValue(SPBExtensionLicense: Record "CAVSB Extension License"; StoreName: Text; StoreValue: Text)
+    internal procedure SetAppValue(CAVExtensionLicense: Record "CAVSB Extension License"; StoreName: Text; StoreValue: Text)
     begin
-        if not IsolatedStorage.Contains(SPBExtensionLicense."Entry Id") then
-            IsolatedStorage.Set(SPBExtensionLicense."Entry Id", '', DataScope::Module);
+        if not IsolatedStorage.Contains(CAVExtensionLicense."Entry Id") then
+            IsolatedStorage.Set(CAVExtensionLicense."Entry Id", '', DataScope::Module);
 
         if EnvironmentInformation.IsOnPrem() then
             if CryptographyManagement.IsEncryptionEnabled() and CryptographyManagement.IsEncryptionPossible() then
@@ -39,18 +39,18 @@ codeunit 71038 "CAVSB IsoStore Manager"
                 if GuiAllowed() then
                     Error('To use Spare Brained Licensing On-Prem, Database Encryption must be enabled.');
 
-        IsolatedStorage.Set(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), StoreValue, DataScope::Module);
+        IsolatedStorage.Set(StrSubstNo(NameMapTok, CAVExtensionLicense."Entry Id", StoreName), StoreValue, DataScope::Module);
     end;
 
-    internal procedure GetAppValue(SPBExtensionLicense: Record "CAVSB Extension License"; StoreName: Text; var ReturnValue: Text) Found: Boolean
+    internal procedure GetAppValue(CAVExtensionLicense: Record "CAVSB Extension License"; StoreName: Text; var ReturnValue: Text) Found: Boolean
     begin
-        Found := IsolatedStorage.Get(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), DataScope::Module, ReturnValue);
+        Found := IsolatedStorage.Get(StrSubstNo(NameMapTok, CAVExtensionLicense."Entry Id", StoreName), DataScope::Module, ReturnValue);
         if EnvironmentInformation.IsOnPrem() and CryptographyManagement.IsEncryptionEnabled() and CryptographyManagement.IsEncryptionPossible() then
             ReturnValue := CryptographyManagement.Decrypt(ReturnValue);
     end;
 
-    internal procedure ContainsAppValue(SPBExtensionLicense: Record "CAVSB Extension License"; StoreName: Text): Boolean
+    internal procedure ContainsAppValue(CAVExtensionLicense: Record "CAVSB Extension License"; StoreName: Text): Boolean
     begin
-        exit(IsolatedStorage.Contains(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), DataScope::Module));
+        exit(IsolatedStorage.Contains(StrSubstNo(NameMapTok, CAVExtensionLicense."Entry Id", StoreName), DataScope::Module));
     end;
 }

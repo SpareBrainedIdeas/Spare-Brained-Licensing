@@ -10,12 +10,12 @@ codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicat
         GumroadTestProductUrlTok: Label 'https://sparebrained.gumroad.com/l/SBILicensingTest', Locked = true;
         GumroadVerifyAPITok: Label 'https://api.gumroad.com/v2/licenses/verify?product_permalink=%1&license_key=%2&increment_uses_count=%3', Comment = '%1 %2 %3', Locked = true;
 
-    procedure CallAPIForActivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    procedure CallAPIForActivation(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
     begin
-        exit(CallAPIForVerification(SPBExtensionLicense, ResponseBody, true));
+        exit(CallAPIForVerification(CAVExtensionLicense, ResponseBody, true));
     end;
 
-    procedure CallAPIForVerification(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean) ResultOK: Boolean
+    procedure CallAPIForVerification(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean) ResultOK: Boolean
     var
         NAVAppSetting: Record "NAV App Setting";
         ApiHttpClient: HttpClient;
@@ -39,7 +39,7 @@ codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicat
             NAVAppSetting.Insert();
         end;
 
-        VerifyAPI := StrSubstNo(GumroadVerifyAPITok, SPBExtensionLicense."Product Code", SPBExtensionLicense."License Key", Format(IncrementLicenseCount, 0, 9));
+        VerifyAPI := StrSubstNo(GumroadVerifyAPITok, CAVExtensionLicense."Product Code", CAVExtensionLicense."License Key", Format(IncrementLicenseCount, 0, 9));
         ApiHttpRequestMessage.SetRequestUri(VerifyAPI);
         ApiHttpRequestMessage.Method('POST');
 
@@ -59,21 +59,21 @@ codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicat
                     Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
     end;
 
-    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    procedure CallAPIForDeactivation(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
     begin
-        exit(CallAPIForVerification(SPBExtensionLicense, ResponseBody, false));
+        exit(CallAPIForVerification(CAVExtensionLicense, ResponseBody, false));
     end;
 
-    procedure ReportPossibleMisuse(SPBExtensionLicense: Record "CAVSB Extension License")
+    procedure ReportPossibleMisuse(CAVExtensionLicense: Record "CAVSB Extension License")
     var
         CAVSBEvents: Codeunit "CAVSB Events";
     begin
         // Potential future use of 'reporting' misuse attempts.   For example, someone programmatically changing the Subscription Record
-        CAVSBEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
+        CAVSBEvents.OnAfterThrowPossibleMisuse(CAVExtensionLicense);
     end;
 
 #pragma warning disable AA0150 // TODO - Passed as "var" for the interface
-    procedure PopulateSubscriptionFromResponse(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text)
+    procedure PopulateSubscriptionFromResponse(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text)
 #pragma warning restore AA0150
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
@@ -83,7 +83,7 @@ codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicat
         AppInfo: ModuleInfo;
         TempPlaceholder: Text;
     begin
-        NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
+        NavApp.GetModuleInfo(CAVExtensionLicense."Extension App Id", AppInfo);
         GumroadJson.ReadFrom(ResponseBody);
         GumroadJson.Get('success', GumroadToken);
         if not GumroadToken.AsValue().AsBoolean() then
@@ -94,34 +94,34 @@ codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicat
         TempJsonBuffer.ReadFromText(ResponseBody);
 
         // Update the current Subscription record
-        SPBExtensionLicense.Validate(Activated, true);
+        CAVExtensionLicense.Validate(Activated, true);
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'created_at');
-        Evaluate(SPBExtensionLicense."Created At", TempPlaceholder);
+        Evaluate(CAVExtensionLicense."Created At", TempPlaceholder);
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'subscription_ended_at');
-        Evaluate(SPBExtensionLicense."Subscription Ended At", TempPlaceholder);
+        Evaluate(CAVExtensionLicense."Subscription Ended At", TempPlaceholder);
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'subscription_cancelled_at');
-        Evaluate(SPBExtensionLicense."Subscription Cancelled At", TempPlaceholder);
+        Evaluate(CAVExtensionLicense."Subscription Cancelled At", TempPlaceholder);
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'subscription_failed_at');
-        Evaluate(SPBExtensionLicense."Subscription Failed At", TempPlaceholder);
+        Evaluate(CAVExtensionLicense."Subscription Failed At", TempPlaceholder);
 
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'email');
-        SPBExtensionLicense."Subscription Email" := CopyStr(TempPlaceholder, 1, MaxStrLen(SPBExtensionLicense."Subscription Email"));
-        SPBExtensionLicense.CalculateEndDate();
+        CAVExtensionLicense."Subscription Email" := CopyStr(TempPlaceholder, 1, MaxStrLen(CAVExtensionLicense."Subscription Email"));
+        CAVExtensionLicense.CalculateEndDate();
     end;
 
-    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
+    procedure ClientSideDeactivationPossible(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         // Gumroad only allows this using an API key, which is unique to each Publisher.  At this time,
         // I can't support the safe storage of that information 
         exit(false);
     end;
 
-    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
+    procedure ClientSideLicenseCount(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         exit(true);
     end;
 
-    procedure CheckAPILicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"; ResponseBody: Text): Boolean
+    procedure CheckAPILicenseCount(var CAVExtensionLicense: Record "CAVSB Extension License"; ResponseBody: Text): Boolean
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
         CAVSBenseUtilities: Codeunit "CAVSB License Utilities";
@@ -133,13 +133,13 @@ codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicat
         AppInfo: ModuleInfo;
     begin
         // The 'Test' product, we never do a Count check on this application
-        if SPBExtensionLicense."Entry Id" = CAVSBenseUtilities.GetTestProductAppId() then
+        if CAVExtensionLicense."Entry Id" = CAVSBenseUtilities.GetTestProductAppId() then
             exit(true);
 
         GumroadJson.ReadFrom(ResponseBody);
         GumroadJson.Get('success', GumroadToken);
         if not GumroadToken.AsValue().AsBoolean() then begin
-            NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
+            NavApp.GetModuleInfo(CAVExtensionLicense."Extension App Id", AppInfo);
             if GuiAllowed() then
                 Error(GumroadErr, AppInfo.Publisher);
         end;
@@ -184,7 +184,7 @@ codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicat
 
     [Obsolete('This event is moved to the central License Management codeunit for platform-agnostic eventing.')]
     [IntegrationEvent(false, false)]
-    local procedure OnAfterThrowPossibleMisuse(SPBExtensionLicense: Record "CAVSB Extension License")
+    local procedure OnAfterThrowPossibleMisuse(CAVExtensionLicense: Record "CAVSB Extension License")
     begin
     end;
 }

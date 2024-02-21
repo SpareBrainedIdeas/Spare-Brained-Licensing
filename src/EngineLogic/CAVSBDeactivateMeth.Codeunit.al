@@ -1,11 +1,11 @@
 codeunit 71046 "CAVSB Deactivate Meth"
 {
-    internal procedure Deactivate(var SPBExtensionLicense: Record "CAVSB Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
+    internal procedure Deactivate(var CAVExtensionLicense: Record "CAVSB Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
     begin
-        DoDeactivate(SPBExtensionLicense, ByPlatform);
+        DoDeactivate(CAVExtensionLicense, ByPlatform);
     end;
 
-    local procedure DoDeactivate(var SPBExtensionLicense: Record "CAVSB Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
+    local procedure DoDeactivate(var CAVExtensionLicense: Record "CAVSB Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
     var
         CAVSBEvents: Codeunit "CAVSB Events";
         CAVSBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
@@ -15,25 +15,25 @@ codeunit 71046 "CAVSB Deactivate Meth"
         AppInfo: ModuleInfo;
         ResponseBody: Text;
     begin
-        NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
+        NavApp.GetModuleInfo(CAVExtensionLicense."Extension App Id", AppInfo);
 
-        SPBExtensionLicense.Validate(Activated, false);
-        SPBExtensionLicense.Modify();
-        CAVSBIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
+        CAVExtensionLicense.Validate(Activated, false);
+        CAVExtensionLicense.Modify();
+        CAVSBIsoStoreManager.UpdateOrCreateIsoStorage(CAVExtensionLicense);
         Commit();  // if calling the API fails, the local should still be marked as deactivated
 
         if not ByPlatform then begin
-            LicensePlatformV2 := SPBExtensionLicense."License Platform";
-            if not LicensePlatformV2.CallAPIForDeactivation(SPBExtensionLicense, ResponseBody) then begin
+            LicensePlatformV2 := CAVExtensionLicense."License Platform";
+            if not LicensePlatformV2.CallAPIForDeactivation(CAVExtensionLicense, ResponseBody) then begin
                 if GuiAllowed() then
                     Error(DeactivationProblemErr, AppInfo.Publisher);
             end else
                 DeactivationSuccess := true;
-            CAVSBTelemetry.LicensePlatformDeactivation(SPBExtensionLicense);
-            CAVSBEvents.OnAfterLicenseDeactivatedByPlatform(SPBExtensionLicense, ResponseBody);
+            CAVSBTelemetry.LicensePlatformDeactivation(CAVExtensionLicense);
+            CAVSBEvents.OnAfterLicenseDeactivatedByPlatform(CAVExtensionLicense, ResponseBody);
         end else begin
-            CAVSBTelemetry.LicenseDeactivation(SPBExtensionLicense);
-            CAVSBEvents.OnAfterLicenseDeactivated(SPBExtensionLicense);
+            CAVSBTelemetry.LicenseDeactivation(CAVExtensionLicense);
+            CAVSBEvents.OnAfterLicenseDeactivated(CAVExtensionLicense);
         end;
     end;
 }

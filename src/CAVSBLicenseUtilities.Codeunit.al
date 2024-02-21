@@ -8,17 +8,17 @@ codeunit 71033 "CAVSB License Utilities"
         exit(AppInfo.Id);
     end;
 
-    internal procedure GetTestProductKey(SPBExtensionLicense: Record "CAVSB Extension License"): Text
+    internal procedure GetTestProductKey(CAVExtensionLicense: Record "CAVSB Extension License"): Text
     var
         LicensePlatform: Interface "CAVSB ILicenseCommunicator2";
     begin
-        LicensePlatform := SPBExtensionLicense."License Platform";
+        LicensePlatform := CAVExtensionLicense."License Platform";
         exit(LicensePlatform.GetTestProductKey());
     end;
 
     [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeLaunchProductUrl(var SPBExtensionLicense: Record "CAVSB Extension License"; var IsHandled: Boolean)
+    local procedure OnBeforeLaunchProductUrl(var CAVExtensionLicense: Record "CAVSB Extension License"; var IsHandled: Boolean)
     begin
     end;
 }

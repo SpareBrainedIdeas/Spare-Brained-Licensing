@@ -12,20 +12,20 @@ codeunit 71042 "CAVSB Check Active"
     /// <returns></returns>
     procedure CheckBasic(SubscriptionId: Guid; InactiveShowError: Boolean) IsActive: Boolean
     var
-        SPBExtensionLicense: Record "CAVSB Extension License";
-        SPBEvents: Codeunit "CAVSB Events";
+        CAVExtensionLicense: Record "CAVSB Extension License";
+        CAVEvents: Codeunit "CAVSB Events";
         NoSubFoundErr: Label 'No License was found in the Licenses list for SubscriptionId: %1', Comment = '%1 is the ID of the App.';
     begin
-        SPBExtensionLicense.SetRange("Extension App Id", SubscriptionId);
+        CAVExtensionLicense.SetRange("Extension App Id", SubscriptionId);
         //If using this function signature, the Submodule functionality should NOT be considered.
-        SPBExtensionLicense.SetRange("Submodule Name", '');
-        if not SPBExtensionLicense.FindFirst() then
+        CAVExtensionLicense.SetRange("Submodule Name", '');
+        if not CAVExtensionLicense.FindFirst() then
             if GuiAllowed() then
                 Error(NoSubFoundErr, SubscriptionId)
             else
-                SPBEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, '', StrSubstNo(FailureToFindSubscriptionTok, SPBExtensionLicense.GetFilters()));
+                CAVEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, '', StrSubstNo(FailureToFindSubscriptionTok, CAVExtensionLicense.GetFilters()));
 
-        IsActive := DoCheckBasic(SPBExtensionLicense, InactiveShowError);
+        IsActive := DoCheckBasic(CAVExtensionLicense, InactiveShowError);
     end;
 
     /// <summary>
@@ -37,31 +37,31 @@ codeunit 71042 "CAVSB Check Active"
     /// <returns></returns>
     procedure CheckBasicSubmodule(SubscriptionId: Guid; SubmoduleName: Text[100]; InactiveShowError: Boolean) IsActive: Boolean
     var
-        SPBExtensionLicense: Record "CAVSB Extension License";
-        SPBEvents: Codeunit "CAVSB Events";
+        CAVExtensionLicense: Record "CAVSB Extension License";
+        CAVEvents: Codeunit "CAVSB Events";
         NoSubscriptionFoundErr: Label 'No License was found in the Licenses list for SubscriptionId: %1 with Submodule name: %2', Comment = '%1 is the ID of the App. %2 is the Submodule.';
     begin
-        SPBExtensionLicense.SetRange("Extension App Id", SubscriptionId);
-        SPBExtensionLicense.SetRange("Submodule Name", SubmoduleName);
-        if not SPBExtensionLicense.FindFirst() then
+        CAVExtensionLicense.SetRange("Extension App Id", SubscriptionId);
+        CAVExtensionLicense.SetRange("Submodule Name", SubmoduleName);
+        if not CAVExtensionLicense.FindFirst() then
             if GuiAllowed() then
                 Error(NoSubscriptionFoundErr, SubscriptionId, SubmoduleName)
             else
-                SPBEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, SubmoduleName, StrSubstNo(FailureToFindSubscriptionTok, SPBExtensionLicense.GetFilters()));
+                CAVEvents.OnAfterCheckActiveBasicFailure(SubscriptionId, SubmoduleName, StrSubstNo(FailureToFindSubscriptionTok, CAVExtensionLicense.GetFilters()));
 
-        IsActive := DoCheckBasic(SPBExtensionLicense, InactiveShowError);
+        IsActive := DoCheckBasic(CAVExtensionLicense, InactiveShowError);
     end;
 
-    local procedure DoCheckBasic(var SPBExtensionLicense: Record "CAVSB Extension License"; InactiveShowError: Boolean): Boolean
+    local procedure DoCheckBasic(var CAVExtensionLicense: Record "CAVSB Extension License"; InactiveShowError: Boolean): Boolean
     var
         CAVSBCheckActiveMeth: Codeunit "CAVSB Check Active Meth";
         IsActive: Boolean;
         SubscriptionInactiveErr: Label 'The License for %1 is not Active.  Contact your system administrator to re-activate it.', Comment = '%1 is the name of the Extension.';
     begin
-        IsActive := CAVSBCheckActiveMeth.CheckIfActive(SPBExtensionLicense);
+        IsActive := CAVSBCheckActiveMeth.CheckIfActive(CAVExtensionLicense);
         if not IsActive and InactiveShowError then
             if GuiAllowed() then
-                Error(SubscriptionInactiveErr, SPBExtensionLicense."Extension Name");
+                Error(SubscriptionInactiveErr, CAVExtensionLicense."Extension Name");
         exit(IsActive);
     end;
 

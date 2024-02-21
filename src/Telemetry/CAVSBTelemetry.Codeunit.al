@@ -44,49 +44,49 @@ codeunit 71048 "CAVSB Telemetry"
         EmitTraceTag(EventTagUpgradeMsg, EventTagUpgradeTok);
     end;
 
-    internal procedure NewExtensionRegistered(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure NewExtensionRegistered(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagNewExtensionMsg, EventTagNewExtensionTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagNewExtensionMsg, EventTagNewExtensionTok);
     end;
 
-    internal procedure LicenseActivation(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure LicenseActivation(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagLicenseActivationMsg, EventTagLicenseActivationTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagLicenseActivationMsg, EventTagLicenseActivationTok);
     end;
 
-    internal procedure LicenseDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure LicenseDeactivation(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagLicenseDeactivationMsg, EventTagLicenseDeactivationTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagLicenseDeactivationMsg, EventTagLicenseDeactivationTok);
     end;
 
-    internal procedure LicensePlatformDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure LicensePlatformDeactivation(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagLicensePlatformDeactivationMsg, EventTagLicensePlatformDeactivationTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagLicensePlatformDeactivationMsg, EventTagLicensePlatformDeactivationTok);
     end;
 
-    internal procedure LicenseActivationFailure(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure LicenseActivationFailure(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagLicenseActivationFailureMsg, EventTagLicenseActivationFailureTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagLicenseActivationFailureMsg, EventTagLicenseActivationFailureTok);
     end;
 
-    internal procedure LicenseCheckSuccess(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure LicenseCheckSuccess(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagLicenseCheckSuccessMsg, EventTagLicenseCheckSuccessTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagLicenseCheckSuccessMsg, EventTagLicenseCheckSuccessTok);
     end;
 
-    internal procedure LicenseCheckFailure(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure LicenseCheckFailure(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagLicenseCheckFailureMsg, EventTagLicenseCheckFailureTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagLicenseCheckFailureMsg, EventTagLicenseCheckFailureTok);
     end;
 
-    internal procedure EventTagMisuseReport(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure EventTagMisuseReport(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagMisuseReportMsg, EventTagMisuseReportTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagMisuseReportMsg, EventTagMisuseReportTok);
     end;
 
-    internal procedure VersionUpdateCheck(var SPBExtensionLicense: Record "CAVSB Extension License")
+    internal procedure VersionUpdateCheck(var CAVExtensionLicense: Record "CAVSB Extension License")
     begin
-        EmitTraceTag(SPBExtensionLicense, EventTagVersionUpdateCheckMsg, EventTagVersionUpdateCheckTok);
+        EmitTraceTag(CAVExtensionLicense, EventTagVersionUpdateCheckMsg, EventTagVersionUpdateCheckTok);
     end;
 
     local procedure EmitTraceTag(EventDescriptionText: Text; Tag: Text)
@@ -96,7 +96,7 @@ codeunit 71048 "CAVSB Telemetry"
         Session.LogMessage(Tag, EventDescriptionText, Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, TelemetryDimension);
     end;
 
-    local procedure EmitTraceTag(var SPBExtensionLicense: Record "CAVSB Extension License"; EventDescriptionText: Text; Tag: Text)
+    local procedure EmitTraceTag(var CAVExtensionLicense: Record "CAVSB Extension License"; EventDescriptionText: Text; Tag: Text)
     var
         TraceTagMessage: Text;
         TelemetryDimension: Dictionary of [Text, Text];
@@ -106,10 +106,10 @@ codeunit 71048 "CAVSB Telemetry"
         ExtensionPublisherLbl: Label 'Publisher', Locked = true;
         AppInfo: ModuleInfo;
     begin
-        NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
+        NavApp.GetModuleInfo(CAVExtensionLicense."Extension App Id", AppInfo);
         TraceTagMessage := EventDescriptionText;
-        TelemetryDimension.Add(ExtensionNameLbl, SPBExtensionLicense."Extension Name");
-        TelemetryDimension.Add(ExtensionGuidLbl, SPBExtensionLicense."Extension App Id");
+        TelemetryDimension.Add(ExtensionNameLbl, CAVExtensionLicense."Extension Name");
+        TelemetryDimension.Add(ExtensionGuidLbl, CAVExtensionLicense."Extension App Id");
         TelemetryDimension.Add(ExtensionPublisherLbl, AppInfo.Publisher);
         TelemetryDimension.Add(ExtensionSubmoduleLbl, CompanyName);
         Session.LogMessage(Tag, TraceTagMessage, Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, TelemetryDimension);

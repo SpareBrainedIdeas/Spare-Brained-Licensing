@@ -83,9 +83,9 @@ codeunit 71034 "CAVSB Extension Registration"
         licensePlatform: Enum "CAVSB License Platform";
         forceUpdate: Boolean)
     var
-        SPBExtensionLicense: Record "CAVSB Extension License";
+        CAVExtensionLicense: Record "CAVSB Extension License";
         EnvironmentInformation: Codeunit "Environment Information";
-        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        CAVIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         CAVSBTelemetry: Codeunit "CAVSB Telemetry";
         GraceEndDate: Date;
         GraceDays: Integer;
@@ -103,38 +103,38 @@ codeunit 71034 "CAVSB Extension Registration"
         else
             GraceEndDate := Today;
 
-        if (SPBExtensionLicense.Get(SubModuleId)) then begin
+        if (CAVExtensionLicense.Get(SubModuleId)) then begin
             if forceUpdate then begin
-                SPBExtensionLicense."Submodule Name" := SubModuleName;
-                SPBExtensionLicense."Extension Name" := CopyStr(AppInfo.Name, 1, MaxStrLen(SPBExtensionLicense."Extension Name"));
-                SPBExtensionLicense."Product Code" := newProductCode;
-                SPBExtensionLicense."Product URL" := newProductUrl;
-                SPBExtensionLicense."Support URL" := newSupportUrl;
-                SPBExtensionLicense."Billing Support Email" := newBillingEmail;
-                SPBExtensionLicense."Version Check URL" := newVersionURL;
-                SPBExtensionLicense."Update News URL" := newUpdateNewsURL;
-                SPBExtensionLicense."Sandbox Grace Days" := daysAllowedBeforeActivationSandbox;
-                SPBExtensionLicense.Modify();
+                CAVExtensionLicense."Submodule Name" := SubModuleName;
+                CAVExtensionLicense."Extension Name" := CopyStr(AppInfo.Name, 1, MaxStrLen(CAVExtensionLicense."Extension Name"));
+                CAVExtensionLicense."Product Code" := newProductCode;
+                CAVExtensionLicense."Product URL" := newProductUrl;
+                CAVExtensionLicense."Support URL" := newSupportUrl;
+                CAVExtensionLicense."Billing Support Email" := newBillingEmail;
+                CAVExtensionLicense."Version Check URL" := newVersionURL;
+                CAVExtensionLicense."Update News URL" := newUpdateNewsURL;
+                CAVExtensionLicense."Sandbox Grace Days" := daysAllowedBeforeActivationSandbox;
+                CAVExtensionLicense.Modify();
             end;
         end else begin
-            SPBExtensionLicense."Entry Id" := SubModuleId;
-            SPBExtensionLicense."Submodule Name" := SubModuleName;
-            SPBExtensionLicense."Extension App Id" := AppInfo.Id;
-            SPBExtensionLicense."Extension Name" := CopyStr(AppInfo.Name, 1, MaxStrLen(SPBExtensionLicense."Extension Name"));
-            SPBExtensionLicense."Product Code" := newProductCode;
-            SPBExtensionLicense."Product URL" := newProductUrl;
-            SPBExtensionLicense."Support URL" := newSupportUrl;
-            SPBExtensionLicense."Billing Support Email" := newBillingEmail;
-            SPBExtensionLicense."Version Check URL" := newVersionURL;
-            SPBExtensionLicense."Update News URL" := newUpdateNewsURL;
-            SPBExtensionLicense."Installed At" := CurrentDateTime();
-            SPBExtensionLicense."Trial Grace End Date" := GraceEndDate;
-            SPBExtensionLicense."Sandbox Grace Days" := daysAllowedBeforeActivationSandbox;
-            SPBExtensionLicense.Insert(true);
+            CAVExtensionLicense."Entry Id" := SubModuleId;
+            CAVExtensionLicense."Submodule Name" := SubModuleName;
+            CAVExtensionLicense."Extension App Id" := AppInfo.Id;
+            CAVExtensionLicense."Extension Name" := CopyStr(AppInfo.Name, 1, MaxStrLen(CAVExtensionLicense."Extension Name"));
+            CAVExtensionLicense."Product Code" := newProductCode;
+            CAVExtensionLicense."Product URL" := newProductUrl;
+            CAVExtensionLicense."Support URL" := newSupportUrl;
+            CAVExtensionLicense."Billing Support Email" := newBillingEmail;
+            CAVExtensionLicense."Version Check URL" := newVersionURL;
+            CAVExtensionLicense."Update News URL" := newUpdateNewsURL;
+            CAVExtensionLicense."Installed At" := CurrentDateTime();
+            CAVExtensionLicense."Trial Grace End Date" := GraceEndDate;
+            CAVExtensionLicense."Sandbox Grace Days" := daysAllowedBeforeActivationSandbox;
+            CAVExtensionLicense.Insert(true);
         end;
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'installDate', Format(CurrentDateTime, 0, 9));
-        SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'preactivationDays', Format(GraceDays));
-        CAVSBTelemetry.NewExtensionRegistered(SPBExtensionLicense);
+        CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'installDate', Format(CurrentDateTime, 0, 9));
+        CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'preactivationDays', Format(GraceDays));
+        CAVSBTelemetry.NewExtensionRegistered(CAVExtensionLicense);
     end;
 
     internal procedure CheckSupportedVersion(minVersion: Version)
@@ -148,7 +148,7 @@ codeunit 71034 "CAVSB Extension Registration"
                 Error(VersionUpdateRequiredErr, AppInfo.Name, minVersion);
     end;
 
-    [Obsolete('Use SPB Check Active method codeunit instead.')]
+    [Obsolete('Use CAV Check Active method codeunit instead.')]
     procedure CheckIfActive(SubscriptionId: Guid; InactiveShowError: Boolean): Boolean
     begin
     end;

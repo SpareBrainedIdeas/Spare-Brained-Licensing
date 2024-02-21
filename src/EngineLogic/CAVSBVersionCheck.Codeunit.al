@@ -2,7 +2,7 @@ codeunit 71044 "CAVSB Version Check"
 {
     Access = Internal;
 
-    procedure DoVersionCheck(var SPBExtensionLicense: Record "CAVSB Extension License")
+    procedure DoVersionCheck(var CAVExtensionLicense: Record "CAVSB Extension License")
     var
         UserTask: Record "User Task";
         CAVSBEvents: Codeunit "CAVSB Events";
@@ -18,10 +18,10 @@ codeunit 71044 "CAVSB Version Check"
         LatestVersion: Version;
     begin
         NavApp.GetCurrentModuleInfo(AppInfo);
-        if SPBExtensionLicense."Version Check URL" = '' then
+        if CAVExtensionLicense."Version Check URL" = '' then
             exit;
 
-        ApiHttpRequestMessage.SetRequestUri(SPBExtensionLicense."Version Check URL");
+        ApiHttpRequestMessage.SetRequestUri(CAVExtensionLicense."Version Check URL");
         ApiHttpRequestMessage.Method('GET');
 
         if ApiHttpClient.Send(ApiHttpRequestMessage, ApiHttpResponseMessage) then begin
@@ -29,18 +29,18 @@ codeunit 71044 "CAVSB Version Check"
                 ApiHttpResponseMessage.Content.ReadAs(VersionResponseBody);
                 LatestVersion := Version.Create(VersionResponseBody);
                 if (AppInfo.AppVersion < LatestVersion) then begin
-                    SPBExtensionLicense."Update Available" := true;
-                    SPBExtensionLicense.Modify();
+                    CAVExtensionLicense."Update Available" := true;
+                    CAVExtensionLicense.Modify();
 
-                    CAVSBEvents.OnBeforeVersionCheckUpgradeAvailable(SPBExtensionLicense, LatestVersion, IsHandled);
+                    CAVSBEvents.OnBeforeVersionCheckUpgradeAvailable(CAVExtensionLicense, LatestVersion, IsHandled);
                     if IsHandled then
                         exit;
 
                     UserTask.Init();
                     UserTask.Title := StrSubstNo(SubjectTok, AppInfo.Name);
                     UserTask.SetDescription(DocsTok);
-                    if not IsNullGuid(SPBExtensionLicense."Activated By") then
-                        UserTask."Assigned To" := SPBExtensionLicense."Activated By";
+                    if not IsNullGuid(CAVExtensionLicense."Activated By") then
+                        UserTask."Assigned To" := CAVExtensionLicense."Activated By";
                     UserTask."Due DateTime" := CurrentDateTime;
                     UserTask."Start DateTime" := CurrentDateTime;
                     UserTask."Object Type" := UserTask."Object Type"::Page;
@@ -48,9 +48,9 @@ codeunit 71044 "CAVSB Version Check"
                     UserTask.Insert(true);
                 end;
             end else
-                CAVSBEvents.OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpResponseMessage);
+                CAVSBEvents.OnAfterVersionCheckFailure(CAVExtensionLicense, ApiHttpResponseMessage);
         end else
-            CAVSBEvents.OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpResponseMessage);
-        CAVSBTelemetry.VersionUpdateCheck(SPBExtensionLicense);
+            CAVSBEvents.OnAfterVersionCheckFailure(CAVExtensionLicense, ApiHttpResponseMessage);
+        CAVSBTelemetry.VersionUpdateCheck(CAVExtensionLicense);
     end;
 }

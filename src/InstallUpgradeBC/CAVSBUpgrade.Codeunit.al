@@ -20,27 +20,27 @@ codeunit 71039 "CAVSB Upgrade"
 
     local procedure Performv20Upgrade()
     var
-        SPBExtensionLicense: Record "CAVSB Extension License";
+        CAVExtensionLicense: Record "CAVSB Extension License";
     begin
-        if SPBExtensionLicense.FindSet() then
+        if CAVExtensionLicense.FindSet() then
             repeat
-                if IsNullGuid(SPBExtensionLicense."Extension App Id") then begin
-                    SPBExtensionLicense."Extension App Id" := SPBExtensionLicense."Entry Id";
-                    SPBExtensionLicense.Modify(true);
+                if IsNullGuid(CAVExtensionLicense."Extension App Id") then begin
+                    CAVExtensionLicense."Extension App Id" := CAVExtensionLicense."Entry Id";
+                    CAVExtensionLicense.Modify(true);
                 end;
-            until SPBExtensionLicense.Next() = 0;
+            until CAVExtensionLicense.Next() = 0;
     end;
 
     local procedure Performv21Upgrade()
     var
-        SPBExtensionLicense: Record "CAVSB Extension License";
+        CAVExtensionLicense: Record "CAVSB Extension License";
         CAVSBensingInstall: Codeunit "CAVSB Licensing Install";
         AppInfo: ModuleInfo;
     begin
         // Removing any older Subscriptions that was just for Gumroad
         NavApp.GetCurrentModuleInfo(AppInfo);
-        SPBExtensionLicense.SetRange("Extension App Id", AppInfo.Id);
-        SPBExtensionLicense.DeleteAll();
+        CAVExtensionLicense.SetRange("Extension App Id", AppInfo.Id);
+        CAVExtensionLicense.DeleteAll();
 
         // To using the submodule system to test whatever platforms
         CAVSBensingInstall.PerformInstallOfTestSubscriptions();

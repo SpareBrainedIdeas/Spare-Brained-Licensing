@@ -10,7 +10,7 @@ codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator
         LemonSqueezyTestProductUrlTok: Label 'https://sparebrained.lemonsqueezy.com/checkout/buy/cab72f9c-add0-47b0-9a09-feb3b4ccf8e0', Locked = true;
         LemonSqueezyVerifyAPITok: Label 'https://api.gumroad.com/v2/licenses/verify?license_key=%1&instance_id=%2', Comment = '%1 is the license key, %2 is the unique guid assigned by Lemon Squeezy for this installation, created during Activation.', Locked = true;
 
-    procedure CallAPIForActivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text): Boolean
+    procedure CallAPIForActivation(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text): Boolean
     var
         EnvInformation: Codeunit "Environment Information";
         OnPremEnvironmentIDTok: Label 'OnPrem-%1-%2', Comment = '%1 is the Tenant ID, %2 is the Environment name', Locked = true;
@@ -29,31 +29,31 @@ codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator
                 EnvironID := StrSubstNo(ProdEnvironmentIDTok, Database.TenantId(), EnvInformation.GetEnvironmentName());
         end;
 
-        ActivateAPI := StrSubstNo(LemonSqueezyActivateAPITok, SPBExtensionLicense."License Key", EnvironID);
+        ActivateAPI := StrSubstNo(LemonSqueezyActivateAPITok, CAVExtensionLicense."License Key", EnvironID);
         exit(CallLemonSqueezy(ResponseBody, ActivateAPI));
     end;
 
-    procedure CallAPIForVerification(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean): Boolean
+    procedure CallAPIForVerification(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean): Boolean
     var
         VerifyAPI: Text;
     begin
         // First, we'll crosscheck that the record's license_id matches the IsoStorage one for possible tamper checking
-        ValidateLicenseIdInfo(SPBExtensionLicense);
+        ValidateLicenseIdInfo(CAVExtensionLicense);
 
         // When verifying the License, we have to pass the instance info that we stored on the record
-        VerifyAPI := StrSubstNo(LemonSqueezyVerifyAPITok, SPBExtensionLicense."License Key", SPBExtensionLicense."Licensing ID");
+        VerifyAPI := StrSubstNo(LemonSqueezyVerifyAPITok, CAVExtensionLicense."License Key", CAVExtensionLicense."Licensing ID");
         exit(CallLemonSqueezy(ResponseBody, VerifyAPI));
     end;
 
-    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    procedure CallAPIForDeactivation(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
     var
         DeactivateAPI: Text;
     begin
         // First, we'll crosscheck that the record's license_id matches the IsoStorage one for possible tamper checking
-        ValidateLicenseIdInfo(SPBExtensionLicense);
+        ValidateLicenseIdInfo(CAVExtensionLicense);
 
         // When verifying the License, we have to pass the instance info that we stored on the record
-        DeactivateAPI := StrSubstNo(LemonSqueezyDeactivateAPITok, SPBExtensionLicense."License Key", SPBExtensionLicense."Licensing ID");
+        DeactivateAPI := StrSubstNo(LemonSqueezyDeactivateAPITok, CAVExtensionLicense."License Key", CAVExtensionLicense."Licensing ID");
         exit(CallLemonSqueezy(ResponseBody, DeactivateAPI));
     end;
 
@@ -99,35 +99,35 @@ codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator
                     Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
     end;
 
-    local procedure ValidateLicenseIdInfo(var SPBExtensionLicense: Record "CAVSB Extension License")
+    local procedure ValidateLicenseIdInfo(var CAVExtensionLicense: Record "CAVSB Extension License")
     var
-        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        CAVIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         LSqueezyIdJson: JsonObject;
         LSqueezyIdJsonToken: JsonToken;
         TempPlaceholder: Text;
     begin
-        SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'licensingId', TempPlaceholder);
+        CAVIsoStoreManager.GetAppValue(CAVExtensionLicense, 'licensingId', TempPlaceholder);
         if LSqueezyIdJson.ReadFrom(TempPlaceholder) then
             if LSqueezyIdJson.Get('id', LSqueezyIdJsonToken) then
-                if LSqueezyIdJsonToken.AsValue().AsText() <> SPBExtensionLicense."Licensing ID" then
-                    ReportPossibleMisuse(SPBExtensionLicense);
+                if LSqueezyIdJsonToken.AsValue().AsText() <> CAVExtensionLicense."Licensing ID" then
+                    ReportPossibleMisuse(CAVExtensionLicense);
     end;
 
-    procedure ReportPossibleMisuse(SPBExtensionLicense: Record "CAVSB Extension License")
+    procedure ReportPossibleMisuse(CAVExtensionLicense: Record "CAVSB Extension License")
     var
         CAVSBEvents: Codeunit "CAVSB Events";
     begin
         // Potential future use of 'reporting' misuse attempts.   For example, someone programmatically changing the Subscription Record
-        CAVSBEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
+        CAVSBEvents.OnAfterThrowPossibleMisuse(CAVExtensionLicense);
     end;
 
 #pragma warning disable AA0150
     //The interface implements this as 'var', so yes, this is fine.
-    procedure PopulateSubscriptionFromResponse(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text)
+    procedure PopulateSubscriptionFromResponse(var CAVExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text)
 #pragma warning restore AA0150
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
-        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        CAVIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         CurrentActiveStatus: Boolean;
         InstanceInfo: JsonObject;
         LSqueezyJson: JsonObject;
@@ -139,7 +139,7 @@ codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator
     begin
         // This is a generic function to process all Responses, regardless of Activation, Validation, or Deactivation
         // Which means we need to detect what mode we're in.
-        NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
+        NavApp.GetModuleInfo(CAVExtensionLicense."Extension App Id", AppInfo);
         LSqueezyJson.ReadFrom(ResponseBody);
         case true of
             LSqueezyJson.Get('activated', LSqueezyToken):
@@ -166,42 +166,42 @@ codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator
         TempJsonBuffer.ReadFromText(ResponseBody);
 
         // Update the current Subscription record
-        SPBExtensionLicense.Validate(Activated, CurrentActiveStatus);
+        CAVExtensionLicense.Validate(Activated, CurrentActiveStatus);
         TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'created_at', 'license_key');
-        Evaluate(SPBExtensionLicense."Created At", TempPlaceholder);
+        Evaluate(CAVExtensionLicense."Created At", TempPlaceholder);
         TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'expires_at', 'license_key');
-        Evaluate(SPBExtensionLicense."Subscription Ended At", TempPlaceholder);
+        Evaluate(CAVExtensionLicense."Subscription Ended At", TempPlaceholder);
 
         // TODO: Pending Request to Lemon Squeezy team to add this to their API
         //TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'email', 'license_key');
-        //SPBExtensionLicense."Subscription Email" := CopyStr(TempPlaceholder, 1, MaxStrLen(SPBExtensionLicense."Subscription Email"));
-        SPBExtensionLicense.CalculateEndDate();
+        //CAVExtensionLicense."Subscription Email" := CopyStr(TempPlaceholder, 1, MaxStrLen(CAVExtensionLicense."Subscription Email"));
+        CAVExtensionLicense.CalculateEndDate();
 
         // Lemon Squeezy relies on having storage of the "instance ID" to verify an instance is still active
         if SqueezyReponseType = SqueezyReponseType::Activation then begin
             TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'id', '*instance*');
-            SPBExtensionLicense."Licensing ID" := CopyStr(TempPlaceholder, 1, MaxStrLen(SPBExtensionLicense."Licensing ID"));
+            CAVExtensionLicense."Licensing ID" := CopyStr(TempPlaceholder, 1, MaxStrLen(CAVExtensionLicense."Licensing ID"));
             InstanceInfo.Add('id', TempPlaceholder);
             TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'name', '*instance*');
             InstanceInfo.Add('name', TempPlaceholder);
 
             InstanceInfo.WriteTo(TempPlaceholder);
-            SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'licensingId', SPBExtensionLicense."Licensing ID");
+            CAVIsoStoreManager.SetAppValue(CAVExtensionLicense, 'licensingId', CAVExtensionLicense."Licensing ID");
         end;
     end;
 
-    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
+    procedure ClientSideDeactivationPossible(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         // LemonSqueezy allows self-unregistration of an instance of a license 
         exit(true);
     end;
 
-    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
+    procedure ClientSideLicenseCount(var CAVExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         exit(false);
     end;
 
-    procedure CheckAPILicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"; ResponseBody: Text): Boolean
+    procedure CheckAPILicenseCount(var CAVExtensionLicense: Record "CAVSB Extension License"; ResponseBody: Text): Boolean
     begin
         // LemonSqueezy does server side count checking during the Activation flow, so we should NOT check client side.
         exit(true);
