@@ -1,4 +1,4 @@
-codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator", "SPBPL ILicenseCommunicator2"
+codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator", "CAVSB ILicenseCommunicator2"
 {
     var
         LemonSqueezyActivateAPITok: Label 'https://api.lemonsqueezy.com/v1/licenses/activate?license_key=%1&instance_name=%2', Comment = '%1 is the license key, %2 is just a label in the Lemon Squeezy list of Licenses', Locked = true;
@@ -10,7 +10,7 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         LemonSqueezyTestProductUrlTok: Label 'https://sparebrained.lemonsqueezy.com/checkout/buy/cab72f9c-add0-47b0-9a09-feb3b4ccf8e0', Locked = true;
         LemonSqueezyVerifyAPITok: Label 'https://api.gumroad.com/v2/licenses/verify?license_key=%1&instance_id=%2', Comment = '%1 is the license key, %2 is the unique guid assigned by Lemon Squeezy for this installation, created during Activation.', Locked = true;
 
-    procedure CallAPIForActivation(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text): Boolean
+    procedure CallAPIForActivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text): Boolean
     var
         EnvInformation: Codeunit "Environment Information";
         OnPremEnvironmentIDTok: Label 'OnPrem-%1-%2', Comment = '%1 is the Tenant ID, %2 is the Environment name', Locked = true;
@@ -33,7 +33,7 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         exit(CallLemonSqueezy(ResponseBody, ActivateAPI));
     end;
 
-    procedure CallAPIForVerification(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean): Boolean
+    procedure CallAPIForVerification(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean): Boolean
     var
         VerifyAPI: Text;
     begin
@@ -45,7 +45,7 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         exit(CallLemonSqueezy(ResponseBody, VerifyAPI));
     end;
 
-    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
     var
         DeactivateAPI: Text;
     begin
@@ -99,9 +99,9 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
                     Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
     end;
 
-    local procedure ValidateLicenseIdInfo(var SPBExtensionLicense: Record "SPBPL Extension License")
+    local procedure ValidateLicenseIdInfo(var SPBExtensionLicense: Record "CAVSB Extension License")
     var
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
+        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         LSqueezyIdJson: JsonObject;
         LSqueezyIdJsonToken: JsonToken;
         TempPlaceholder: Text;
@@ -113,21 +113,21 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
                     ReportPossibleMisuse(SPBExtensionLicense);
     end;
 
-    procedure ReportPossibleMisuse(SPBExtensionLicense: Record "SPBPL Extension License")
+    procedure ReportPossibleMisuse(SPBExtensionLicense: Record "CAVSB Extension License")
     var
-        SPBPLEvents: Codeunit "SPBPL Events";
+        CAVSBEvents: Codeunit "CAVSB Events";
     begin
         // Potential future use of 'reporting' misuse attempts.   For example, someone programmatically changing the Subscription Record
-        SPBPLEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
+        CAVSBEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
     end;
 
 #pragma warning disable AA0150
     //The interface implements this as 'var', so yes, this is fine.
-    procedure PopulateSubscriptionFromResponse(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text)
+    procedure PopulateSubscriptionFromResponse(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text)
 #pragma warning restore AA0150
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
+        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         CurrentActiveStatus: Boolean;
         InstanceInfo: JsonObject;
         LSqueezyJson: JsonObject;
@@ -190,18 +190,18 @@ codeunit 71040 "SPBPL LemonSqueezy Comm." implements "SPBPL ILicenseCommunicator
         end;
     end;
 
-    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean;
+    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         // LemonSqueezy allows self-unregistration of an instance of a license 
         exit(true);
     end;
 
-    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean;
+    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         exit(false);
     end;
 
-    procedure CheckAPILicenseCount(var SPBExtensionLicense: Record "SPBPL Extension License"; ResponseBody: Text): Boolean
+    procedure CheckAPILicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"; ResponseBody: Text): Boolean
     begin
         // LemonSqueezy does server side count checking during the Activation flow, so we should NOT check client side.
         exit(true);

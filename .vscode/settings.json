@@ -12,7 +12,7 @@
         "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
         "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
         "CRS.RenameWithGit": false,
-        "CRS.ObjectNamePrefix": "SPBPL ",
+        "CRS.ObjectNamePrefix": "CAVSB ",
         "al.ruleSetPath": "src\\.rulesets\\SPBLicensing.ruleset.json",
 
 }

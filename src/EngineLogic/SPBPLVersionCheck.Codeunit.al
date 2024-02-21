@@ -1,12 +1,12 @@
-codeunit 71044 "SPBPL Version Check"
+codeunit 71044 "CAVSB Version Check"
 {
     Access = Internal;
 
-    procedure DoVersionCheck(var SPBExtensionLicense: Record "SPBPL Extension License")
+    procedure DoVersionCheck(var SPBExtensionLicense: Record "CAVSB Extension License")
     var
         UserTask: Record "User Task";
-        SPBPLEvents: Codeunit "SPBPL Events";
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
+        CAVSBEvents: Codeunit "CAVSB Events";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
         IsHandled: Boolean;
         ApiHttpClient: HttpClient;
         ApiHttpRequestMessage: HttpRequestMessage;
@@ -32,7 +32,7 @@ codeunit 71044 "SPBPL Version Check"
                     SPBExtensionLicense."Update Available" := true;
                     SPBExtensionLicense.Modify();
 
-                    SPBPLEvents.OnBeforeVersionCheckUpgradeAvailable(SPBExtensionLicense, LatestVersion, IsHandled);
+                    CAVSBEvents.OnBeforeVersionCheckUpgradeAvailable(SPBExtensionLicense, LatestVersion, IsHandled);
                     if IsHandled then
                         exit;
 
@@ -44,13 +44,13 @@ codeunit 71044 "SPBPL Version Check"
                     UserTask."Due DateTime" := CurrentDateTime;
                     UserTask."Start DateTime" := CurrentDateTime;
                     UserTask."Object Type" := UserTask."Object Type"::Page;
-                    UserTask."Object ID" := Page::"SPBPL Extension Licenses";
+                    UserTask."Object ID" := Page::"CAVSB Extension Licenses";
                     UserTask.Insert(true);
                 end;
             end else
-                SPBPLEvents.OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpResponseMessage);
+                CAVSBEvents.OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpResponseMessage);
         end else
-            SPBPLEvents.OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpResponseMessage);
-        SPBPLTelemetry.VersionUpdateCheck(SPBExtensionLicense);
+            CAVSBEvents.OnAfterVersionCheckFailure(SPBExtensionLicense, ApiHttpResponseMessage);
+        CAVSBTelemetry.VersionUpdateCheck(SPBExtensionLicense);
     end;
 }

@@ -1,24 +1,24 @@
-permissionset 71034 "SPBPL Licensing RO"
+permissionset 71034 "CAVSB Licensing RO"
 {
     Assignable = true;
-    Caption = 'SPBPL Licensing RO';
-    Permissions = table "SPBPL Extension License" = X,
-        tabledata "SPBPL Extension License" = RMI,
-        codeunit "SPBPL Activate Meth" = X,
-        codeunit "SPBPL Check Active" = X,
-        codeunit "SPBPL Check Active Meth" = X,
-        codeunit "SPBPL Deactivate Meth" = X,
-        codeunit "SPBPL Environment Watcher" = X,
-        codeunit "SPBPL Events" = X,
-        codeunit "SPBPL Extension Registration" = X,
-        codeunit "SPBPL Gumroad Communicator" = X,
-        codeunit "SPBPL IsoStore Manager" = X,
-        codeunit "SPBPL LemonSqueezy Comm." = X,
-        codeunit "SPBPL License Utilities" = X,
-        codeunit "SPBPL Licensing Install" = X,
-        codeunit "SPBPL Telemetry" = X,
-        codeunit "SPBPL Upgrade" = X,
-        codeunit "SPBPL Version Check" = X,
-        page "SPBPL Extension Licenses" = X,
-        page "SPBPL License Activation" = X;
+    Caption = 'CAVSB Licensing RO';
+    Permissions = table "CAVSB Extension License" = X,
+        tabledata "CAVSB Extension License" = RMI,
+        codeunit "CAVSB Activate Meth" = X,
+        codeunit "CAVSB Check Active" = X,
+        codeunit "CAVSB Check Active Meth" = X,
+        codeunit "CAVSB Deactivate Meth" = X,
+        codeunit "CAVSB Environment Watcher" = X,
+        codeunit "CAVSB Events" = X,
+        codeunit "CAVSB Extension Registration" = X,
+        codeunit "CAVSB Gumroad Communicator" = X,
+        codeunit "CAVSB IsoStore Manager" = X,
+        codeunit "CAVSB LemonSqueezy Comm." = X,
+        codeunit "CAVSB License Utilities" = X,
+        codeunit "CAVSB Licensing Install" = X,
+        codeunit "CAVSB Telemetry" = X,
+        codeunit "CAVSB Upgrade" = X,
+        codeunit "CAVSB Version Check" = X,
+        page "CAVSB Extension Licenses" = X,
+        page "CAVSB License Activation" = X;
 }

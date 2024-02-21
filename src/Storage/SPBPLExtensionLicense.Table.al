@@ -1,10 +1,10 @@
-table 71033 "SPBPL Extension License"
+table 71033 "CAVSB Extension License"
 {
     Caption = 'Extension License';
     DataClassification = AccountData;
     DataPerCompany = false;
-    DrillDownPageId = "SPBPL Extension Licenses";
-    LookupPageId = "SPBPL Extension Licenses";
+    DrillDownPageId = "CAVSB Extension Licenses";
+    LookupPageId = "CAVSB Extension Licenses";
 
     fields
     {
@@ -167,7 +167,7 @@ table 71033 "SPBPL Extension License"
             DataClassification = SystemMetadata;
             Editable = false;
         }
-        field(30; "License Platform"; Enum "SPBPL License Platform")
+        field(30; "License Platform"; Enum "CAVSB License Platform")
         {
             Caption = 'License Platform';
             DataClassification = SystemMetadata;
@@ -217,14 +217,14 @@ table 71033 "SPBPL Extension License"
 
     internal procedure IsTestSubscription(): Boolean
     var
-        SPBPLenseUtilities: Codeunit "SPBPL License Utilities";
+        CAVSBenseUtilities: Codeunit "CAVSB License Utilities";
     begin
-        exit(Rec."Extension App Id" = SPBPLenseUtilities.GetTestProductAppId());
+        exit(Rec."Extension App Id" = CAVSBenseUtilities.GetTestProductAppId());
     end;
 
     internal procedure LaunchProductUrl()
     var
-        SBPLicEvents: Codeunit "SPBPL Events";
+        SBPLicEvents: Codeunit "CAVSB Events";
         IsHandled: Boolean;
     begin
         SBPLicEvents.OnBeforeLaunchProductUrl(Rec, IsHandled);

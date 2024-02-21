@@ -6,467 +6,467 @@
         <trans-unit id="Table 2870711897 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Extension License</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 2520497479 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activated</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Activated - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Activated - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3681468396 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activated At</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Activated At - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Activated At - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 128183738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activated By</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Activated By - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Activated By - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3278502036 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Billing Support Email</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Billing Support Email - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Billing Support Email - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 2570673311 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Created At</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Created At - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Created At - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3553709163 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry Id</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Entry Id - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Entry Id - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 793520103 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Extension App Id</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Extension App Id - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Extension App Id - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 2515772770 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Extension Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Extension Name - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Extension Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3301870439 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Installed At</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Installed At - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Installed At - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 682390464 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>License Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field License Key - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field License Key - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3482719256 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>License Platform</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field License Platform - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field License Platform - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3113370813 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Licensing ID</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Licensing ID - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Licensing ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3265714202 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Product Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Product Code - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Product Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 1615067412 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Product URL</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Product URL - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Product URL - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 251475916 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Sandbox Grace Days</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Sandbox Grace Days - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Sandbox Grace Days - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 66934155 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Submodule Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Submodule Name - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Submodule Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3577687543 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Subscription Cancelled At</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Subscription Cancelled At - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Subscription Cancelled At - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 2993034865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Subscription Email</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Subscription Email - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Subscription Email - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 714177988 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Subscription End Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Subscription End Date - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Subscription End Date - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3419904252 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Subscription Ended At</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Subscription Ended At - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Subscription Ended At - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 586868407 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Subscription Failed At</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Subscription Failed At - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Subscription Failed At - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 1645510544 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Support URL</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Support URL - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Support URL - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 3502087437 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Trial Grace End Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Trial Grace End Date - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Trial Grace End Date - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 2888391108 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Update Available</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Update Available - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Update Available - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 1667101431 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Update News URL</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Update News URL - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Update News URL - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2870711897 - Field 1618015777 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Version Check URL</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table SPBPL Extension License - Field Version Check URL - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table CAVSB Extension License - Field Version Check URL - Property Caption</note>
         </trans-unit>
         <trans-unit id="Codeunit 3181116820 - Method 488700208 - NamedType 2571021891" size-unit="char" translate="yes" xml:space="preserve">
           <source>An error occured validating the license.  Contact %1 for assistance</source>
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Activate Meth - Method CheckPlatformCanActivate - NamedType ActivationFailureErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Activate Meth - Method CheckPlatformCanActivate - NamedType ActivationFailureErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3181116820 - Method 488700208 - NamedType 2597918364" size-unit="char" translate="yes" xml:space="preserve">
           <source>There are no remaining uses of that license key to assign to this installation.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Activate Meth - Method CheckPlatformCanActivate - NamedType NoRemainingUsesErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Activate Meth - Method CheckPlatformCanActivate - NamedType NoRemainingUsesErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 3181116820 - Method 2107568876 - NamedType 4258206074" size-unit="char" translate="yes" xml:space="preserve">
           <source>The License Key provided has already expired due to a Subscription End.  Contact %1 for assistance</source>
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Activate Meth - Method DoActivationInLocalSystem - NamedType LicenseKeyExpiredErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Activate Meth - Method DoActivationInLocalSystem - NamedType LicenseKeyExpiredErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2729312257 - Method 788638224 - NamedType 345427010" size-unit="char" translate="yes" xml:space="preserve">
           <source>No License was found in the Licenses list for SubscriptionId: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 is the ID of the App.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active - Method CheckBasic - NamedType NoSubFoundErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Check Active - Method CheckBasic - NamedType NoSubFoundErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2729312257 - Method 766558854 - NamedType 4016921347" size-unit="char" translate="yes" xml:space="preserve">
           <source>No License was found in the Licenses list for SubscriptionId: %1 with Submodule name: %2</source>
           <note from="Developer" annotates="general" priority="2">%1 is the ID of the App. %2 is the Submodule.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active - Method CheckBasicSubmodule - NamedType NoSubscriptionFoundErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Check Active - Method CheckBasicSubmodule - NamedType NoSubscriptionFoundErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2729312257 - Method 430906001 - NamedType 4007641815" size-unit="char" translate="yes" xml:space="preserve">
           <source>The License for %1 is not Active.  Contact your system administrator to re-activate it.</source>
           <note from="Developer" annotates="general" priority="2">%1 is the name of the Extension.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active - Method DoCheckBasic - NamedType SubscriptionInactiveErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Check Active - Method DoCheckBasic - NamedType SubscriptionInactiveErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 629474109 - Method 1532212514 - NamedType 1318374551" size-unit="char" translate="yes" xml:space="preserve">
           <source>&lt;+%1D&gt;</source>
           <note from="Developer" annotates="general" priority="2">%1 is the number of days</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active Meth - Method DoCheckIfActive - NamedType DaysGraceTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Check Active Meth - Method DoCheckIfActive - NamedType DaysGraceTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 629474109 - Method 1532212514 - NamedType 3635804519" size-unit="char" translate="yes" xml:space="preserve">
           <source>Today is the last trial day for %1. Please purchase a License Key and Activate the subscription to continue use.</source>
           <note from="Developer" annotates="general" priority="2">%1 is the name of the Extension</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Check Active Meth - Method DoCheckIfActive - NamedType GraceExpiringMsg</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Check Active Meth - Method DoCheckIfActive - NamedType GraceExpiringMsg</note>
         </trans-unit>
         <trans-unit id="Codeunit 4244379827 - Method 3272340085 - NamedType 1073361429" size-unit="char" translate="yes" xml:space="preserve">
           <source>There was an issue in contacting the licensing server to deactivate this license.  Contact %1 for assistance.</source>
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher name</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Deactivate Meth - Method DoDeactivate - NamedType DeactivationProblemErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Deactivate Meth - Method DoDeactivate - NamedType DeactivationProblemErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1922437799 - Method 2547612846 - NamedType 4286379137" size-unit="char" translate="yes" xml:space="preserve">
           <source>To install this Extension, you need to update %1 to at least version %2.</source>
           <note from="Developer" annotates="general" priority="2">%1 is the name of licensing extension, %2 is the version number</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Extension Registration - Method CheckSupportedVersion - NamedType VersionUpdateRequiredErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Extension Registration - Method CheckSupportedVersion - NamedType VersionUpdateRequiredErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 1922437799 - Method 36282276 - NamedType 3218011231" size-unit="char" translate="yes" xml:space="preserve">
           <source>&lt;+%1D&gt;</source>
           <note from="Developer" annotates="general" priority="2">%1 is the number of days </note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Extension Registration - Method RegisterExtension - NamedType PlusDaysTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Extension Registration - Method RegisterExtension - NamedType PlusDaysTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 4024883425 - NamedType 385219469" size-unit="char" translate="yes" xml:space="preserve">
           <source>The key will look like XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - NamedType GumroadKeyFormatTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Gumroad Communicator - NamedType GumroadKeyFormatTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 4024883425 - Method 572322412 - NamedType 2344834051" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unable to communicate with the license server due to an environment block. Please resolve and try again.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method CallAPIForVerification - NamedType EnvironmentBlockErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Gumroad Communicator - Method CallAPIForVerification - NamedType EnvironmentBlockErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 4024883425 - Method 572322412 - NamedType 1832738441" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unable to verify or activate license.\ %1: %2 \ %3</source>
           <note from="Developer" annotates="general" priority="2">%1 %2 %3</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method CallAPIForVerification - NamedType WebCallErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Gumroad Communicator - Method CallAPIForVerification - NamedType WebCallErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 4024883425 - Method 2508294018 - NamedType 1515148142" size-unit="char" translate="yes" xml:space="preserve">
           <source>An error occured validating the license.  Contact %1 for assistance</source>
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method CheckAPILicenseCount - NamedType GumroadErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Gumroad Communicator - Method CheckAPILicenseCount - NamedType GumroadErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 4024883425 - Method 2792865364 - NamedType 2571021891" size-unit="char" translate="yes" xml:space="preserve">
           <source>An error occured validating the license.  Contact %1 for assistance</source>
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Gumroad Communicator - Method PopulateSubscriptionFromResponse - NamedType ActivationFailureErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Gumroad Communicator - Method PopulateSubscriptionFromResponse - NamedType ActivationFailureErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2825412634 - Method 1937264269 - NamedType 2344834051" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unable to communicate with the license server due to an environment block. Please resolve and try again.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method CallLemonSqueezy - NamedType EnvironmentBlockErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB LemonSqueezy Comm. - Method CallLemonSqueezy - NamedType EnvironmentBlockErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2825412634 - Method 1937264269 - NamedType 1832738441" size-unit="char" translate="yes" xml:space="preserve">
           <source>Unable to verify or activate license.\ %1: %2 \ %3</source>
           <note from="Developer" annotates="general" priority="2">%1 %2 %3</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method CallLemonSqueezy - NamedType WebCallErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB LemonSqueezy Comm. - Method CallLemonSqueezy - NamedType WebCallErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2825412634 - Method 2792865364 - NamedType 3707967943" size-unit="char" translate="yes" xml:space="preserve">
           <source>An error occured communicating with the licensing platform.  Contact %1 for assistance</source>
           <note from="Developer" annotates="general" priority="2">%1 is the App Publisher</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method PopulateSubscriptionFromResponse - NamedType CommunicationFailureErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB LemonSqueezy Comm. - Method PopulateSubscriptionFromResponse - NamedType CommunicationFailureErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2825412634 - Method 906692905 - NamedType 3887869495" size-unit="char" translate="yes" xml:space="preserve">
           <source>The key will look like XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL LemonSqueezy Comm. - Method SampleKeyFormatText - NamedType LemonSqueezyKeyFormatTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB LemonSqueezy Comm. - Method SampleKeyFormatText - NamedType LemonSqueezyKeyFormatTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2498763846 - NamedType 1018804737" size-unit="char" translate="yes" xml:space="preserve">
           <source>b08c8cbe-ff20-4c38-9448-21e68b509e84</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Licensing Install - NamedType GumroadTestSubscriptionIdTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Licensing Install - NamedType GumroadTestSubscriptionIdTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2498763846 - NamedType 3762490115" size-unit="char" translate="yes" xml:space="preserve">
           <source>62922d07-87e2-4959-aece-2cacf9222e9b</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Licensing Install - NamedType LemonSqueezyTestSubscriptionIdTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Licensing Install - NamedType LemonSqueezyTestSubscriptionIdTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2498763846 - Method 875139600 - NamedType 3252658350" size-unit="char" translate="yes" xml:space="preserve">
           <source>%1 Test Subscription</source>
           <note from="Developer" annotates="general" priority="2">%1 is the Licensing Extension name.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Licensing Install - Method AddTestProduct - NamedType TestLicenseNameTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Licensing Install - Method AddTestProduct - NamedType TestLicenseNameTok</note>
         </trans-unit>
         <trans-unit id="Codeunit 2019263043 - Method 2406779609 - NamedType 1913171376" size-unit="char" translate="yes" xml:space="preserve">
           <source>Update Extension: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 is Extension Name</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SPBPL Version Check - Method DoVersionCheck - NamedType SubjectTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit CAVSB Version Check - Method DoVersionCheck - NamedType SubjectTok</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Extension Licenses</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - NamedType 3390988340" size-unit="char" translate="yes" xml:space="preserve">
           <source>Available</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - NamedType UpdateAvailableTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - NamedType UpdateAvailableTok</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Method 1168398803 - NamedType 3960046211" size-unit="char" translate="yes" xml:space="preserve">
           <source>This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Method DeactivateExtension - NamedType DeactivationNotPossibleWarningQst</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Method DeactivateExtension - NamedType DeactivationNotPossibleWarningQst</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Method 1168398803 - NamedType 1534060074" size-unit="char" translate="yes" xml:space="preserve">
           <source>This will deactivate this license in this Business Central instance.\ \Are you sure you want to deactivate this license?</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Method DeactivateExtension - NamedType DeactivationPossibleQst</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Method DeactivateExtension - NamedType DeactivationPossibleQst</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 2520497479 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Shows if this Extension has been Activated with a Product Key.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Activated - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Activated - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 3278502036 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>The email address to contact with Billing related questions about this Subscription.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Billing Support Email - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Billing Support Email - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 3553709163 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>This Guid is the Subscription Entry Id.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Entry Id - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Entry Id - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 793520103 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>This Guid is the Extension's App Id.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Extension App Id - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Extension App Id - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 2515772770 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>The name of the Extension that is registered to have a Subscription requirement.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Extension Name - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Extension Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 3482719256 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the License Platform field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control License Platform - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control License Platform - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 1615067412 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>The page where one can find more information about purchasing a Subscription for this Extension.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Product URL - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Product URL - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 66934155 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>If this Extension uses Module based Subscriptions, this displays which Submodule/Edition this is.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Submodule Name - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Submodule Name - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 2993034865 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>This shows the email address that the License Key is registered to, in case there is a need to find it later.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Subscription Email - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Subscription Email - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 1645510544 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>The page where one can find more information about how to get Support for the Extension.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Support URL - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Support URL - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 3502087437 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>If the Extension is not yet Activated, this is the last date the Extension can run in Trial Mode.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control Trial Grace End Date - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control Trial Grace End Date - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 890477203 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>If an Update is available, this will link to where to find out more.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control UpdateLink - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control UpdateLink - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Control 890477203 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Update News</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Control UpdateLink - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Control UpdateLink - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Action 2267293014 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Launches the Activation Wizard for this Subscription.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Action ActivateProduct - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Action ActivateProduct - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Action 2267293014 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activate</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Action ActivateProduct - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Action ActivateProduct - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Action 2955463525 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Forces this Subscription inactive, which will allow entry of a new License Key.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Action DeactivateProduct - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Action DeactivateProduct - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2519867600 - Action 2955463525 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Deactivate</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL Extension Licenses - Action DeactivateProduct - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB Extension Licenses - Action DeactivateProduct - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Licensing Activation Wizard</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - NamedType 1398112590" size-unit="char" translate="yes" xml:space="preserve">
           <source>You need to enter a License Key to continue.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - NamedType LicenseKeyNeededErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - NamedType LicenseKeyNeededErr</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - NamedType 1234444719" size-unit="char" translate="yes" xml:space="preserve">
           <source>Get License Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - NamedType LicenseLinkUriTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - NamedType LicenseLinkUriTok</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - NamedType 3119195878" size-unit="char" translate="yes" xml:space="preserve">
           <source>Use Test Key</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - NamedType TestLicenseKeyOfferTok</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - NamedType TestLicenseKeyOfferTok</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 3243166786 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Start Activation</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control LetsStart - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control LetsStart - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 1201906119 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
           <source>Click Next to begin the activation process. You will need your Subscription License key.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control StartText - Property InstructionalText</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control StartText - Property InstructionalText</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 1283650361 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>This is the Activation Wizard for the Licensing system.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control WelcomeText - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control WelcomeText - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 3817008790 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
           <source>You will enter the License Key for the following License.  If you do not have a License key, please click on the "Get License Key" link.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control WelcomeExplainer - Property InstructionalText</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control WelcomeExplainer - Property InstructionalText</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 426715456 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
           <source>Please enter your Subscription License Key:</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control LicenseKeyInstruction - Property InstructionalText</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control LicenseKeyInstruction - Property InstructionalText</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 3196012354 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
           <source>This is the Test Subscription, so you can use a test License Key here by clicking:</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control TestLicenseOption - Property InstructionalText</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control TestLicenseOption - Property InstructionalText</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 2723201281 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
           <source>Please enter your Subscription License Key:</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control TestPathLicenseKeyInstruction - Property InstructionalText</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control TestPathLicenseKeyInstruction - Property InstructionalText</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 1755829652 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activation Results</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control ActivationResultsPageText - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control ActivationResultsPageText - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 3933190995 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activation Unsuccessful!</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control ActivationDidNotWork - Property InstructionalText</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control ActivationDidNotWork - Property InstructionalText</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Control 1200239856 - Property 1968111052" size-unit="char" translate="yes" xml:space="preserve">
           <source>Activation Successful!</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Control ActivationWorked - Property InstructionalText</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Control ActivationWorked - Property InstructionalText</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Action 2438272767 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Back</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Action ActionBack - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Action ActionBack - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Action 3259912055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Finish</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Action ActionFinish - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Action ActionFinish - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3179820558 - Action 914282563 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Next</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SPBPL License Activation - Action ActionNext - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page CAVSB License Activation - Action ActionNext - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3747597251 - EnumValue 1009633233 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Gumroad</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Enum SPBPL License Platform - EnumValue Gumroad - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum CAVSB License Platform - EnumValue Gumroad - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 3747597251 - EnumValue 1315004771 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>LemonSqueezy</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Enum SPBPL License Platform - EnumValue LemonSqueezy - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum CAVSB License Platform - EnumValue LemonSqueezy - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 917097709 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spare Brained Licensing Admin</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet SPBPL Licensing - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet CAVSB Licensing - Property Caption</note>
         </trans-unit>
         <trans-unit id="PermissionSet 1149570938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>SPBPL Licensing RO</source>
+          <source>CAVSB Licensing RO</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet SPBPL Licensing RO - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet CAVSB Licensing RO - Property Caption</note>
         </trans-unit>
       </group>
     </body>

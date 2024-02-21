@@ -1,10 +1,10 @@
-page 71034 "SPBPL License Activation"
+page 71034 "CAVSB License Activation"
 {
 
     ApplicationArea = All;
-    Caption = 'Licensing Activation Wizard';
+    Caption = 'Cavallo Licensing Activation Wizard';
     PageType = NavigatePage;
-    SourceTable = "SPBPL Extension License";
+    SourceTable = "CAVSB Extension License";
 
     layout
     {
@@ -95,7 +95,7 @@ page 71034 "SPBPL License Activation"
 
                     trigger OnDrillDown()
                     begin
-                        LicenseKey := SPBPLenseUtilities.GetTestProductKey(Rec);
+                        LicenseKey := CAVSBenseUtilities.GetTestProductKey(Rec);
                     end;
                 }
             }
@@ -168,8 +168,8 @@ page 71034 "SPBPL License Activation"
     }
 
     var
-        SPBPLActivateMeth: Codeunit "SPBPL Activate Meth";
-        SPBPLenseUtilities: Codeunit "SPBPL License Utilities";
+        CAVSBActivateMeth: Codeunit "CAVSB Activate Meth";
+        CAVSBenseUtilities: Codeunit "CAVSB License Utilities";
         ActivationResult: Boolean;
         BackActionEnabled: Boolean;
         FinishActionEnabled: Boolean;
@@ -191,7 +191,7 @@ page 71034 "SPBPL License Activation"
 
     trigger OnOpenPage()
     var
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator";
+        LicensePlatform: Interface "CAVSB ILicenseCommunicator";
     begin
         LicenseLinkText := LicenseLinkUriTok;
         LicensePlatform := Rec."License Platform";
@@ -231,7 +231,7 @@ page 71034 "SPBPL License Activation"
         if (Step = Step::Step2) and not Backwards then begin
             Rec."License Key" := CopyStr(LicenseKey, 1, MaxStrLen(Rec."License Key"));
             Rec.Modify();
-            ActivationResult := SPBPLActivateMeth.Activate(Rec);
+            ActivationResult := CAVSBActivateMeth.Activate(Rec);
             Step := Step + 1;
         end;
 

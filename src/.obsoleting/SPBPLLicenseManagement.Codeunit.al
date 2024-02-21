@@ -1,48 +1,48 @@
-codeunit 71036 "SPBPL License Management"
+codeunit 71036 "CAVSB License Management"
 {
-    Permissions = tabledata "SPBPL Extension License" = RIM;
+    Permissions = tabledata "CAVSB Extension License" = RIM;
     ObsoleteState = Pending;
     ObsoleteReason = 'Refactored to new Method Codeunits and separate Event wrapper.';
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    local procedure OnAfterLicenseDeactivated(var SPBExtensionLicense: Record "SPBPL Extension License")
+    local procedure OnAfterLicenseDeactivated(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
     end;
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    local procedure OnAfterLicenseDeactivatedByPlatform(var SPBExtensionLicense: Record "SPBPL Extension License"; ResponseBody: Text)
+    local procedure OnAfterLicenseDeactivatedByPlatform(var SPBExtensionLicense: Record "CAVSB Extension License"; ResponseBody: Text)
     begin
     end;
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    local procedure OnAfterActivationFailure(var SPBExtensionLicense: Record "SPBPL Extension License"; var AppInfo: ModuleInfo)
+    local procedure OnAfterActivationFailure(var SPBExtensionLicense: Record "CAVSB Extension License"; var AppInfo: ModuleInfo)
     begin
     end;
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeVersionCheckUpgradeAvailable(var SPBExtensionLicense: Record "SPBPL Extension License"; var LatestVersion: Version; var IsHandled: Boolean)
+    local procedure OnBeforeVersionCheckUpgradeAvailable(var SPBExtensionLicense: Record "CAVSB Extension License"; var LatestVersion: Version; var IsHandled: Boolean)
     begin
     end;
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    local procedure OnAfterActivationSuccess(var SPBExtensionLicense: Record "SPBPL Extension License"; var AppInfo: ModuleInfo)
+    local procedure OnAfterActivationSuccess(var SPBExtensionLicense: Record "CAVSB Extension License"; var AppInfo: ModuleInfo)
     begin
     end;
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    local procedure OnAfterVersionCheckFailure(var SPBExtensionLicense: Record "SPBPL Extension License"; var ApiHttpRespMessage: HttpResponseMessage)
+    local procedure OnAfterVersionCheckFailure(var SPBExtensionLicense: Record "CAVSB Extension License"; var ApiHttpRespMessage: HttpResponseMessage)
     begin
     end;
 
-    [Obsolete('Use new Events in SPBPL Events codeunit.')]
+    [Obsolete('Use new Events in CAVSB Events codeunit.')]
     [IntegrationEvent(false, false)]
-    internal procedure OnAfterThrowPossibleMisuse(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure OnAfterThrowPossibleMisuse(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
     end;
 }

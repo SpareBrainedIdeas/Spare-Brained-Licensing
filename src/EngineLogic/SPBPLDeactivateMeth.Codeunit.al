@@ -1,16 +1,16 @@
-codeunit 71046 "SPBPL Deactivate Meth"
+codeunit 71046 "CAVSB Deactivate Meth"
 {
-    internal procedure Deactivate(var SPBExtensionLicense: Record "SPBPL Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
+    internal procedure Deactivate(var SPBExtensionLicense: Record "CAVSB Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
     begin
         DoDeactivate(SPBExtensionLicense, ByPlatform);
     end;
 
-    local procedure DoDeactivate(var SPBExtensionLicense: Record "SPBPL Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
+    local procedure DoDeactivate(var SPBExtensionLicense: Record "CAVSB Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
     var
-        SPBPLEvents: Codeunit "SPBPL Events";
-        SPBPLIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
-        LicensePlatformV2: Interface "SPBPL ILicenseCommunicator2";
+        CAVSBEvents: Codeunit "CAVSB Events";
+        CAVSBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
+        LicensePlatformV2: Interface "CAVSB ILicenseCommunicator2";
         DeactivationProblemErr: Label 'There was an issue in contacting the licensing server to deactivate this license.  Contact %1 for assistance.', Comment = '%1 is the App Publisher name';
         AppInfo: ModuleInfo;
         ResponseBody: Text;
@@ -19,7 +19,7 @@ codeunit 71046 "SPBPL Deactivate Meth"
 
         SPBExtensionLicense.Validate(Activated, false);
         SPBExtensionLicense.Modify();
-        SPBPLIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
+        CAVSBIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
         Commit();  // if calling the API fails, the local should still be marked as deactivated
 
         if not ByPlatform then begin
@@ -29,11 +29,11 @@ codeunit 71046 "SPBPL Deactivate Meth"
                     Error(DeactivationProblemErr, AppInfo.Publisher);
             end else
                 DeactivationSuccess := true;
-            SPBPLTelemetry.LicensePlatformDeactivation(SPBExtensionLicense);
-            SPBPLEvents.OnAfterLicenseDeactivatedByPlatform(SPBExtensionLicense, ResponseBody);
+            CAVSBTelemetry.LicensePlatformDeactivation(SPBExtensionLicense);
+            CAVSBEvents.OnAfterLicenseDeactivatedByPlatform(SPBExtensionLicense, ResponseBody);
         end else begin
-            SPBPLTelemetry.LicenseDeactivation(SPBExtensionLicense);
-            SPBPLEvents.OnAfterLicenseDeactivated(SPBExtensionLicense);
+            CAVSBTelemetry.LicenseDeactivation(SPBExtensionLicense);
+            CAVSBEvents.OnAfterLicenseDeactivated(SPBExtensionLicense);
         end;
     end;
 }

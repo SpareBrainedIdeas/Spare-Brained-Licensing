@@ -1,4 +1,4 @@
-codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicator", "SPBPL ILicenseCommunicator2"
+codeunit 71035 "CAVSB Gumroad Communicator" implements "CAVSB ILicenseCommunicator", "CAVSB ILicenseCommunicator2"
 {
 
     var
@@ -10,12 +10,12 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         GumroadTestProductUrlTok: Label 'https://sparebrained.gumroad.com/l/SBILicensingTest', Locked = true;
         GumroadVerifyAPITok: Label 'https://api.gumroad.com/v2/licenses/verify?product_permalink=%1&license_key=%2&increment_uses_count=%3', Comment = '%1 %2 %3', Locked = true;
 
-    procedure CallAPIForActivation(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    procedure CallAPIForActivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
     begin
         exit(CallAPIForVerification(SPBExtensionLicense, ResponseBody, true));
     end;
 
-    procedure CallAPIForVerification(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean) ResultOK: Boolean
+    procedure CallAPIForVerification(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text; IncrementLicenseCount: Boolean) ResultOK: Boolean
     var
         NAVAppSetting: Record "NAV App Setting";
         ApiHttpClient: HttpClient;
@@ -59,21 +59,21 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
                     Error(WebCallErr, ApiHttpResponseMessage.HttpStatusCode, ApiHttpResponseMessage.ReasonPhrase, ApiHttpResponseMessage.Content);
     end;
 
-    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ResultOK: Boolean
+    procedure CallAPIForDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ResultOK: Boolean
     begin
         exit(CallAPIForVerification(SPBExtensionLicense, ResponseBody, false));
     end;
 
-    procedure ReportPossibleMisuse(SPBExtensionLicense: Record "SPBPL Extension License")
+    procedure ReportPossibleMisuse(SPBExtensionLicense: Record "CAVSB Extension License")
     var
-        SPBPLEvents: Codeunit "SPBPL Events";
+        CAVSBEvents: Codeunit "CAVSB Events";
     begin
         // Potential future use of 'reporting' misuse attempts.   For example, someone programmatically changing the Subscription Record
-        SPBPLEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
+        CAVSBEvents.OnAfterThrowPossibleMisuse(SPBExtensionLicense);
     end;
 
 #pragma warning disable AA0150 // TODO - Passed as "var" for the interface
-    procedure PopulateSubscriptionFromResponse(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text)
+    procedure PopulateSubscriptionFromResponse(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text)
 #pragma warning restore AA0150
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
@@ -109,22 +109,22 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         SPBExtensionLicense.CalculateEndDate();
     end;
 
-    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean;
+    procedure ClientSideDeactivationPossible(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         // Gumroad only allows this using an API key, which is unique to each Publisher.  At this time,
         // I can't support the safe storage of that information 
         exit(false);
     end;
 
-    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean;
+    procedure ClientSideLicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean;
     begin
         exit(true);
     end;
 
-    procedure CheckAPILicenseCount(var SPBExtensionLicense: Record "SPBPL Extension License"; ResponseBody: Text): Boolean
+    procedure CheckAPILicenseCount(var SPBExtensionLicense: Record "CAVSB Extension License"; ResponseBody: Text): Boolean
     var
         TempJsonBuffer: Record "JSON Buffer" temporary;
-        SPBPLenseUtilities: Codeunit "SPBPL License Utilities";
+        CAVSBenseUtilities: Codeunit "CAVSB License Utilities";
         LicenseCount: Integer;
         LicenseUses: Integer;
         GumroadJson: JsonObject;
@@ -133,7 +133,7 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
         AppInfo: ModuleInfo;
     begin
         // The 'Test' product, we never do a Count check on this application
-        if SPBExtensionLicense."Entry Id" = SPBPLenseUtilities.GetTestProductAppId() then
+        if SPBExtensionLicense."Entry Id" = CAVSBenseUtilities.GetTestProductAppId() then
             exit(true);
 
         GumroadJson.ReadFrom(ResponseBody);
@@ -184,7 +184,7 @@ codeunit 71035 "SPBPL Gumroad Communicator" implements "SPBPL ILicenseCommunicat
 
     [Obsolete('This event is moved to the central License Management codeunit for platform-agnostic eventing.')]
     [IntegrationEvent(false, false)]
-    local procedure OnAfterThrowPossibleMisuse(SPBExtensionLicense: Record "SPBPL Extension License")
+    local procedure OnAfterThrowPossibleMisuse(SPBExtensionLicense: Record "CAVSB Extension License")
     begin
     end;
 }

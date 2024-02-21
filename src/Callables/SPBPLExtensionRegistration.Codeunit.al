@@ -1,9 +1,9 @@
 /// <summary>
 /// This codeunit is for properly registering Extensions into the Licensing system. 
 /// </summary>
-codeunit 71034 "SPBPL Extension Registration"
+codeunit 71034 "CAVSB Extension Registration"
 {
-    Permissions = tabledata "SPBPL Extension License" = RIM;
+    Permissions = tabledata "CAVSB Extension License" = RIM;
 
     /// <summary>
     /// This function with an appalling number of parameters allows Extensions to register as License.
@@ -31,7 +31,7 @@ codeunit 71034 "SPBPL Extension Registration"
         daysAllowedBeforeActivationProd: Integer;
         daysAllowedBeforeActivationSandbox: Integer;
         minimumLicensingAppVersion: Version;
-        licensePlatform: Enum "SPBPL License Platform";
+        licensePlatform: Enum "CAVSB License Platform";
         forceUpdate: Boolean)
     begin
         RegisterExtension(AppInfo,
@@ -80,13 +80,13 @@ codeunit 71034 "SPBPL Extension Registration"
         daysAllowedBeforeActivationProd: Integer;
         daysAllowedBeforeActivationSandbox: Integer;
         minimumLicensingAppVersion: Version;
-        licensePlatform: Enum "SPBPL License Platform";
+        licensePlatform: Enum "CAVSB License Platform";
         forceUpdate: Boolean)
     var
-        SPBExtensionLicense: Record "SPBPL Extension License";
+        SPBExtensionLicense: Record "CAVSB Extension License";
         EnvironmentInformation: Codeunit "Environment Information";
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
+        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
         GraceEndDate: Date;
         GraceDays: Integer;
         PlusDaysTok: Label '<+%1D>', Comment = '%1 is the number of days ';
@@ -134,7 +134,7 @@ codeunit 71034 "SPBPL Extension Registration"
         end;
         SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'installDate', Format(CurrentDateTime, 0, 9));
         SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'preactivationDays', Format(GraceDays));
-        SPBPLTelemetry.NewExtensionRegistered(SPBExtensionLicense);
+        CAVSBTelemetry.NewExtensionRegistered(SPBExtensionLicense);
     end;
 
     internal procedure CheckSupportedVersion(minVersion: Version)

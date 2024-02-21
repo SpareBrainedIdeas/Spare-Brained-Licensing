@@ -1,44 +1,44 @@
-codeunit 71043 "SPBPL Check Active Meth"
+codeunit 71043 "CAVSB Check Active Meth"
 {
     Access = Internal;
 
-    procedure CheckIfActive(var SPBExtensionLicense: Record "SPBPL Extension License") IsActive: Boolean
+    procedure CheckIfActive(var SPBExtensionLicense: Record "CAVSB Extension License") IsActive: Boolean
     var
-        SPBPLDeactivateMeth: Codeunit "SPBPL Deactivate Meth";
-        SPBPLEvents: Codeunit "SPBPL Events";
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
+        CAVSBDeactivateMeth: Codeunit "CAVSB Deactivate Meth";
+        CAVSBEvents: Codeunit "CAVSB Events";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
     begin
         IsActive := DoCheckIfActive(SPBExtensionLicense);
 
         // We throw the Event here before we begin to deactivate the subscription.
-        SPBPLEvents.OnAfterCheckActiveBasic(SPBExtensionLicense, IsActive);
+        CAVSBEvents.OnAfterCheckActiveBasic(SPBExtensionLicense, IsActive);
 
         if IsActive then
-            SPBPLTelemetry.LicenseCheckSuccess(SPBExtensionLicense)
+            CAVSBTelemetry.LicenseCheckSuccess(SPBExtensionLicense)
         else
-            SPBPLTelemetry.LicenseCheckFailure(SPBExtensionLicense);
+            CAVSBTelemetry.LicenseCheckFailure(SPBExtensionLicense);
 
         if SPBExtensionLicense.Activated and not IsActive then
             // If the Check came back FALSE but the Subscription is Active,
             // it may be because the subscription has expired or deactivated on the platform.
             // We will force the local installation to inactive.
-            SPBPLDeactivateMeth.Deactivate(SPBExtensionLicense, true);
+            CAVSBDeactivateMeth.Deactivate(SPBExtensionLicense, true);
     end;
 
-    procedure DoCheckIfActive(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean
+    procedure DoCheckIfActive(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean
     var
         EnvironmentInformation: Codeunit "Environment Information";
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
-        SPBEvents: Codeunit "SPBPL Events";
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
-        SPBPLVersionCheck: Codeunit "SPBPL Version Check";
+        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
+        SPBEvents: Codeunit "CAVSB Events";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
+        CAVSBVersionCheck: Codeunit "CAVSB Version Check";
         IsoActive: Boolean;
         GraceEndDate: Date;
         InstallDateTime: DateTime;
         IsoDatetime: DateTime;
         LastCheckDateTime: DateTime;
         IsoNumber: Integer;
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator";
+        LicensePlatform: Interface "CAVSB ILicenseCommunicator";
         DaysGraceTok: Label '<+%1D>', Comment = '%1 is the number of days';
         GraceExpiringMsg: Label 'Today is the last trial day for %1. Please purchase a License Key and Activate the subscription to continue use.', Comment = '%1 is the name of the Extension';
         ResponseBody: Text;
@@ -80,7 +80,7 @@ codeunit 71043 "SPBPL Check Active Meth"
                 LicensePlatform.PopulateSubscriptionFromResponse(SPBExtensionLicense, ResponseBody);
                 SPBExtensionLicense.Modify();
             end;
-            SPBPLVersionCheck.DoVersionCheck(SPBExtensionLicense);
+            CAVSBVersionCheck.DoVersionCheck(SPBExtensionLicense);
             SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastCheckDate', Format(CurrentDateTime, 0, 9));
         end;
 
@@ -97,7 +97,7 @@ codeunit 71043 "SPBPL Check Active Meth"
             Evaluate(IsoActive, IsoStorageValue);
         if not IsoActive then begin
             LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
-            SPBPLTelemetry.EventTagMisuseReport(SPBExtensionLicense);
+            CAVSBTelemetry.EventTagMisuseReport(SPBExtensionLicense);
             SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, IsoStorageTamperingTok);
             exit(false);
         end;
@@ -109,7 +109,7 @@ codeunit 71043 "SPBPL Check Active Meth"
             // Only checking at the date level in case of time zone nonsense
             if DT2Date(IsoDatetime) <> DT2Date(SPBExtensionLicense."Subscription End Date") then begin
                 LicensePlatform.ReportPossibleMisuse(SPBExtensionLicense);
-                SPBPLTelemetry.EventTagMisuseReport(SPBExtensionLicense);
+                CAVSBTelemetry.EventTagMisuseReport(SPBExtensionLicense);
                 SPBEvents.OnAfterCheckActiveFailure(SPBExtensionLicense, false, IsoStorageTamperingTok);
                 exit(false);
             end;

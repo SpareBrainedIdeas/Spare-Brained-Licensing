@@ -1,4 +1,4 @@
-codeunit 71037 "SPBPL Licensing Install"
+codeunit 71037 "CAVSB Licensing Install"
 {
     Subtype = Install;
 
@@ -8,16 +8,16 @@ codeunit 71037 "SPBPL Licensing Install"
 
     trigger OnInstallAppPerDatabase()
     var
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
     begin
         PerformInstallOfTestSubscriptions();
-        SPBPLTelemetry.LicensingAppInstalled();
+        CAVSBTelemetry.LicensingAppInstalled();
     end;
 
     procedure PerformInstallOfTestSubscriptions()
     begin
-        AddTestProduct(Enum::"SPBPL License Platform"::Gumroad, GumroadTestSubscriptionIdTok);
-        AddTestProduct(Enum::"SPBPL License Platform"::LemonSqueezy, LemonSqueezyTestSubscriptionIdTok);
+        AddTestProduct(Enum::"CAVSB License Platform"::Gumroad, GumroadTestSubscriptionIdTok);
+        AddTestProduct(Enum::"CAVSB License Platform"::LemonSqueezy, LemonSqueezyTestSubscriptionIdTok);
     end;
 
     procedure GetGumroadTestAppId() TestProductGuid: Guid
@@ -30,11 +30,11 @@ codeunit 71037 "SPBPL Licensing Install"
         Evaluate(TestProductGuid, LemonSqueezyTestSubscriptionIdTok);
     end;
 
-    internal procedure AddTestProduct(WhichLicensePlatform: Enum "SPBPL License Platform"; TestProductId: Text)
+    internal procedure AddTestProduct(WhichLicensePlatform: Enum "CAVSB License Platform"; TestProductId: Text)
     var
-        SPBExtensionLicense: Record "SPBPL Extension License";
+        SPBExtensionLicense: Record "CAVSB Extension License";
         TestLicenseNameTok: Label '%1 Test Subscription', Comment = '%1 is the Licensing Extension name.';
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator2";
+        LicensePlatform: Interface "CAVSB ILicenseCommunicator2";
         AppInfo: ModuleInfo;
         TestProductGuid: Guid;
     begin

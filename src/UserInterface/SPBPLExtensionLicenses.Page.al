@@ -1,11 +1,11 @@
-page 71033 "SPBPL Extension Licenses"
+page 71033 "CAVSB Extension Licenses"
 {
 
     ApplicationArea = All;
-    Caption = 'Extension Licenses';
+    Caption = 'Cavallo License Management';
     Editable = false;
     PageType = List;
-    SourceTable = "SPBPL Extension License";
+    SourceTable = "CAVSB Extension License";
     UsageCategory = Administration;
 
     layout
@@ -168,31 +168,31 @@ page 71033 "SPBPL Extension Licenses"
 
     local procedure CheckAllForUpdates()
     var
-        SPBPLense: Record "SPBPL Extension License";
-        SPBPLVersionCheck: Codeunit "SPBPL Version Check";
+        CAVSBense: Record "CAVSB Extension License";
+        CAVSBVersionCheck: Codeunit "CAVSB Version Check";
     begin
-        if SPBPLense.FindSet(true) then
+        if CAVSBense.FindSet(true) then
             repeat
-                if SPBPLense."Update News URL" <> '' then
-                    SPBPLVersionCheck.DoVersionCheck(SPBPLense);
-            until SPBPLense.Next() = 0;
+                if CAVSBense."Update News URL" <> '' then
+                    CAVSBVersionCheck.DoVersionCheck(CAVSBense);
+            until CAVSBense.Next() = 0;
     end;
 
-    internal procedure LaunchActivation(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LaunchActivation(var SPBExtensionLicense: Record "CAVSB Extension License")
     var
-        SPBPLenseActivationWizard: Page "SPBPL License Activation";
+        CAVSBenseActivationWizard: Page "CAVSB License Activation";
     begin
-        Clear(SPBPLenseActivationWizard);
+        Clear(CAVSBenseActivationWizard);
         SPBExtensionLicense.SetRecFilter();
-        SPBPLenseActivationWizard.SetTableView(SPBExtensionLicense);
-        SPBPLenseActivationWizard.RunModal();
+        CAVSBenseActivationWizard.SetTableView(SPBExtensionLicense);
+        CAVSBenseActivationWizard.RunModal();
     end;
 
-    internal procedure DeactivateExtension(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean
+    internal procedure DeactivateExtension(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean
     var
-        SPBPLDeactivateMeth: Codeunit "SPBPL Deactivate Meth";
+        CAVSBDeactivateMeth: Codeunit "CAVSB Deactivate Meth";
         DoDeactivation: Boolean;
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator2";
+        LicensePlatform: Interface "CAVSB ILicenseCommunicator2";
         DeactivationNotPossibleWarningQst: Label 'This will deactivate this license in this Business Central instance, but you will need to contact the Publisher to release the assigned license. \ \Are you sure you want to deactivate this license?';
         DeactivationPossibleQst: Label 'This will deactivate this license in this Business Central instance.\ \Are you sure you want to deactivate this license?';
     begin
@@ -205,6 +205,6 @@ page 71033 "SPBPL Extension Licenses"
             DoDeactivation := Confirm(DeactivationNotPossibleWarningQst, false);
 
         if DoDeactivation then
-            exit(SPBPLDeactivateMeth.Deactivate(SPBExtensionLicense, false));
+            exit(CAVSBDeactivateMeth.Deactivate(SPBExtensionLicense, false));
     end;
 }

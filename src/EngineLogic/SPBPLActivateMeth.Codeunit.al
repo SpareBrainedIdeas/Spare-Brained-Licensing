@@ -1,10 +1,10 @@
-codeunit 71045 "SPBPL Activate Meth"
+codeunit 71045 "CAVSB Activate Meth"
 {
     Access = Internal;
 
-    internal procedure Activate(var SPBExtensionLicense: Record "SPBPL Extension License") ActivationSuccess: Boolean
+    internal procedure Activate(var SPBExtensionLicense: Record "CAVSB Extension License") ActivationSuccess: Boolean
     var
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
         ResponseBody: Text;
     begin
         ActivationSuccess := CheckPlatformCanActivate(SPBExtensionLicense, ResponseBody);
@@ -12,17 +12,17 @@ codeunit 71045 "SPBPL Activate Meth"
             DoActivationInLocalSystem(SPBExtensionLicense);
 
         if ActivationSuccess then
-            SPBPLTelemetry.LicenseActivation(SPBExtensionLicense)
+            CAVSBTelemetry.LicenseActivation(SPBExtensionLicense)
         else
-            SPBPLTelemetry.LicenseActivationFailure(SPBExtensionLicense);
+            CAVSBTelemetry.LicenseActivationFailure(SPBExtensionLicense);
 
         OnAfterActivate(SPBExtensionLicense);
     end;
 
-    local procedure CheckPlatformCanActivate(var SPBExtensionLicense: Record "SPBPL Extension License"; var ResponseBody: Text) ActivationSuccess: Boolean
+    local procedure CheckPlatformCanActivate(var SPBExtensionLicense: Record "CAVSB Extension License"; var ResponseBody: Text) ActivationSuccess: Boolean
     var
-        LicensePlatform: Interface "SPBPL ILicenseCommunicator";
-        LicensePlatformV2: Interface "SPBPL ILicenseCommunicator2";
+        LicensePlatform: Interface "CAVSB ILicenseCommunicator";
+        LicensePlatformV2: Interface "CAVSB ILicenseCommunicator2";
         ActivationFailureErr: Label 'An error occured validating the license.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         NoRemainingUsesErr: Label 'There are no remaining uses of that license key to assign to this installation.';
         AppInfo: ModuleInfo;
@@ -53,10 +53,10 @@ codeunit 71045 "SPBPL Activate Meth"
                 ActivationSuccess := false; // Yes, default, but being explicit for clarity/future-proofing
     end;
 
-    local procedure DoActivationInLocalSystem(var SPBExtensionLicense: Record "SPBPL Extension License"): Boolean
+    local procedure DoActivationInLocalSystem(var SPBExtensionLicense: Record "CAVSB Extension License"): Boolean
     var
-        SPBPLEvents: Codeunit "SPBPL Events";
-        SPBPLIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
+        CAVSBEvents: Codeunit "CAVSB Events";
+        CAVSBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         LicenseKeyExpiredErr: Label 'The License Key provided has already expired due to a Subscription End.  Contact %1 for assistance', Comment = '%1 is the App Publisher';
         AppInfo: ModuleInfo;
     begin
@@ -69,26 +69,26 @@ codeunit 71045 "SPBPL Activate Meth"
             SPBExtensionLicense.Activated := false;
             SPBExtensionLicense.Modify();
             Commit();
-            SPBPLEvents.OnAfterActivationFailure(SPBExtensionLicense, AppInfo);
+            CAVSBEvents.OnAfterActivationFailure(SPBExtensionLicense, AppInfo);
             if GuiAllowed() then
                 Error(LicenseKeyExpiredErr, AppInfo.Publisher);
         end else begin
             SPBExtensionLicense.Modify();
             Commit();
-            SPBPLEvents.OnAfterActivationSuccess(SPBExtensionLicense, AppInfo);
+            CAVSBEvents.OnAfterActivationSuccess(SPBExtensionLicense, AppInfo);
         end;
 
         // Now pop the details into IsolatedStorage
-        SPBPLIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
+        CAVSBIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
         exit(SPBExtensionLicense.Activated);
     end;
 
-    local procedure OnAfterActivate(var SPBExtensionLicense: Record "SPBPL Extension License");
+    local procedure OnAfterActivate(var SPBExtensionLicense: Record "CAVSB Extension License");
     var
-        SPBPLEvents: Codeunit "SPBPL Events";
+        CAVSBEvents: Codeunit "CAVSB Events";
         AppInfo: ModuleInfo;
     begin
         NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
-        SPBPLEvents.OnAfterActivationSuccess(SPBExtensionLicense, AppInfo);
+        CAVSBEvents.OnAfterActivationSuccess(SPBExtensionLicense, AppInfo);
     end;
 }

@@ -1,10 +1,10 @@
-codeunit 71039 "SPBPL Upgrade"
+codeunit 71039 "CAVSB Upgrade"
 {
     Subtype = Upgrade;
 
     trigger OnUpgradePerCompany()
     var
-        SPBPLTelemetry: Codeunit "SPBPL Telemetry";
+        CAVSBTelemetry: Codeunit "CAVSB Telemetry";
         UpgradeTag: Codeunit "Upgrade Tag";
     begin
         if not UpgradeTag.HasUpgradeTag(v20ReasonLbl) then begin
@@ -15,12 +15,12 @@ codeunit 71039 "SPBPL Upgrade"
             Performv21Upgrade();
             UpgradeTag.SetUpgradeTag(v21ReasonLbl);
         end;
-        SPBPLTelemetry.LicensingAppUpgraded();
+        CAVSBTelemetry.LicensingAppUpgraded();
     end;
 
     local procedure Performv20Upgrade()
     var
-        SPBExtensionLicense: Record "SPBPL Extension License";
+        SPBExtensionLicense: Record "CAVSB Extension License";
     begin
         if SPBExtensionLicense.FindSet() then
             repeat
@@ -33,8 +33,8 @@ codeunit 71039 "SPBPL Upgrade"
 
     local procedure Performv21Upgrade()
     var
-        SPBExtensionLicense: Record "SPBPL Extension License";
-        SPBPLensingInstall: Codeunit "SPBPL Licensing Install";
+        SPBExtensionLicense: Record "CAVSB Extension License";
+        CAVSBensingInstall: Codeunit "CAVSB Licensing Install";
         AppInfo: ModuleInfo;
     begin
         // Removing any older Subscriptions that was just for Gumroad
@@ -43,7 +43,7 @@ codeunit 71039 "SPBPL Upgrade"
         SPBExtensionLicense.DeleteAll();
 
         // To using the submodule system to test whatever platforms
-        SPBPLensingInstall.PerformInstallOfTestSubscriptions();
+        CAVSBensingInstall.PerformInstallOfTestSubscriptions();
     end;
 
 

@@ -1,4 +1,4 @@
-codeunit 71038 "SPBPL IsoStore Manager"
+codeunit 71038 "CAVSB IsoStore Manager"
 {
     // Utility Codeunit
     var
@@ -6,9 +6,9 @@ codeunit 71038 "SPBPL IsoStore Manager"
         EnvironmentInformation: Codeunit "Environment Information";
         NameMapTok: Label '%1-%2', Comment = '%1 %2', Locked = true;
 
-    internal procedure UpdateOrCreateIsoStorage(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure UpdateOrCreateIsoStorage(var SPBExtensionLicense: Record "CAVSB Extension License")
     var
-        SPBIsoStoreManager: Codeunit "SPBPL IsoStore Manager";
+        SPBIsoStoreManager: Codeunit "CAVSB IsoStore Manager";
         YesterdayDateTime: DateTime;
     begin
         SPBIsoStoreManager.SetAppValue(SPBExtensionLicense, 'lastUpdated', Format(CurrentDateTime, 0, 9));
@@ -27,7 +27,7 @@ codeunit 71038 "SPBPL IsoStore Manager"
         end;
     end;
 
-    internal procedure SetAppValue(SPBExtensionLicense: Record "SPBPL Extension License"; StoreName: Text; StoreValue: Text)
+    internal procedure SetAppValue(SPBExtensionLicense: Record "CAVSB Extension License"; StoreName: Text; StoreValue: Text)
     begin
         if not IsolatedStorage.Contains(SPBExtensionLicense."Entry Id") then
             IsolatedStorage.Set(SPBExtensionLicense."Entry Id", '', DataScope::Module);
@@ -42,14 +42,14 @@ codeunit 71038 "SPBPL IsoStore Manager"
         IsolatedStorage.Set(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), StoreValue, DataScope::Module);
     end;
 
-    internal procedure GetAppValue(SPBExtensionLicense: Record "SPBPL Extension License"; StoreName: Text; var ReturnValue: Text) Found: Boolean
+    internal procedure GetAppValue(SPBExtensionLicense: Record "CAVSB Extension License"; StoreName: Text; var ReturnValue: Text) Found: Boolean
     begin
         Found := IsolatedStorage.Get(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), DataScope::Module, ReturnValue);
         if EnvironmentInformation.IsOnPrem() and CryptographyManagement.IsEncryptionEnabled() and CryptographyManagement.IsEncryptionPossible() then
             ReturnValue := CryptographyManagement.Decrypt(ReturnValue);
     end;
 
-    internal procedure ContainsAppValue(SPBExtensionLicense: Record "SPBPL Extension License"; StoreName: Text): Boolean
+    internal procedure ContainsAppValue(SPBExtensionLicense: Record "CAVSB Extension License"; StoreName: Text): Boolean
     begin
         exit(IsolatedStorage.Contains(StrSubstNo(NameMapTok, SPBExtensionLicense."Entry Id", StoreName), DataScope::Module));
     end;

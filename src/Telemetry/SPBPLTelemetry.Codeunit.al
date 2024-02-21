@@ -1,4 +1,4 @@
-codeunit 71048 "SPBPL Telemetry"
+codeunit 71048 "CAVSB Telemetry"
 {
     Access = Internal;
 
@@ -12,27 +12,27 @@ codeunit 71048 "SPBPL Telemetry"
 
     var
         EventTagInstallMsg: Label 'Installation', Locked = true;
-        EventTagInstallTok: Label 'SPBPL1000', Locked = true;
+        EventTagInstallTok: Label 'CAVSB1000', Locked = true;
         EventTagUpgradeMsg: Label 'Upgraded', Locked = true;
-        EventTagUpgradeTok: Label 'SPBPL1001', Locked = true;
+        EventTagUpgradeTok: Label 'CAVSB1001', Locked = true;
         EventTagNewExtensionMsg: Label 'New Extension License Registered', Locked = true;
-        EventTagNewExtensionTok: Label 'SPBPL1002', Locked = true;
+        EventTagNewExtensionTok: Label 'CAVSB1002', Locked = true;
         EventTagLicenseActivationMsg: Label 'License Activated', Locked = true;
-        EventTagLicenseActivationTok: Label 'SPBPL1100', Locked = true;
+        EventTagLicenseActivationTok: Label 'CAVSB1100', Locked = true;
         EventTagLicenseDeactivationMsg: Label 'License Deactivated', Locked = true;
-        EventTagLicenseDeactivationTok: Label 'SPBPL1101', Locked = true;
+        EventTagLicenseDeactivationTok: Label 'CAVSB1101', Locked = true;
         EventTagLicensePlatformDeactivationMsg: Label 'License Deactivated by Platform', Locked = true;
-        EventTagLicensePlatformDeactivationTok: Label 'SPBPL1102', Locked = true;
+        EventTagLicensePlatformDeactivationTok: Label 'CAVSB1102', Locked = true;
         EventTagLicenseActivationFailureMsg: Label 'License Activation Failure', Locked = true;
-        EventTagLicenseActivationFailureTok: Label 'SPBPL1100', Locked = true;
+        EventTagLicenseActivationFailureTok: Label 'CAVSB1100', Locked = true;
         EventTagLicenseCheckSuccessMsg: Label 'License Check - Success', Locked = true;
-        EventTagLicenseCheckSuccessTok: Label 'SPBPL1200', Locked = true;
+        EventTagLicenseCheckSuccessTok: Label 'CAVSB1200', Locked = true;
         EventTagLicenseCheckFailureMsg: Label 'License Check - Failed', Locked = true;
-        EventTagLicenseCheckFailureTok: Label 'SPBPL1201', Locked = true;
+        EventTagLicenseCheckFailureTok: Label 'CAVSB1201', Locked = true;
         EventTagMisuseReportMsg: Label 'Misuse! Table data and IsoStorage mismatch', Locked = true;
-        EventTagMisuseReportTok: Label 'SPBPL1300', Locked = true;
+        EventTagMisuseReportTok: Label 'CAVSB1300', Locked = true;
         EventTagVersionUpdateCheckMsg: Label 'Version Update Checking', Locked = true;
-        EventTagVersionUpdateCheckTok: Label 'SPBPL1400', Locked = true;
+        EventTagVersionUpdateCheckTok: Label 'CAVSB1400', Locked = true;
 
     internal procedure LicensingAppInstalled()
     begin
@@ -44,47 +44,47 @@ codeunit 71048 "SPBPL Telemetry"
         EmitTraceTag(EventTagUpgradeMsg, EventTagUpgradeTok);
     end;
 
-    internal procedure NewExtensionRegistered(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure NewExtensionRegistered(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagNewExtensionMsg, EventTagNewExtensionTok);
     end;
 
-    internal procedure LicenseActivation(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LicenseActivation(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagLicenseActivationMsg, EventTagLicenseActivationTok);
     end;
 
-    internal procedure LicenseDeactivation(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LicenseDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagLicenseDeactivationMsg, EventTagLicenseDeactivationTok);
     end;
 
-    internal procedure LicensePlatformDeactivation(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LicensePlatformDeactivation(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagLicensePlatformDeactivationMsg, EventTagLicensePlatformDeactivationTok);
     end;
 
-    internal procedure LicenseActivationFailure(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LicenseActivationFailure(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagLicenseActivationFailureMsg, EventTagLicenseActivationFailureTok);
     end;
 
-    internal procedure LicenseCheckSuccess(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LicenseCheckSuccess(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagLicenseCheckSuccessMsg, EventTagLicenseCheckSuccessTok);
     end;
 
-    internal procedure LicenseCheckFailure(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure LicenseCheckFailure(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagLicenseCheckFailureMsg, EventTagLicenseCheckFailureTok);
     end;
 
-    internal procedure EventTagMisuseReport(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure EventTagMisuseReport(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagMisuseReportMsg, EventTagMisuseReportTok);
     end;
 
-    internal procedure VersionUpdateCheck(var SPBExtensionLicense: Record "SPBPL Extension License")
+    internal procedure VersionUpdateCheck(var SPBExtensionLicense: Record "CAVSB Extension License")
     begin
         EmitTraceTag(SPBExtensionLicense, EventTagVersionUpdateCheckMsg, EventTagVersionUpdateCheckTok);
     end;
@@ -96,7 +96,7 @@ codeunit 71048 "SPBPL Telemetry"
         Session.LogMessage(Tag, EventDescriptionText, Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, TelemetryDimension);
     end;
 
-    local procedure EmitTraceTag(var SPBExtensionLicense: Record "SPBPL Extension License"; EventDescriptionText: Text; Tag: Text)
+    local procedure EmitTraceTag(var SPBExtensionLicense: Record "CAVSB Extension License"; EventDescriptionText: Text; Tag: Text)
     var
         TraceTagMessage: Text;
         TelemetryDimension: Dictionary of [Text, Text];

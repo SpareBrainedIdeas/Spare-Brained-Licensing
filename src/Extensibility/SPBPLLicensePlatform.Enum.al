@@ -1,16 +1,16 @@
-enum 71033 "SPBPL License Platform" implements "SPBPL ILicenseCommunicator", "SPBPL ILicenseCommunicator2"
+enum 71033 "CAVSB License Platform" implements "CAVSB ILicenseCommunicator", "CAVSB ILicenseCommunicator2"
 {
     Extensible = true;
-    DefaultImplementation = "SPBPL ILicenseCommunicator" = "SPBPL Gumroad Communicator", "SPBPL ILicenseCommunicator2" = "SPBPL Gumroad Communicator";
+    DefaultImplementation = "CAVSB ILicenseCommunicator" = "CAVSB Gumroad Communicator", "CAVSB ILicenseCommunicator2" = "CAVSB Gumroad Communicator";
 
     value(0; Gumroad)
     {
         Caption = 'Gumroad';
-        Implementation = "SPBPL ILicenseCommunicator" = "SPBPL Gumroad Communicator", "SPBPL ILicenseCommunicator2" = "SPBPL Gumroad Communicator";
+        Implementation = "CAVSB ILicenseCommunicator" = "CAVSB Gumroad Communicator", "CAVSB ILicenseCommunicator2" = "CAVSB Gumroad Communicator";
     }
     value(1; LemonSqueezy)
     {
         Caption = 'LemonSqueezy';
-        Implementation = "SPBPL ILicenseCommunicator" = "SPBPL LemonSqueezy Comm.", "SPBPL ILicenseCommunicator2" = "SPBPL LemonSqueezy Comm.";
+        Implementation = "CAVSB ILicenseCommunicator" = "CAVSB LemonSqueezy Comm.", "CAVSB ILicenseCommunicator2" = "CAVSB LemonSqueezy Comm.";
     }
 }
