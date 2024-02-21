@@ -26,6 +26,7 @@
     "includeSourceInSymbolFile": true
   },
   "target": "Cloud",
+  "contextSensitiveHelpUrl": "https://support.cavallo.com",
   "runtime": "10.0",
   "features": [
     "TranslationFile", "NoImplicitWith"

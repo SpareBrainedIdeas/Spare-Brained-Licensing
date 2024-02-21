@@ -106,7 +106,7 @@ codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator
         LSqueezyIdJsonToken: JsonToken;
         TempPlaceholder: Text;
     begin
-        TempPlaceholder := SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'licensingId');
+        SPBIsoStoreManager.GetAppValue(SPBExtensionLicense, 'licensingId', TempPlaceholder);
         if LSqueezyIdJson.ReadFrom(TempPlaceholder) then
             if LSqueezyIdJson.Get('id', LSqueezyIdJsonToken) then
                 if LSqueezyIdJsonToken.AsValue().AsText() <> SPBExtensionLicense."Licensing ID" then
