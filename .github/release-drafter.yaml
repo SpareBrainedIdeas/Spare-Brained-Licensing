@@ -1,0 +1,81 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '⚠️ Breaking Changes'
+    label: 'breaking change'
+  - title: '🚀 Features'
+    label: 'Feature'
+  - title: '🐛 Bug Fixes'
+    label: 'Bug'
+  - title: '🧰 Maintenance'
+    labels:
+      - 'Documentation'
+      - 'Chore'
+      - 'Tools'
+      - 'Testing'
+  - title: '🛠️ Infrastructure'
+    label: infra
+  - title: '🤖 Dependency Updates'
+    label: dependencies
+change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
+change-title-escapes: '\<*_&'
+autolabeler:
+  - label: 'Feature'
+    title:
+      - '/^feat:.+$/'
+      - '/^feat\(.+\):.+$/'
+  - label: 'Bug'
+    title:
+      - '/^fix:.+$/'
+      - '/^fix\(.+\):.+$/'
+  - label: 'Documentation'
+    title:
+      - '/^docs:.+$/'
+      - '/^docs\(.+\):.+$/'
+  - label: 'Testing'
+    title:
+      - '/^test:.+$/'
+      - '/^test\(.+\):.+$/'
+  - label: 'Tools'
+    title:
+      - '/^build:.+$/'
+      - '/^ci:.+$/'
+      - '/^tools:.+$/'
+      - '/^tools\(.+\):.+$/'
+  - label: 'Chore'
+    title:
+      - '/^chore:.+$/'
+      - '/^chore\(.+\):.+$/'
+      - '/^refactor:.+$/'
+      - '/^refactor\(.+\):.+$/'
+      - '/^improvement:.+$/'
+      - '/^improvement\(.+\):.+$/'
+  - label: 'breaking change'
+    title:
+      - '/^(.+)!:\s.+$/'
+  - label: 'infra'
+    title:
+    - '/^infra:.+$/'
+    - '/^infra\(.+\):.+$/'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+      - 'breaking change'
+  minor:
+    labels:
+      - 'minor'
+      - 'Feature'
+      - 'dependencies'
+  patch:
+    labels:
+      - 'patch'
+      - 'Documentation'
+      - 'Chore'
+      - 'Tools'
+      - 'Testing'
+      - 'Bug'
+      - 'infra'
+  default: patch
+template: |
+  $CHANGES

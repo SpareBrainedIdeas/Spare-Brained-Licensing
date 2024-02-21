@@ -1,0 +1,17 @@
+name: Release Drafter
+on:
+  push:
+    branches:
+      - main
+  pull_request_target:
+    # Only following types are handled by the action, but one can default to all as well
+    types: [opened, reopened, ready_for_review, synchronize]
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        with:
+          config-name: release-drafter.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

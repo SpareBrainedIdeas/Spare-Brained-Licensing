@@ -1,0 +1,7 @@
+{
+  "type":  "AppSource App",
+  "templateUrl":  "https://github.com/microsoft/AL-Go-AppSource@main",
+  "skipUpgrade": true,
+  "doNotSignApps": false,
+  "versioningStrategy": 2
+}

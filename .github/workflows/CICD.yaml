@@ -1,0 +1,258 @@
+name: ' CI/CD'
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/*.yaml'
+      - '!.github/workflows/CICD.yaml'
+    branches: [ 'main', 'release/*', 'feature/*' ]
+
+defaults:
+  run:
+    shell: powershell
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  workflowDepth: 1
+  ALGoOrgSettings: ${{ vars.ALGoOrgSettings }}
+  ALGoRepoSettings: ${{ vars.ALGoRepoSettings }}
+
+jobs:
+  Initialization:
+    runs-on: [ windows-latest ]
+    outputs:
+      telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
+      environmentsMatrixJson: ${{ steps.DetermineDeploymentEnvironments.outputs.EnvironmentsMatrixJson }}
+      environmentCount: ${{ steps.DetermineDeploymentEnvironments.outputs.EnvironmentCount }}
+      deploymentEnvironmentsJson: ${{ steps.DetermineDeploymentEnvironments.outputs.DeploymentEnvironmentsJson }}
+      deliveryTargetsJson: ${{ steps.DetermineDeliveryTargets.outputs.DeliveryTargetsJson }}
+      githubRunner: ${{ steps.ReadSettings.outputs.GitHubRunnerJson }}
+      githubRunnerShell: ${{ steps.ReadSettings.outputs.GitHubRunnerShell }}
+      projects: ${{ steps.determineProjectsToBuild.outputs.ProjectsJson }}
+      projectDependenciesJson: ${{ steps.determineProjectsToBuild.outputs.ProjectDependenciesJson }}
+      buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
+      workflowDepth: ${{ steps.DetermineWorkflowDepth.outputs.WorkflowDepth }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Initialize the workflow
+        id: init
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v4.1
+        with:
+          shell: powershell
+          eventId: "DO0091"
+
+      - name: Read settings
+        id: ReadSettings
+        uses: microsoft/AL-Go-Actions/ReadSettings@v4.1
+        with:
+          shell: powershell
+          get: type
+
+      - name: Determine Workflow Depth
+        id: DetermineWorkflowDepth
+        run: |
+          Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "WorkflowDepth=$($env:workflowDepth)"
+
+      - name: Determine Projects To Build
+        id: determineProjectsToBuild
+        uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@v4.1
+        with:
+          shell: powershell
+          maxBuildDepth: ${{ env.workflowDepth }}
+
+      - name: Determine Delivery Target Secrets
+        id: DetermineDeliveryTargetSecrets
+        uses: microsoft/AL-Go-Actions/DetermineDeliveryTargets@v4.1
+        with:
+          shell: powershell
+          projectsJson: '${{ steps.determineProjectsToBuild.outputs.ProjectsJson }}'
+          checkContextSecrets: 'N'
+
+      - name: Read secrets
+        id: ReadSecrets
+        uses: microsoft/AL-Go-Actions/ReadSecrets@v4.1
+        with:
+          shell: powershell
+          gitHubSecrets: ${{ toJson(secrets) }}
+          getSecrets: ${{ steps.DetermineDeliveryTargetSecrets.outputs.ContextSecrets }}
+
+      - name: Determine Delivery Targets
+        id: DetermineDeliveryTargets
+        uses: microsoft/AL-Go-Actions/DetermineDeliveryTargets@v4.1
+        env:
+          Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
+        with:
+          shell: powershell
+          projectsJson: '${{ steps.determineProjectsToBuild.outputs.ProjectsJson }}'
+          checkContextSecrets: 'Y'
+
+      - name: Determine Deployment Environments
+        id: DetermineDeploymentEnvironments
+        uses: microsoft/AL-Go-Actions/DetermineDeploymentEnvironments@v4.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          shell: powershell
+          getEnvironments: '*'
+          type: 'CD'
+
+  CheckForUpdates:
+    runs-on: [ windows-latest ]
+    needs: [ Initialization ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read settings
+        uses: microsoft/AL-Go-Actions/ReadSettings@v4.1
+        with:
+          shell: powershell
+          get: templateUrl
+
+      - name: Check for updates to AL-Go system files
+        uses: microsoft/AL-Go-Actions/CheckForUpdates@v4.1
+        with:
+          shell: powershell
+          parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
+          templateUrl: ${{ env.templateUrl }}
+
+  Build:
+    needs: [ Initialization ]
+    if: (!failure()) && (!cancelled()) && fromJson(needs.Initialization.outputs.buildOrderJson)[0].projectsCount > 0
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.Initialization.outputs.buildOrderJson)[0].buildDimensions }}
+      fail-fast: false
+    name: Build ${{ matrix.projectName }} (${{ matrix.buildMode }})
+    uses: ./.github/workflows/_BuildALGoProject.yaml
+    secrets: inherit
+    with:
+      shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
+      runsOn: ${{ needs.Initialization.outputs.githubRunner }}
+      parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
+      project: ${{ matrix.project }}
+      projectName: ${{ matrix.projectName }}
+      buildMode: ${{ matrix.buildMode }}
+      projectDependenciesJson: ${{ needs.Initialization.outputs.projectDependenciesJson }}
+      secrets: 'licenseFileUrl,codeSignCertificateUrl,*codeSignCertificatePassword,keyVaultCertificateUrl,*keyVaultCertificatePassword,keyVaultClientId,gitHubPackagesContext,applicationInsightsConnectionString'
+      publishThisBuildArtifacts: ${{ needs.Initialization.outputs.workflowDepth > 1 }}
+      publishArtifacts: ${{ github.ref_name == 'main' || startswith(github.ref_name, 'release/') || needs.Initialization.outputs.deliveryTargetsJson != '[]' || needs.Initialization.outputs.environmentCount > 0 }}
+      signArtifacts: true
+      useArtifactCache: true
+
+  Deploy:
+    needs: [ Initialization, Build ]
+    if: always() && needs.Build.result == 'Success' && needs.Initialization.outputs.environmentCount > 0
+    strategy: ${{ fromJson(needs.Initialization.outputs.environmentsMatrixJson) }}
+    runs-on: ${{ fromJson(matrix.os) }}
+    name: Deploy to ${{ matrix.environment }}
+    environment:
+      name: ${{ matrix.environment }}
+      url: ${{ steps.Deploy.outputs.environmentUrl }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: '.artifacts'
+
+      - name: Read settings
+        uses: microsoft/AL-Go-Actions/ReadSettings@v4.1
+        with:
+          shell: powershell
+
+      - name: EnvName
+        id: envName
+        run: |
+          $errorActionPreference = "Stop"; $ProgressPreference = "SilentlyContinue"; Set-StrictMode -Version 2.0
+          $envName = '${{ matrix.environment }}'.split(' ')[0]
+          Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "envName=$envName"
+
+      - name: Read secrets
+        id: ReadSecrets
+        uses: microsoft/AL-Go-Actions/ReadSecrets@v4.1
+        with:
+          shell: powershell
+          gitHubSecrets: ${{ toJson(secrets) }}
+          getSecrets: '${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext,${{ steps.envName.outputs.envName }}-EnvironmentName,${{ steps.envName.outputs.envName }}_EnvironmentName,EnvironmentName,projects'
+
+      - name: Deploy
+        id: Deploy
+        uses: microsoft/AL-Go-Actions/Deploy@v4.1
+        env:
+          Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
+        with:
+          shell: powershell
+          environmentName: ${{ matrix.environment }}
+          artifacts: '.artifacts'
+          type: 'CD'
+          deploymentEnvironmentsJson: ${{ needs.Initialization.outputs.deploymentEnvironmentsJson }}
+
+  Deliver:
+    needs: [ Initialization, Build ]
+    if: always() && needs.Build.result == 'Success' && needs.Initialization.outputs.deliveryTargetsJson != '[]'
+    strategy:
+      matrix:
+        deliveryTarget: ${{ fromJson(needs.Initialization.outputs.deliveryTargetsJson) }}
+      fail-fast: false
+    runs-on: [ windows-latest ]
+    name: Deliver to ${{ matrix.deliveryTarget }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: '.artifacts'
+
+      - name: Read settings
+        uses: microsoft/AL-Go-Actions/ReadSettings@v4.1
+        with:
+          shell: powershell
+
+      - name: Read secrets
+        id: ReadSecrets
+        uses: microsoft/AL-Go-Actions/ReadSecrets@v4.1
+        with:
+          shell: powershell
+          gitHubSecrets: ${{ toJson(secrets) }}
+          getSecrets: '${{ matrix.deliveryTarget }}Context'
+
+      - name: Deliver
+        uses: microsoft/AL-Go-Actions/Deliver@v4.1
+        env:
+          Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
+        with:
+          shell: powershell
+          type: 'CD'
+          projects: ${{ needs.Initialization.outputs.projects }}
+          deliveryTarget: ${{ matrix.deliveryTarget }}
+          artifacts: '.artifacts'
+
+  PostProcess:
+    if: (!cancelled())
+    runs-on: [ windows-latest ]
+    needs: [ Initialization, Build, Deploy, Deliver ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Finalize the workflow
+        id: PostProcess
+        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v4.1
+        with:
+          shell: powershell
+          eventId: "DO0091"
+          telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}

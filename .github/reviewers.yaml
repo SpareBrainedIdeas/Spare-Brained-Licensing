@@ -1,0 +1,12 @@
+reviewers:
+  # The default reviewers
+  defaults:
+    - 'team:alreviewers'
+    - 'team:mustang'
+
+options:
+  ignore_draft: true
+  ignored_keywords:
+    - DO NOT REVIEW
+    - WIP
+  enable_group_assignment: false

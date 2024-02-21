@@ -1,0 +1,57 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach: Microsoft cloud sandbox",
+            "type": "al",
+            "request": "attach",
+            "environmentType": "Sandbox",
+            "environmentName": "DevSandbox",
+            "server":"https://businesscentral.dynamics.com/3de29c7a-7051-49d5-b678-914f819a3d72/DevSandbox",
+            "tenant": "3de29c7a-7051-49d5-b678-914f819a3d72",
+            "breakOnError": true,
+            "breakOnRecordWrite": false,
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10,
+            "breakOnNext": "WebServiceClient"
+        },
+        {
+            "name": "Microsoft cloud sandbox",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "DevSandbox",
+            "server":"https://businesscentral.dynamics.com/3de29c7a-7051-49d5-b678-914f819a3d72/DevSandbox",
+            "tenant": "3de29c7a-7051-49d5-b678-914f819a3d72",
+            "breakOnError": true,
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            // "schemaUpdateMode": "ForceSync",
+            "startupObjectId": 130451,
+            "startupObjectType": "Page", 
+        },
+        {
+            // By default, the debug launches against a portless sp-bc-02
+            // appending the port on the open window with the correct debug context will connect it
+            "name": "Microsoft local sandbox",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "OnPrem",
+            "server":"http://bc-dev-01:15001/BC/",
+            "serverInstance": "BC",
+            "debugServer": 15001,
+            "authentication": "UserPassword",
+            "breakOnError": true,
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "port": 7049,
+            // "schemaUpdateMode": "ForceSync",
+            // "startupObjectId": 130451,
+            // "startupObjectType": "Page", 
+        }
+    ]
+}
