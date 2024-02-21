@@ -2,7 +2,7 @@
 /// This Codeunit is for checking basic active/inactive functions to be used by 3rd parties wanting to validate
 /// if a license is active.  Two main options exist at this time - with or without Submodule functionality.
 /// </summary>
-codeunit 71042 "CAVSB Check Active"
+codeunit 71264325 "CAVSB Check Active"
 {
     /// <summary>
     /// This function takes an App ID and checks if it is active or not, along with if the user should be shown errors if Inactive.

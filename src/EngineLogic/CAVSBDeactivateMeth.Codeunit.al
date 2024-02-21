@@ -1,4 +1,4 @@
-codeunit 71046 "CAVSB Deactivate Meth"
+codeunit 71264329 "CAVSB Deactivate Meth"
 {
     internal procedure Deactivate(var CAVExtensionLicense: Record "CAVSB Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
     begin

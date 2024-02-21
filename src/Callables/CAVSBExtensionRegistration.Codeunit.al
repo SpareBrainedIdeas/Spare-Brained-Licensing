@@ -1,7 +1,7 @@
 /// <summary>
 /// This codeunit is for properly registering Extensions into the Licensing system. 
 /// </summary>
-codeunit 71034 "CAVSB Extension Registration"
+codeunit 71264326 "CAVSB Extension Registration"
 {
     Permissions = tabledata "CAVSB Extension License" = RIM;
 

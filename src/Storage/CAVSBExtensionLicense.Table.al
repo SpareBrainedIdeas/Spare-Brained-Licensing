@@ -1,4 +1,4 @@
-table 71033 "CAVSB Extension License"
+table 71264323 "CAVSB Extension License"
 {
     Caption = 'Extension License';
     DataClassification = AccountData;

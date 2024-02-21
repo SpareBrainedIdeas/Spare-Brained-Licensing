@@ -1,4 +1,4 @@
-codeunit 71039 "CAVSB Upgrade"
+codeunit 71264334 "CAVSB Upgrade"
 {
     Subtype = Upgrade;
 

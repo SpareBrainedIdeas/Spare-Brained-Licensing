@@ -1,4 +1,4 @@
-enum 71033 "CAVSB License Platform" implements "CAVSB ILicenseCommunicator", "CAVSB ILicenseCommunicator2"
+enum 71264323 "CAVSB License Platform" implements "CAVSB ILicenseCommunicator", "CAVSB ILicenseCommunicator2"
 {
     Extensible = true;
     DefaultImplementation = "CAVSB ILicenseCommunicator" = "CAVSB Gumroad Communicator", "CAVSB ILicenseCommunicator2" = "CAVSB Gumroad Communicator";

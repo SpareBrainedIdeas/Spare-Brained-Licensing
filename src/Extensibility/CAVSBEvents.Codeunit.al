@@ -1,4 +1,4 @@
-codeunit 71041 "CAVSB Events"
+codeunit 71264331 "CAVSB Events"
 {
     #region UIEvents
     [IntegrationEvent(false, false)]

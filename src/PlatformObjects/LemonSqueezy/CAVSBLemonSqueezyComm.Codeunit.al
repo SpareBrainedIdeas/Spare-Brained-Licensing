@@ -1,4 +1,4 @@
-codeunit 71040 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator", "CAVSB ILicenseCommunicator2"
+codeunit 71264336 "CAVSB LemonSqueezy Comm." implements "CAVSB ILicenseCommunicator", "CAVSB ILicenseCommunicator2"
 {
     var
         LemonSqueezyActivateAPITok: Label 'https://api.lemonsqueezy.com/v1/licenses/activate?license_key=%1&instance_name=%2', Comment = '%1 is the license key, %2 is just a label in the Lemon Squeezy list of Licenses', Locked = true;

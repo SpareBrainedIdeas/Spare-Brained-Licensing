@@ -1,4 +1,4 @@
-codeunit 71044 "CAVSB Version Check"
+codeunit 71264330 "CAVSB Version Check"
 {
     Access = Internal;
 

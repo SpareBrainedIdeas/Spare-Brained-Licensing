@@ -1,4 +1,4 @@
-page 71034 "CAVSB License Activation"
+page 71264324 "CAVSB License Activation"
 {
 
     ApplicationArea = All;

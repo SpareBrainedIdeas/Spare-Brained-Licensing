@@ -1,4 +1,4 @@
-page 71033 "CAVSB Extension Licenses"
+page 71264323 "CAVSB Extension Licenses"
 {
 
     ApplicationArea = All;

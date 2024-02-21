@@ -1,4 +1,4 @@
-codeunit 71033 "CAVSB License Utilities"
+codeunit 71264323 "CAVSB License Utilities"
 {
     internal procedure GetTestProductAppId(): Guid
     var

@@ -1,4 +1,4 @@
-codeunit 71036 "CAVSB License Management"
+codeunit 71264324 "CAVSB License Management"
 {
     Permissions = tabledata "CAVSB Extension License" = RIM;
     ObsoleteState = Pending;

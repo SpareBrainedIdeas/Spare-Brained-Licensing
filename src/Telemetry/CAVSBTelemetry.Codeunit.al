@@ -1,4 +1,4 @@
-codeunit 71048 "CAVSB Telemetry"
+codeunit 71264338 "CAVSB Telemetry"
 {
     Access = Internal;
 

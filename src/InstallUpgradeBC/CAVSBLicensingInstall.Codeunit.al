@@ -1,4 +1,4 @@
-codeunit 71037 "CAVSB Licensing Install"
+codeunit 71264333 "CAVSB Licensing Install"
 {
     Subtype = Install;
 
