@@ -6,7 +6,7 @@ codeunit 71033584 "SPBLIC Check Active"
 {
     /// <summary>
     /// This function takes an App ID and checks if it is active or not, along with if the user should be shown errors if Inactive.
-    /// </summary>
+    /// </summary> 
     /// <param name="SubscriptionId">This should be the App ID</param>
     /// <param name="InactiveShowError">If the extension is Inactive, should the user be shown an error?</param>
     /// <returns></returns>

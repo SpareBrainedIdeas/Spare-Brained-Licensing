@@ -2,9 +2,13 @@ codeunit 71033577 "SPBLIC Gumroad Communicator" implements "SPBLIC ILicenseCommu
 {
 
     var
+#pragma warning disable AA0240
         GumroadBillingEmailTok: Label 'support@sparebrained.com', Locked = true;
+#pragma warning restore AA0240
         GumroadKeyFormatTok: Label 'The key will look like XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX.';
+#pragma warning disable AA0240
         GumroadSupportUrlTok: Label 'support@sparebrained.com', Locked = true;
+#pragma warning restore AA0240
         GumroadTestProductIdTok: Label 'bwdCu', Locked = true;
         GumroadTestProductKeyTok: Label '21E2339D-F24D4A92-9813B4F2-8ABA083C', Locked = true;
         GumroadTestProductUrlTok: Label 'https://sparebrained.gumroad.com/l/SBILicensingTest', Locked = true;

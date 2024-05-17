@@ -2,9 +2,13 @@ codeunit 71033582 "SPBLIC LemonSqueezy Comm." implements "SPBLIC ILicenseCommuni
 {
     var
         LemonSqueezyActivateAPITok: Label 'https://api.lemonsqueezy.com/v1/licenses/activate?license_key=%1&instance_name=%2', Comment = '%1 is the license key, %2 is just a label in the Lemon Squeezy list of Licenses', Locked = true;
+#pragma warning disable AA0240
         LemonSqueezyBillingEmailTok: Label 'support@sparebrained.com', Locked = true;
+#pragma warning restore AA0240
         LemonSqueezyDeactivateAPITok: Label 'https://api.lemonsqueezy.com/v1/licenses/deactivate?license_key=%1&instance_id=%2', Comment = '%1 is the license key, %2 is the unique guid assigned by Lemon Squeezy for this installation, created during Activation.', Locked = true;
+#pragma warning disable AA0240
         LemonSqueezySupportUrlTok: Label 'support@sparebrained.com', Locked = true;
+#pragma warning restore AA0240
         LemonSqueezyTestProductIdTok: Label '39128', Locked = true;
         LemonSqueezyTestProductKeyTok: Label 'CE2F02DE-657C-4F76-8F93-0E352C9A30B2', Locked = true;
         LemonSqueezyTestProductUrlTok: Label 'https://sparebrained.lemonsqueezy.com/checkout/buy/cab72f9c-add0-47b0-9a09-feb3b4ccf8e0', Locked = true;
