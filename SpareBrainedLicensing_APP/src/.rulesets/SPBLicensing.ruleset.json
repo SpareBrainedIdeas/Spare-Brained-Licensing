@@ -1,0 +1,16 @@
+{
+    "name": "Licensing ruleset",
+    "description": "The ruleset to use for SBI Licensing",
+    "rules": [
+        {
+            "id": "AA0240",
+            "action": "None",
+            "justification": "There are intentionally included email addresses for support with this extension."
+        },
+        {
+            "id": "AA0072",
+            "action": "None",
+            "justification": "I need to use more generic variable names for easing cloning to a PTE."
+        }
+    ]
+}

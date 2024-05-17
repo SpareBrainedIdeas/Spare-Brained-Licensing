@@ -1,0 +1,35 @@
+{
+  "id": "5ddd2a5e-1b5f-47b4-b655-88d2c2a9b382",
+  "name": "Spare Brained Licensing",
+  "publisher": "Spare Brained Ideas AB",
+  "brief": "This library helps other Extensions verify a current subscription license.",
+  "description": "This library helps other Extensions verify a current subscription license.",
+  "version": "2.0.0.0",
+  "privacyStatement": "https://sparebrained.com/appsource/privacystatement",
+  "EULA": "https://sparebrained.com/appsource/eula",
+  "help": "https://sparebrained.com/support",
+  "contextSensitiveHelpUrl": "https://sparebrained.com/support",
+  "url": "https://sparebrained.com/appsource/licensing",
+  "logo": "./logo/AppSource-SpareBrainedLicensing-350x350.png",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "21.0.0.0",
+  "idRanges": [
+    {
+      "from": 71033575,
+      "to": 71033599
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "target": "Cloud",
+  "runtime": "10.0",
+  "features": [
+    "TranslationFile", "NoImplicitWith"
+  ],
+  "applicationInsightsConnectionString": ""
+}

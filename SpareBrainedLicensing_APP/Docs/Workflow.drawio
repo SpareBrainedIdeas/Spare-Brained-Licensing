@@ -1,0 +1,95 @@
+<mxfile host="65bd71144e">
+    <diagram id="wiHsHP1i6lQUQWM4oXDf" name="License Activation">
+        <mxGraphModel dx="992" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="From the &quot;Subscriptions&quot; list, the user selects an Installed Extension that isn't activated and launches the Activation Wizard" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="40" width="220" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Activation Wizard" style="swimlane;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="180" width="140" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Step 1 explains, as well as links to Purchase Page" style="rounded=0;whiteSpace=wrap;html=1;" parent="4" vertex="1">
+                    <mxGeometry x="10" y="30" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Step 2 asks for License Key entry." style="rounded=0;whiteSpace=wrap;html=1;" parent="4" vertex="1">
+                    <mxGeometry x="10" y="100" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Moving to Step 3 attempts to Activate the subscription" style="rounded=0;whiteSpace=wrap;html=1;" parent="4" vertex="1">
+                    <mxGeometry x="10" y="170" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="On Success, user is given results" style="rounded=0;whiteSpace=wrap;html=1;" parent="4" vertex="1">
+                    <mxGeometry x="70" y="240" width="60" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="On failure, user is given results &amp;amp; any info needed" style="rounded=0;whiteSpace=wrap;html=1;" parent="4" vertex="1">
+                    <mxGeometry x="10" y="240" width="60" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Activation" style="swimlane;startSize=20;horizontal=1;childLayout=flowLayout;flowOrientation=north;resizable=0;interRankCellSpacing=50;containerType=tree;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="170" width="283" height="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Reach out to Gumroad to verify License" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="37.96875" y="40" width="220" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Failure, present reasons" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="32.96875" y="130" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="html=1;curved=1;noEdgeStyle=1;orthogonal=1;" parent="12" source="13" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="95.46875" y="92"/>
+                            <mxPoint x="82.96875" y="118"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="Success" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="162.96875" y="130" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="html=1;curved=1;noEdgeStyle=1;orthogonal=1;" parent="12" source="13" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="200.46875" y="92"/>
+                            <mxPoint x="212.96875" y="118"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="" style="html=1;curved=1;noEdgeStyle=1;orthogonal=1;" parent="12" source="16" target="22" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1225.3749999999995" y="1703" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="212.96875" y="182"/>
+                            <mxPoint x="170.78125" y="208"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="Store Record and Secure JSON" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="120.78125" y="220" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="" style="html=1;curved=1;noEdgeStyle=1;orthogonal=1;" parent="12" source="22" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1207.8749999999995" y="1677" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="170.78125" y="272"/>
+                            <mxPoint x="182.5" y="298"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="Done" style="whiteSpace=wrap;html=1;" parent="12" vertex="1">
+                    <mxGeometry x="20" y="310" width="220" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="curved=1;endArrow=classic;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;noEdgeStyle=1;orthogonal=1;" parent="12" source="14" target="24" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="737.8750000000002" y="1301" as="sourcePoint"/>
+                        <mxPoint x="787.8750000000002" y="1251" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="82.96875" y="182"/>
+                            <mxPoint x="90.78125" y="195"/>
+                            <mxPoint x="90.78125" y="285"/>
+                            <mxPoint x="77.5" y="298"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
