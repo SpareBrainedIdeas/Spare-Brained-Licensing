@@ -2,9 +2,9 @@
   "id": "5ddd2a5e-1b5f-47b4-b655-88d2c2a9b382",
   "name": "Spare Brained Licensing",
   "publisher": "Spare Brained Ideas AB",
+  "version": "23.0.0.0",
   "brief": "This library helps other Extensions verify a current subscription license.",
   "description": "This library helps other Extensions verify a current subscription license.",
-  "version": "2.0.0.0",
   "privacyStatement": "https://sparebrained.com/appsource/privacystatement",
   "EULA": "https://sparebrained.com/appsource/eula",
   "help": "https://sparebrained.com/support",
@@ -13,8 +13,15 @@
   "logo": "./logo/AppSource-SpareBrainedLicensing-350x350.png",
   "dependencies": [],
   "screenshots": [],
+  "internalsVisibleTo": [
+    {
+      "id": "5981c6d1-08c0-4f7f-8457-26b3a9e8e43b",
+      "name": "SBI License Test App",
+      "publisher": "Spare Brained Ideas AB"
+    }
+  ],
   "platform": "1.0.0.0",
-  "application": "21.0.0.0",
+  "application": "23.0.0.0",
   "idRanges": [
     {
       "from": 71033575,
@@ -27,7 +34,7 @@
     "includeSourceInSymbolFile": true
   },
   "target": "Cloud",
-  "runtime": "10.0",
+  "runtime": "12.0",
   "features": [
     "TranslationFile", "NoImplicitWith"
   ],

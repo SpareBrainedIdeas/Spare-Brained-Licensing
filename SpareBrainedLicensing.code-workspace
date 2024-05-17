@@ -1,0 +1,52 @@
+{
+	"folders": [
+		{
+			"path": ".alpackages"
+		},
+		{
+			"name": "App",
+			"path": "./SpareBrainedLicensing_APP"
+		},
+		{
+			"name": "Test",
+			"path": "./SpareBrainedLicensing_TEST"
+		}
+	],
+	"settings": {
+		"al.codeAnalyzers": [
+			"${CodeCop}",
+			"${UICop}"
+		],
+		"al.enableCodeAnalysis": true,
+		"al.packageCachePath": [
+			"../.alpackages"
+		],
+		"CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.OnSaveAlFileAction": "Rename"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Local BC Server",
+				"request": "launch",
+				"type": "al",
+				"environmentType": "OnPrem",
+				"server": "http://bcserver",
+				"serverInstance": "BC",
+				"authentication": "UserPassword",
+				"startupObjectId": 22,
+				"startupObjectType": "Page",
+				"breakOnError": "All",
+				"launchBrowser": false,
+				"enableLongRunningSqlStatements": true,
+				"enableSqlInformationDebugger": true,
+				"tenant": "default",
+				"usePublicURLFromServer": true
+			}
+		],
+		"compounds": []
+	}
+}

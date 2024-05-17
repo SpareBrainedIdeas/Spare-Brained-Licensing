@@ -1,9 +1,8 @@
 {
     "al.codeAnalyzers": [
-        "${AppSourceCop}",
         "${CodeCop}",
         "${UICop}"
     ],
-    "CRS.ObjectNamePrefix": "SPBLIC ",
+    "CRS.ObjectNamePrefix": "TST ",
     "CRS.RemovePrefixFromFilename": true
 }
