@@ -4,6 +4,12 @@
 			"path": ".alpackages"
 		},
 		{
+			"path": ".github"
+		},
+		{
+			"path": ".AL-Go"
+		},
+		{
 			"name": "App",
 			"path": "./SpareBrainedLicensing_APP"
 		},
