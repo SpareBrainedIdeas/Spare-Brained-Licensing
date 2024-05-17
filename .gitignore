@@ -1,7 +1,31 @@
-# ALTB
+# Symbols
 .alpackages/
+# Cache
 .alcache/
-launch.json
-!app.json
+# snapshots
+.snapshots/
+# extension templates
+.altemplates
+
+# Testing Output folder
+.output/
+# Test results file
+TestResults.xml
+
+# everything altestrunner
+.altestrunner/
+
+# Rapid Application Development File
 rad.json
+
+# Extension App-files
 *.app
+
+# Translation Base-file (it's autoregen'd on compile)
+*.g.xlf
+
+# Launch Config is too user/environ specific
+launch.json
+
+~*.xlsx
+~*.docx
