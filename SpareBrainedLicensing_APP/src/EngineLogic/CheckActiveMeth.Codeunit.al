@@ -62,7 +62,7 @@ codeunit 71033585 "SPBLIC Check Active Meth"
                     // -1 days grace for a Sandbox means it's unlimited use in sandboxes, even if not activated.
                     exit(true)
                 else
-                    GraceEndDate := Today;
+                    GraceEndDate := Today - 1;
             if (GraceEndDate = Today) and GuiAllowed then
                 Message(GraceExpiringMsg, SPBExtensionLicense."Extension Name");
 
