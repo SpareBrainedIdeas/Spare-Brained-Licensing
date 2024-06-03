@@ -1,4 +1,4 @@
-codeunit 71033582 "SPBLIC LemonSqueezy Comm." implements "SPBLIC ILicenseCommunicator", "SPBLIC ILicenseCommunicator2"
+codeunit 71033582 "SPBLIC LemonSqueezy Comm." implements "SPBLIC IActivation", "SPBLIC IProduct"
 {
     var
         LemonSqueezyActivateAPITok: Label 'https://api.lemonsqueezy.com/v1/licenses/activate?license_key=%1&instance_name=%2', Comment = '%1 is the license key, %2 is just a label in the Lemon Squeezy list of Licenses', Locked = true;

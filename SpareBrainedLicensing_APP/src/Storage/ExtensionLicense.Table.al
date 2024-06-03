@@ -30,6 +30,8 @@ table 71033575 "SPBLIC Extension License"
             Caption = 'Activated';
             DataClassification = SystemMetadata;
             Editable = false;
+            ObsoleteReason = 'Migrated to the License State field Enum.';
+            ObsoleteState = Pending;
 
             trigger OnValidate()
             begin
@@ -169,6 +171,43 @@ table 71033575 "SPBLIC Extension License"
             // This is for generic storage of 3rd party system ID fields in case needed
             Caption = 'Licensing ID';
             DataClassification = CustomerContent;
+            Editable = false;
+        }
+        field(50; "Licensing Mode"; Enum "SPBLIC Licensing Mode")
+        {
+            Caption = 'Licensing Mode';
+            DataClassification = SystemMetadata;
+            Editable = false;
+        }
+        field(51; "Licensing Scope"; Enum "SPBLIC Licensing Scope")
+        {
+            Caption = 'Licensing Scope';
+            DataClassification = SystemMetadata;
+            Editable = false;
+        }
+        field(52; "Tenant Id"; Guid)
+        {
+            Caption = 'Tenant Id';
+            DataClassification = SystemMetadata;
+            Editable = false;
+        }
+        field(53; "Company Id"; Guid)
+        {
+            Caption = 'Company Id';
+            DataClassification = SystemMetadata;
+            Editable = false;
+            TableRelation = Company.SystemId;
+        }
+        field(54; "User Id"; Guid)
+        {
+            Caption = 'User Id';
+            DataClassification = SystemMetadata;
+            Editable = false;
+        }
+        field(60; "License State"; Enum "SPBLIC License State")
+        {
+            Caption = 'License State';
+            DataClassification = SystemMetadata;
             Editable = false;
         }
     }

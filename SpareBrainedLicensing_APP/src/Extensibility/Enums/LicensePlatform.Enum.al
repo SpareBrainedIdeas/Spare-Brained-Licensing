@@ -1,16 +1,16 @@
-enum 71033575 "SPBLIC License Platform" implements "SPBLIC ILicenseCommunicator", "SPBLIC ILicenseCommunicator2"
+enum 71033575 "SPBLIC License Platform" implements "SPBLIC IActivation", "SPBLIC IProduct"
 {
     Extensible = true;
-    DefaultImplementation = "SPBLIC ILicenseCommunicator" = "SPBLIC Gumroad Communicator", "SPBLIC ILicenseCommunicator2" = "SPBLIC Gumroad Communicator";
+    UnknownValueImplementation = "SPBLIC IActivation" = "SPBLIC Unknown Activation", "SPBLIC IProduct" = "SPBLIC Unknown Product";
 
     value(0; Gumroad)
     {
         Caption = 'Gumroad';
-        Implementation = "SPBLIC ILicenseCommunicator" = "SPBLIC Gumroad Communicator", "SPBLIC ILicenseCommunicator2" = "SPBLIC Gumroad Communicator";
+        Implementation = "SPBLIC IActivation" = "SPBLIC Gumroad Communicator", "SPBLIC IProduct" = "SPBLIC Gumroad Communicator";
     }
     value(1; LemonSqueezy)
     {
         Caption = 'LemonSqueezy';
-        Implementation = "SPBLIC ILicenseCommunicator" = "SPBLIC LemonSqueezy Comm.", "SPBLIC ILicenseCommunicator2" = "SPBLIC LemonSqueezy Comm.";
+        Implementation = "SPBLIC IActivation" = "SPBLIC LemonSqueezy Comm.", "SPBLIC IProduct" = "SPBLIC LemonSqueezy Comm.";
     }
 }

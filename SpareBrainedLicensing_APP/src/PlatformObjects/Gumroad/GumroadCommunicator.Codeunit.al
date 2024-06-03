@@ -1,4 +1,4 @@
-codeunit 71033577 "SPBLIC Gumroad Communicator" implements "SPBLIC ILicenseCommunicator", "SPBLIC ILicenseCommunicator2"
+codeunit 71033577 "SPBLIC Gumroad Communicator" implements "SPBLIC IActivation", "SPBLIC IProduct"
 {
 
     var
