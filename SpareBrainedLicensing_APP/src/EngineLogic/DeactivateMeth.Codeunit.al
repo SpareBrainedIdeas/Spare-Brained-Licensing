@@ -17,7 +17,7 @@ codeunit 71033588 "SPBLIC Deactivate Meth"
     begin
         NavApp.GetModuleInfo(SPBExtensionLicense."Extension App Id", AppInfo);
 
-        SPBExtensionLicense.Validate(Activated, false);
+        SPBExtensionLicense.Validate("License State", SPBExtensionLicense."License State"::Deactivated);
         SPBExtensionLicense.Modify();
         SPBLICIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
         Commit();  // if calling the API fails, the local should still be marked as deactivated

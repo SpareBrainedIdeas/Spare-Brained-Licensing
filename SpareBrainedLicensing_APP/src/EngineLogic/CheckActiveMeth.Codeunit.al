@@ -18,7 +18,7 @@ codeunit 71033585 "SPBLIC Check Active Meth"
         else
             SPBLICTelemetry.LicenseCheckFailure(SPBExtensionLicense);
 
-        if SPBExtensionLicense.Activated and not IsActive then
+        if SPBExtensionLicense.IsActive() and not IsActive then
             // If the Check came back FALSE but the Subscription is Active,
             // it may be because the subscription has expired or deactivated on the platform.
             // We will force the local installation to inactive.

@@ -166,7 +166,10 @@ codeunit 71033582 "SPBLIC LemonSqueezy Comm." implements "SPBLIC IActivation", "
         TempJsonBuffer.ReadFromText(ResponseBody);
 
         // Update the current Subscription record
-        SPBExtensionLicense.Validate(Activated, CurrentActiveStatus);
+        if CurrentActiveStatus then
+            SPBExtensionLicense.Validate("License State", Enum::"SPBLIC License State"::Active)
+        else
+            SPBExtensionLicense.Validate("License State", Enum::"SPBLIC License State"::Deactivated);
         TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'created_at', 'license_key');
         Evaluate(SPBExtensionLicense."Created At", TempPlaceholder);
         TempJsonBuffer.GetPropertyValueAtPath(TempPlaceholder, 'expires_at', 'license_key');

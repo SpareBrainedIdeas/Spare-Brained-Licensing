@@ -209,6 +209,15 @@ table 71033575 "SPBLIC Extension License"
             Caption = 'License State';
             DataClassification = SystemMetadata;
             Editable = false;
+
+            trigger OnValidate()
+            begin
+                if "License State" = "License State"::Active then begin
+                    "Activated At" := CurrentDateTime();
+                    "Activated By" := UserSecurityId();
+                    "Trial Grace End Date" := 0D;
+                end;
+            end;
         }
     }
     keys
@@ -260,5 +269,15 @@ table 71033575 "SPBLIC Extension License"
         SBPLicEvents.OnBeforeLaunchProductUrl(Rec, IsHandled);
         if not IsHandled then
             Hyperlink("Product URL");
+    end;
+
+    internal procedure IsActive(): Boolean
+    begin
+        case "License State" of
+            "License State"::Active, "License State"::Trial:
+                exit(true);
+            else
+                exit(false);
+        end;
     end;
 }

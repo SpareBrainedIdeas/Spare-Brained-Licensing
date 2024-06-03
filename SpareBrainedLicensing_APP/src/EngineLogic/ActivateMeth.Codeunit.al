@@ -60,7 +60,7 @@ codeunit 71033587 "SPBLIC Activate Meth"
         if (SPBExtensionLicense."Subscription End Date" <> 0DT) and
           (SPBExtensionLicense."Subscription End Date" < CurrentDateTime)
         then begin
-            SPBExtensionLicense.Activated := false;
+            SPBExtensionLicense.Validate("License State", SPBExtensionLicense."License State"::Active);
             SPBExtensionLicense.Modify();
             Commit();
             SPBLICEvents.OnAfterActivationFailure(SPBExtensionLicense, AppInfo);
@@ -73,7 +73,7 @@ codeunit 71033587 "SPBLIC Activate Meth"
 
         // Now pop the details into IsolatedStorage
         SPBLICIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
-        exit(SPBExtensionLicense.Activated);
+        exit(SPBExtensionLicense.IsActive());
     end;
 
     local procedure OnAfterActivate(var SPBExtensionLicense: Record "SPBLIC Extension License");

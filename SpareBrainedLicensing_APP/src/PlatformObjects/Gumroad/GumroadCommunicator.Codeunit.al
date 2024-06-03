@@ -94,7 +94,7 @@ codeunit 71033577 "SPBLIC Gumroad Communicator" implements "SPBLIC IActivation",
         TempJsonBuffer.ReadFromText(ResponseBody);
 
         // Update the current Subscription record
-        SPBExtensionLicense.Validate(Activated, true);
+        SPBExtensionLicense.Validate("License State", Enum::"SPBLIC License State"::Active);
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'created_at');
         Evaluate(SPBExtensionLicense."Created At", TempPlaceholder);
         TempJsonBuffer.GetPropertyValue(TempPlaceholder, 'subscription_ended_at');
