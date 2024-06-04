@@ -1,11 +1,11 @@
 codeunit 71033588 "SPBLIC Deactivate Meth"
 {
-    internal procedure Deactivate(var SPBExtensionLicense: Record "SPBLIC Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
+    internal procedure Deactivate(var SPBExtensionLicense: Record "SPBLIC Extension License"; LocalOnly: Boolean) DeactivationSuccess: Boolean
     begin
-        DoDeactivate(SPBExtensionLicense, ByPlatform);
+        DoDeactivate(SPBExtensionLicense, LocalOnly);
     end;
 
-    local procedure DoDeactivate(var SPBExtensionLicense: Record "SPBLIC Extension License"; ByPlatform: Boolean) DeactivationSuccess: Boolean
+    local procedure DoDeactivate(var SPBExtensionLicense: Record "SPBLIC Extension License"; LocalOnly: Boolean) DeactivationSuccess: Boolean
     var
         SPBLICEvents: Codeunit "SPBLIC Events";
         SPBLICIsoStoreManager: Codeunit "SPBLIC IsoStore Manager";
@@ -22,7 +22,7 @@ codeunit 71033588 "SPBLIC Deactivate Meth"
         SPBLICIsoStoreManager.UpdateOrCreateIsoStorage(SPBExtensionLicense);
         Commit();  // if calling the API fails, the local should still be marked as deactivated
 
-        if not ByPlatform then begin
+        if not LocalOnly then begin
             LicenseActivation := SPBExtensionLicense."License Platform";
             if not LicenseActivation.CallAPIForDeactivation(SPBExtensionLicense, ResponseBody) then begin
                 if GuiAllowed() then
