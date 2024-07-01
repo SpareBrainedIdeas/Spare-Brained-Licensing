@@ -3,7 +3,9 @@ permissionset 71033575 "SPBLIC Licensing"
     Assignable = true;
     Caption = 'Spare Brained Licensing Admin', MaxLength = 30;
     Permissions = table "SPBLIC Extension License" = X,
+        table "SPBLIC IsoStore Map" = X,
         tabledata "SPBLIC Extension License" = RMI,
+        tabledata "SPBLIC IsoStore Map" = RMI,
         codeunit "SPBLIC Activate Meth" = X,
         codeunit "SPBLIC Check Active" = X,
         codeunit "SPBLIC Check Active Meth" = X,
