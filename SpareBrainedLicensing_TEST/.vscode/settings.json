@@ -4,5 +4,6 @@
         "${UICop}"
     ],
     "CRS.ObjectNamePrefix": "TST ",
-    "CRS.RemovePrefixFromFilename": true
+    "CRS.RemovePrefixFromFilename": true,
+    "al.ruleSetPath": "src\\.rulesets\\SPBLicensingTest.ruleset.json" 
 }
