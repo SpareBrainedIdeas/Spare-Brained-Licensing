@@ -32,4 +32,18 @@ codeunit 90006 "TST Library - Licensing"
         // This overload assumes MockSuccess
         CreateAppRegistration(ExtensionLicense, Enum::"SPBLIC License Platform"::MockSuccess);
     end;
+
+    procedure RemoveAppRegistration(var ExtensionLicense: Record "SPBLIC Extension License")
+    var
+        ExtensionRegistration: Codeunit "SPBLIC Extension Registration";
+        AppInfo: ModuleInfo;
+    begin
+        // Given an app, in this case the test app is fine.
+        NavApp.GetCurrentModuleInfo(AppInfo);
+
+        // When we remove it:
+
+
+        ExtensionLicense.Reset();
+    end;
 }

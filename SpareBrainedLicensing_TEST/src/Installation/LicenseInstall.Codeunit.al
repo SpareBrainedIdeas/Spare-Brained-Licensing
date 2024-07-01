@@ -4,7 +4,6 @@ codeunit 90000 "TST License Install"
     TestPermissions = Disabled;
 
     var
-        Assert: Codeunit "Assert";
         IsInitialized: Boolean;
 
 #pragma warning disable AA0005
