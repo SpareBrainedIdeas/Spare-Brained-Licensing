@@ -1,6 +1,5 @@
 {
   "type": "AppSource App",
   "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@main",
-  "templateSha": "173f75a74ecf7d846a89b49b57fba1e3507a5ddd",
-  "githubRunner": "self-hosted"
+  "templateSha": "173f75a74ecf7d846a89b49b57fba1e3507a5ddd"
 }
