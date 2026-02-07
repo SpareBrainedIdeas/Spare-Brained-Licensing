@@ -1,3 +1,107 @@
+## v8.2
+
+### Issues
+
+- Issue 2095 DeliverToAppSource.ProductId needs to be specified (Library app)
+- Issue 2082 Sign action no longer fails when repository is empty or no artifacts are generated
+- Issue 2078 Workflows run since January 14th '26 have space before CI/CD removed
+- Issue 2070 Support public GitHub Packages feeds without requiring a Personal Access Token (PAT)
+- Issue 2004 PublishToAppSource workflow publishes multi-app repos in alphabetical order instead of dependency order
+- Issue 2045 DateTime parsing fails on non-US locale runners in WorkflowPostProcess.ps1
+- Issue 2055 When using versioningStrategy 3+16, you get an error when building
+- Issue 2094 PR into release branch gets wrong previous release
+- AL-Go repositories with large amounts of projects may run into issues with too large environment variables
+- Discussion 1855 Add trigger 'workflow_call' to workflow 'Update AL-Go System Files' for reusability
+- Issue 2050 Publish To Environment creates mistyped environment
+
+### Publish To Environment no longer creates unknown environments by default
+
+Previously, when running the "Publish To Environment" workflow with an environment name that doesn't exist in GitHub or AL-Go settings, the workflow would automatically create a new GitHub environment. This could lead to problems when environment names were mistyped, as the bogus environment would then cause subsequent CI/CD workflows to fail.
+
+Now, the workflow will fail with a clear error message if the specified environment doesn't exist. If you intentionally want to deploy to a new environment that hasn't been configured yet, you can check the **Create environment if it does not exist** checkbox when running the workflow.
+
+### Set default values for workflow inputs
+
+The `workflowDefaultInputs` setting now also applies to `workflow_call` inputs when an input with the same name exists for `workflow_dispatch`.
+This ensures consistent default values across both manual workflow runs and reusable workflow calls.
+
+Read more at [workflowDefaultInputs](https://aka.ms/algosettings#workflowDefaultInputs).
+
+### Merge queue support
+
+AL-Go now supports GitHub's merge queue feature out of the box! The `merge_group` trigger has been added to the Pull Request Build workflow, enabling seamless integration with merge queues. When you have the merge queue feature enabled in your repo, multiple PRs will automatically be validated together. Read more about merge queues [here](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue).
+
+> [!WARNING]
+> If you rely on a custom workflow for merge queue validation, you may need to adjust your setup to avoid duplicate builds.
+
+### AL-Go Telemetry updates
+
+AL-Go telemetry now includes test results so you can more easily see how many AL tests, Page Scripting tests and BCPT tests ran in your workflows across all your repositories. Documentation for this can be found on [this article](https://github.com/microsoft/AL-Go/blob/main/Scenarios/EnablingTelemetry.md) on enabling telemetry.
+
+## v8.1
+
+### Custom AL-Go files
+
+AL-Go for GitHub now supports updating files from your custom templates via the new `customALGoFiles` setting. Read more at [customALGoFiles](https://aka.ms/algosettings#customALGoFiles).
+
+### Set default values for workflow inputs
+
+A new setting `workflowDefaultInputs` allows you to configure default values for workflow_dispatch inputs. This makes it easier to run workflows manually with consistent settings across your team.
+
+When you add this setting to your AL-Go settings file and run the "Update AL-Go System Files" workflow, the default values will be automatically applied to the workflow YAML files in your repository.
+The default values must match the input types (boolean, number, string, or choice) defined in the workflow YAML files.
+
+Example configuration:
+
+```json
+{
+  "workflowDefaultInputs": [
+    { "name": "directCommit", "value": true },
+    { "name": "useGhTokenWorkflow", "value": true }
+  ]
+}
+```
+
+This setting can be used on its own in repository settings to apply defaults to all workflows with matching input names. Alternatively, you can use it within [conditional settings](https://aka.ms/algosettings#conditional-settings) to apply defaults only to specific workflows, branches, or other conditions.
+
+Example using conditional settings to target specific workflows:
+
+```json
+{
+  "conditionalSettings": [
+    {
+      "workflows": ["Create Release"],
+      "settings": {
+        "workflowDefaultInputs": [
+          { "name": "directCommit", "value": true },
+          { "name": "releaseType", "value": "Prerelease" }
+        ]
+      }
+    }
+  ]
+}
+```
+
+**Important:** When multiple conditional settings blocks match and both define `workflowDefaultInputs`, the arrays are merged following AL-Go's standard behavior for complex setting types (all entries are kept). If the same input name appears in multiple entries, the last matching entry takes precedence.
+
+Read more at [workflowDefaultInputs](https://aka.ms/algosettings#workflowDefaultInputs).
+
+### Issues
+
+- Issue 2039 Error when deploy to environment: NewTemporaryFolder is not recognized
+- Issue 1961 KeyVault access in PR pipeline
+- Discussion 1911 Add support for reportSuppressedDiagnostics
+- Discussion 1968 Parameter for settings passed to CreateDevEnv
+- Issue 1945 Deploy Reference Documentation fails for CI/CD
+- Use Runner_Temp instead of GetTempFolder whenever possible
+- Issue 2016 Running Update AL-Go system files with branches wildcard `*` tries to update _origin_
+- Issue 1960 Deploy Reference Documentation fails
+- Discussion 1952 Set default values on workflow_dispatch input
+
+### Deprecations
+
+- `unusedALGoSystemFiles` will be removed after October 1st 2026. Please use [`customALGoFiles.filesToExclude`](https://aka.ms/algosettings#customALGoFiles) instead.
+
 ## v8.0
 
 ### Mechanism to overwrite complex settings type
@@ -917,7 +1021,7 @@ Setting the repo setting "runs-on" to "Ubuntu-latest", followed by running Updat
 ### Issues
 
 - Issue #143 Commit Message for **Increment Version Number** workflow
-- Issue #160 Create local DevEnv aith appDependencyProbingPaths
+- Issue #160 Create local DevEnv with appDependencyProbingPaths
 - Issue #156 Versioningstrategy 2 doesn't use 24h format
 - Issue #155 Initial Add existing app fails with "Cannot find path"
 - Issue #152 Error when loading dependencies from releases
